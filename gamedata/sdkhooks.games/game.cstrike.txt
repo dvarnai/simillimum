@@ -2,150 +2,232 @@
 {
 	"#default"
 	{
+		"Dynamic Offsets"
+		{
+			"EndTouch"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBaseEntity8EndTouchEPS_"
+			}
+			"FireBullets"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBaseEntity11FireBulletsERK17FireBulletsInfo_t"
+			}
+			"GetMaxHealth"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZNK11CBaseEntity12GetMaxHealthEv"	
+			}
+			"GroundEntChanged"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer35NetworkStateChanged_m_hGroundEntityEPv"
+			}
+			"OnTakeDamage"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN9CCSPlayer12OnTakeDamageERK15CTakeDamageInfo"
+			}
+			"PreThink"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer8PreThinkEv"
+			}
+			"PostThink"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer9PostThinkEv"
+			}
+			"Reload"
+			{
+				"library" "server"
+				"vtable" "CBaseCombatWeapon"
+				"linux" "@_ZN17CBaseCombatWeapon6ReloadEv"
+			}
+			"SetTransmit"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN20CBaseCombatCharacter11SetTransmitEP18CCheckTransmitInfob"
+			}
+			"ShouldCollide"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZNK11CBaseEntity13ShouldCollideEii"
+			}
+			"Spawn"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN9CCSPlayer5SpawnEv"
+			}
+			"StartTouch"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBaseEntity10StartTouchEPS_"
+			}
+			"Think"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer5ThinkEv"
+			}
+			"Touch"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer5TouchEP11CBaseEntity"
+			}
+			"TraceAttack"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN9CCSPlayer11TraceAttackERK15CTakeDamageInfoRK6VectorP10CGameTraceP15CDmgAccumulator"
+			}
+			"Use"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBaseEntity3UseEPS_S0_8USE_TYPEf"
+			}
+			"VPhysicsUpdate"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer14VPhysicsUpdateEP14IPhysicsObject"
+			}
+			"Weapon_CanSwitchTo"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN9CCSPlayer18Weapon_CanSwitchToEP17CBaseCombatWeapon"
+			}
+			"Weapon_CanUse"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN9CCSPlayer13Weapon_CanUseEP17CBaseCombatWeapon"
+			}
+			"Weapon_Drop"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer11Weapon_DropEP17CBaseCombatWeaponPK6VectorS4_"
+			}
+			"Weapon_Equip"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN9CCSPlayer12Weapon_EquipEP17CBaseCombatWeapon"
+			}
+			"Weapon_Switch"
+			{
+				"library" "server"
+				"vtable" "CCSPlayer"
+				"linux" "@_ZN11CBasePlayer13Weapon_SwitchEP17CBaseCombatWeaponi"
+			}
+		}
+
 		"Offsets"
 		{
 			"EndTouch"
 			{
 				"windows"	"99"
-				"linux"		"100"
-				"mac"		"100"
 			}
 			"FireBullets"
 			{
 				"windows"	"111"
-				"linux"		"112"
-				"mac"		"112"
 			}
 			"GetMaxHealth"
 			{
-				"windows"	"116"
-				"linux"		"117"
-				"mac"		"117"				
+				"windows"	"116"				
 			}
 			"GroundEntChanged"
 			{
 				"windows"	"176"
-				"linux"		"177"
-				"mac"		"177"
 			}
 			"OnTakeDamage"
 			{
 				"windows"	"62"
-				"linux"		"63"
-				"mac"		"63"
 			}
 			"PreThink"
 			{
 				"windows"	"330"
-				"linux"		"331"
-				"mac"		"331"
 			}
 			"PostThink"
 			{
 				"windows"	"331"
-				"linux"		"332"
-				"mac"		"332"
 			}
 			"Reload"
 			{
 				"windows"	"270"
-				"linux"		"276"
-				"mac"		"276"
 			}
 			"SetTransmit"
 			{
 				"windows"	"20"
-				"linux"		"21"
-				"mac"		"21"
 			}
 			"ShouldCollide"
 			{
 				"windows"	"16"
-				"linux"		"17"
-				"mac"		"17"
 			}
 			"Spawn"
 			{
 				"windows"	"22"
-				"linux"		"23"
-				"mac"		"23"
 			}
 			"StartTouch"
 			{
 				"windows"	"97"
-				"linux"		"98"
-				"mac"		"98"
 			}
 			"Think"
 			{
 				"windows"	"47"
-				"linux"		"48"
-				"mac"		"48"
 			}
 			"Touch"
 			{
 				"windows"	"98"
-				"linux"		"99"
-				"mac"		"99"
 			}
 			"TraceAttack"
 			{
 				"windows"	"60"
-				"linux"		"61"
-				"mac"		"61"
 			}
 			"Use"
 			{
 				"windows"	"96"
-				"linux"		"97"
-				"mac"		"97"
 			}
 			"VPhysicsUpdate"
 			{
 				"windows"	"156"
-				"linux"		"157"
-				"mac"		"157"
 			}
 			"Weapon_CanSwitchTo"
 			{
 				"windows"	"264"
-				"linux"		"265"
-				"mac"		"265"
 			}
 			"Weapon_CanUse"
 			{
 				"windows"	"258"
-				"linux"		"259"
-				"mac"		"259"
 			}
 			"Weapon_Drop"
 			{
 				"windows"	"261"
-				"linux"		"262"
-				"mac"		"262"
 			}
 			"Weapon_Equip"
 			{
 				"windows"	"259"
-				"linux"		"260"
-				"mac"		"260"
 			}
 			"Weapon_Switch"
 			{
 				"windows"	"262"
-				"linux"		"263"
-				"mac"		"263"
 			}
-			
-			
-			// no longer used
-			"UpdateOnRemove"
-			{
-				"windows"	"104"
-				"linux"		"105"
-				"mac"		"105"
-			}
-			//
 		}
 		
 		"Signatures"
