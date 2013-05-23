@@ -20,7 +20,7 @@ Changelog:<br/>
 -Updated cURL libraries<br/>
 -Minor cleanup<br/>
 -Swapd the MySQL connector to the connector of MariaDB<br/>
--Removed deprecated status of IsValidHandle<br/>
+-Added native HandleError:GetHandleStatus(Handle:hndl)<br/>
 <br/>
 <b>TODO:</b><br/>
 <br/>
