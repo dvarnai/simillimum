@@ -8,7 +8,7 @@ HL2SDK_OB = ../../../hl2sdk-ob
 HL2SDK_OB_VALVE = ../../../hl2sdk-ob-valve
 HL2SDK_L4D = ../../../hl2sdk-l4d
 MMSOURCE17 = ../../../mmsource-1.7
-MYSQL = ../../../mysql-5.0
+MARIADB = ../../../mariadb
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
@@ -84,12 +84,12 @@ ifeq "$(USEMETA)" "true"
 	INCLUDE += -I. -I.. -Isdk -I$(HL2PUB) -I$(HL2PUB)/engine -I$(HL2PUB)/tier0 -I$(HL2PUB)/tier1 \
 		-I$(METAMOD) -I$(METAMOD)/sourcehook -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn
 else
-	INCLUDE += -I. -I.. -Isdk -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn -I$(MMSOURCE17)/core/sourcehook \
-		-I$(MYSQL)/include
+	INCLUDE += -I. -I.. -Isdk -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn -I$(MMSOURCE19)/core/sourcehook \
+		-I$(MARIADB)/include
 	CFLAGS += -DSE_EPISODEONE=1 -DSE_DARKMESSIAH=2 -DSE_ORANGEBOX=3 -DSE_ORANGEBOXVALVE=4 -DSE_LEFT4DEAD=5 
 endif
 
-LINK += $(MYSQL)/lib/libmysqlclient_r.a -lz -lpthread
+LINK += $(MARIADB)/libmariadbclient.a -lz -lpthread
 
 CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Werror -Wno-switch \

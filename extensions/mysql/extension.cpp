@@ -29,7 +29,7 @@
  * Version: $Id$
  */
 
-#include <sourcemod_version.h>
+#include <simillimum_version.h>
 #include "extension.h"
 #include "mysql/MyDriver.h"
 #include <assert.h>

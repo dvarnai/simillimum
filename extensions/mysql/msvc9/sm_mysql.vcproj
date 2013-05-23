@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;..\sdk;..\..\..\public;..\..\..\public\sourcepawn;&quot;$(MMSOURCE17)\core\sourcehook&quot;;&quot;$(MYSQL5)\include&quot;"
+				AdditionalIncludeDirectories="..;..\sdk;..\..\..\public;..\..\..\public\sourcepawn;&quot;$(MMSOURCE19)\core\sourcehook&quot;;&quot;$(MARIADB)\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;SDK_EXPORTS;_CRT_SECURE_NO_DEPRECATE;SOURCEMOD_BUILD"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -59,17 +59,17 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="BINARY_NAME=\&quot;$(TargetFileName)\&quot;"
+				PreprocessorDefinitions="BINARY_NAME=\\&quot;$(TargetFileName)\\&quot;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wsock32.lib &quot;$(MYSQL5)\lib\opt\mysqlclient.lib&quot; zlib.lib"
+				AdditionalDependencies="wsock32.lib &quot;$(MARIADB)\mariadbclient.lib"
 				OutputFile="$(OutDir)\dbi.mysql.ext.dll"
 				LinkIncremental="2"
-				IgnoreDefaultLibraryNames="LIBC;LIBCD;LIBCMT"
+				IgnoreDefaultLibraryNames="LIBC;LIBCD;LIBCMTD"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -124,7 +124,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="..;..\sdk;..\..\..\public;..\..\..\public\sourcepawn;&quot;$(MMSOURCE17)\core\sourcehook&quot;;&quot;$(MYSQL5)\include&quot;"
+				AdditionalIncludeDirectories="..;..\sdk;..\..\..\public;..\..\..\public\sourcepawn;&quot;$(MMSOURCE19)\core\sourcehook&quot;;&quot;$(MARIADB)\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SDK_EXPORTS;_CRT_SECURE_NO_DEPRECATE;SOURCEMOD_BUILD"
 				RuntimeLibrary="0"
 				StructMemberAlignment="3"
@@ -140,17 +140,17 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="BINARY_NAME=\&quot;$(TargetFileName)\&quot;"
+				PreprocessorDefinitions="BINARY_NAME=\\&quot;$(TargetFileName)\\&quot;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wsock32.lib &quot;$(MYSQL5)\lib\opt\mysqlclient.lib&quot;"
+				AdditionalDependencies="wsock32.lib &quot;$(MARIADB)\mariadbclient.lib"
 				OutputFile="$(OutDir)\dbi.mysql.ext.dll"
 				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="LIBC;LIBCD;LIBCMTD"
+				IgnoreDefaultLibraryNames="LIBC;LIBCD;LIBCMT"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"

@@ -35,6 +35,7 @@
 #include <IDBDriver.h>
 #include <sm_platform.h>
 #if defined PLATFORM_WINDOWS
+#define _WINSOCKAPI_
 #include <winsock.h>
 #endif
 
@@ -47,7 +48,7 @@
 #include <sh_string.h>
 #include <sh_list.h>
 
-using namespace SourceMod;
+using namespace Simillimum;
 using namespace SourceHook;
 
 #define M_CLIENT_MULTI_RESULTS    ((1) << 17)  /* Enable/disable multi-results */
