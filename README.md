@@ -18,7 +18,6 @@ Changelog:<br/>
 <br/>
 <b>2013.05.24:</b><br/>
 -Updated cURL libraries<br/>
--Swap the MySQL connector to the connector of MariaDB<br/>
 -Minor cleanup<br/>
 -Swapd the MySQL connector to the connector of MariaDB<br/>
 -Removed deprecated status of IsValidHandle<br/>
