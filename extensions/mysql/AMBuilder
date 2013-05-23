@@ -2,14 +2,14 @@
 import os
 
 compiler = SM.DefaultExtCompiler('extensions/mysql')
-compiler['CXXINCLUDES'].append(os.path.join(AMBuild.cache['MARIADB'], 'include'))
+compiler['CXXINCLUDES'].append(os.path.join('mariadb-source', 'include'))
 compiler['CXXINCLUDES'].append(os.path.join(SM.mmsPath, 'core', 'sourcehook'))
 
 extension = AMBuild.AddJob('dbi.mysql.ext')
 binary = Cpp.LibraryBuilder('dbi.mysql.ext', AMBuild, extension, compiler)
 
 if AMBuild.target['platform'] == 'linux' or AMBuild.target['platform'] == 'darwin':
-	lib = os.path.join(AMBuild.cache['MARIADB'], 'lib', 'libmariadbclient.a')
+	lib = os.path.join(AMBuild.cache['MARIADB'], 'libmariadbclient.a')
 	link = [lib,
           '-lz',
           '-lpthread',

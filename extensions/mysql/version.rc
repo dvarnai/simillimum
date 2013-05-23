@@ -9,7 +9,7 @@
 //
 #include "winres.h"
 
-#include <sourcemod_version.h>
+#include <simillimum_version.h>
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS

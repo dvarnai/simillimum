@@ -85,7 +85,7 @@ ifeq "$(USEMETA)" "true"
 		-I$(METAMOD) -I$(METAMOD)/sourcehook -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn
 else
 	INCLUDE += -I. -I.. -Isdk -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn -I$(MMSOURCE19)/core/sourcehook \
-		-I$(MARIADB)/include
+		-Imariadb-source/include
 	CFLAGS += -DSE_EPISODEONE=1 -DSE_DARKMESSIAH=2 -DSE_ORANGEBOX=3 -DSE_ORANGEBOXVALVE=4 -DSE_LEFT4DEAD=5 
 endif
 
