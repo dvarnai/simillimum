@@ -1,0 +1,53 @@
+﻿Build started 2012.08.22. 7:44:03.
+     1>Project "G:\exts\sourcemod-central\extensions\sdktools\msvc10\sdktools.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release - Orange Box Valve\sdktools.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I..\sdk /I..\..\..\public /I..\..\..\public\extensions /I..\..\..\public\sourcepawn /I"g:\exts\hl2sdk-ob-valve\common" /I"g:\exts\hl2sdk-ob-valve\public" /I"g:\exts\hl2sdk-ob-valve\public\engine" /I"g:\exts\hl2sdk-ob-valve\public\game\server" /I"g:\exts\hl2sdk-ob-valve\public\mathlib" /I"g:\exts\hl2sdk-ob-valve\public\tier0" /I"g:\exts\hl2sdk-ob-valve\public\tier1" /I"g:\exts\hl2sdk-ob-valve\game\shared" /I"g:\exts\hl2sdk-ob-valve\public\toolframework" /I"g:\exts\mmsource-central\core" /I"g:\exts\mmsource-central\core\sourcehook" /Zi /nologo /W3 /WX- /Ox /Ot /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D SDK_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D SOURCEMOD_BUILD /D SOURCE_ENGINE=6 /D _WINDLL /D _MBCS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR- /Fo"Release - Orange Box Valve\\" /Fd"Release - Orange Box Valve\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\vnatives.cpp /MP /D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_BLOODYGOODTIME=4 /D SE_EYE=5 /D SE_ORANGEBOXVALVE=6 /D SE_LEFT4DEAD=7 /D SE_LEFT4DEAD2=8 /D SE_ALIENSWARM=9 /D SE_PORTAL2=10 /D SE_CSGO=11 
+         vnatives.cpp
+       ResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.dll" /INCREMENTAL:NO /NOLOGO "g:\exts\hl2sdk-ob-valve\lib\public\tier0.lib" "g:\exts\hl2sdk-ob-valve\lib\public\tier1.lib" "g:\exts\hl2sdk-ob-valve\lib\public\vstdlib.lib" "g:\exts\hl2sdk-ob-valve\lib\public\mathlib.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:LIBC /NODEFAULTLIB:LIBCD /NODEFAULTLIB:LIBCMTD /MANIFEST /ManifestFile:"Release - Orange Box Valve\sdktools.ext.2.ep2v.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.lib" /MACHINE:X86 /DLL "Release - Orange Box Valve\version.res"
+         "Release - Orange Box Valve\asm.obj"
+         "Release - Orange Box Valve\detours.obj"
+         "Release - Orange Box Valve\clientnatives.obj"
+         "Release - Orange Box Valve\extension.obj"
+         "Release - Orange Box Valve\gamerulesnatives.obj"
+         "Release - Orange Box Valve\hooks.obj"
+         "Release - Orange Box Valve\inputnatives.obj"
+         "Release - Orange Box Valve\output.obj"
+         "Release - Orange Box Valve\outputnatives.obj"
+         "Release - Orange Box Valve\teamnatives.obj"
+         "Release - Orange Box Valve\tempents.obj"
+         "Release - Orange Box Valve\tenatives.obj"
+         "Release - Orange Box Valve\trnatives.obj"
+         "Release - Orange Box Valve\vcallbuilder.obj"
+         "Release - Orange Box Valve\vcaller.obj"
+         "Release - Orange Box Valve\vdecoder.obj"
+         "Release - Orange Box Valve\vglobals.obj"
+         "Release - Orange Box Valve\vhelpers.obj"
+         "Release - Orange Box Valve\vnatives.obj"
+         "Release - Orange Box Valve\voice.obj"
+         "Release - Orange Box Valve\vsound.obj"
+         "Release - Orange Box Valve\vstringtable.obj"
+         "Release - Orange Box Valve\smsdk_ext.obj"
+            Creating library G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.lib and object G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.exp
+         Generating code
+     1>g:\exts\sourcemod-central\extensions\sdktools\vnatives.cpp(1260): warning C4715: 'SetClientName' : not all control paths return a value
+         Finished generating code
+         sdktools.vcxproj -> G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.dll;#2" /manifest "Release - Orange Box Valve\sdktools.ext.2.ep2v.dll.intermediate.manifest"
+       PostBuildEvent:
+         IF NOT "%SMOUTDIR%"=="" copy "G:\exts\sourcemod-central\extensions\sdktools\msvc10\Release - Orange Box Valve\sdktools.ext.2.ep2v.dll" "%SMOUTDIR%\extensions"
+         :VCEnd
+       FinalizeBuildStatus:
+         Deleting file "Release - Orange Box Valve\sdktools.unsuccessfulbuild".
+         Touching "Release - Orange Box Valve\sdktools.lastbuildstate".
+     1>Done Building Project "G:\exts\sourcemod-central\extensions\sdktools\msvc10\sdktools.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.85

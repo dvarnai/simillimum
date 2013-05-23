@@ -1,0 +1,45 @@
+﻿Build started 2013.05.23. 4:30:19.
+     1>Project "E:\simillimum-central\extensions\cstrike\msvc10\cstrike.vcxproj" on node 7 (Rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release - CSS\cstrike.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release - CSS\cstrike.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I..\sdk /I..\..\..\public /I..\..\..\public\sourcepawn /I..\..\..\public\extensions /I"G:\Coding\C++\exts\hl2sdk-css\public" /I"G:\Coding\C++\exts\hl2sdk-css\public\game\server" /I"G:\Coding\C++\exts\hl2sdk-css\public\engine" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier0" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier1" /I"G:\Coding\C++\exts\mmsource-central\core" /I"G:\Coding\C++\exts\mmsource-central\core\sourcehook" /Zi /nologo /W3 /WX- /O2 /Ot /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D CSTRIKE_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D SOURCEMOD_BUILD /D SOURCE_ENGINE=6 /D _WINDLL /D _MBCS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR- /Fo"Release - CSS\\" /Fd"Release - CSS\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\extension.cpp ..\forwards.cpp ..\natives.cpp ..\RegNatives.cpp ..\timeleft.cpp ..\util_cstrike.cpp ..\sdk\smsdk_ext.cpp ..\CDetour\detours.cpp /D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_BLOODYGOODTIME=4 /D SE_EYE=5 /D SE_CSS=6 /D SE_ORANGEBOXVALVE=7 /D SE_LEFT4DEAD=8 /D SE_LEFT4DEAD2=9 /D SE_ALIENSWARM=10 /D SE_PORTAL2=11 /D SE_CSGO=12
+         extension.cpp
+         forwards.cpp
+         natives.cpp
+         RegNatives.cpp
+         timeleft.cpp
+         util_cstrike.cpp
+         smsdk_ext.cpp
+         detours.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I..\sdk /I..\..\..\public /I..\..\..\public\sourcepawn /I..\..\..\public\extensions /I"G:\Coding\C++\exts\hl2sdk-css\public" /I"G:\Coding\C++\exts\hl2sdk-css\public\game\server" /I"G:\Coding\C++\exts\hl2sdk-css\public\engine" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier0" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier1" /I"G:\Coding\C++\exts\mmsource-central\core" /I"G:\Coding\C++\exts\mmsource-central\core\sourcehook" /Zi /nologo /W3 /WX- /O2 /Ot /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D CSTRIKE_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D SOURCEMOD_BUILD /D SOURCE_ENGINE=6 /D _WINDLL /D _MBCS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR- /Fo"Release - CSS\\" /Fd"Release - CSS\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\asm\asm.c /D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_BLOODYGOODTIME=4 /D SE_EYE=5 /D SE_CSS=6 /D SE_ORANGEBOXVALVE=7 /D SE_LEFT4DEAD=8 /D SE_LEFT4DEAD2=9 /D SE_ALIENSWARM=10 /D SE_PORTAL2=11 /D SE_CSGO=12
+         asm.c
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.dll" /INCREMENTAL:NO /NOLOGO "G:\Coding\C++\exts\hl2sdk-css\lib\public\tier0.lib" "G:\Coding\C++\exts\hl2sdk-css\lib\public\tier1.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:LIBC /NODEFAULTLIB:LIBCD /NODEFAULTLIB:LIBCMTD /MANIFEST /ManifestFile:"Release - CSS\game.cstrike.ext.2.css.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.lib" /MACHINE:X86 /DLL "Release - CSS\extension.obj"
+         "Release - CSS\forwards.obj"
+         "Release - CSS\natives.obj"
+         "Release - CSS\RegNatives.obj"
+         "Release - CSS\timeleft.obj"
+         "Release - CSS\util_cstrike.obj"
+         "Release - CSS\smsdk_ext.obj"
+         "Release - CSS\asm.obj"
+         "Release - CSS\detours.obj"
+            Creating library E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.lib and object E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.exp
+         Generating code
+         Finished generating code
+         cstrike.vcxproj -> E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.dll;#2" /manifest "Release - CSS\game.cstrike.ext.2.css.dll.intermediate.manifest"
+       PostBuildEvent:
+         IF NOT "%SMOUTDIR%"=="" copy /Y "E:\simillimum-central\msvc10\Release - CSS\game.cstrike.ext.2.css.dll" "%SMOUTDIR%\extensions"
+         :VCEnd
+       FinalizeBuildStatus:
+         Deleting file "Release - CSS\cstrike.unsuccessfulbuild".
+         Touching "Release - CSS\cstrike.lastbuildstate".
+     1>Done Building Project "E:\simillimum-central\extensions\cstrike\msvc10\cstrike.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:08.49

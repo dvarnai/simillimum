@@ -1,0 +1,76 @@
+﻿Build started 2013.05.23. 4:30:19.
+     1>Project "E:\simillimum-central\extensions\sdktools\msvc10\sdktools.vcxproj" on node 6 (Rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release - CSS\sdktools.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release - CSS\sdktools.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I..\sdk /I..\..\..\public /I..\..\..\public\extensions /I..\..\..\public\sourcepawn /I"G:\Coding\C++\exts\hl2sdk-css\common" /I"G:\Coding\C++\exts\hl2sdk-css\public" /I"G:\Coding\C++\exts\hl2sdk-css\public\engine" /I"G:\Coding\C++\exts\hl2sdk-css\public\game\server" /I"G:\Coding\C++\exts\hl2sdk-css\public\mathlib" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier0" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier1" /I"G:\Coding\C++\exts\hl2sdk-css\game\shared" /I"G:\Coding\C++\exts\hl2sdk-css\public\toolframework" /I"G:\Coding\C++\exts\mmsource-central\core" /I"G:\Coding\C++\exts\mmsource-central\core\sourcehook" /Zi /nologo /W3 /WX- /MP /Ox /Ot /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D SDK_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D SOURCEMOD_BUILD /D SOURCE_ENGINE=6 /D _WINDLL /D _MBCS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR- /Fo"Release - CSS\\" /Fd"Release - CSS\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\asm\asm.c /D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_BLOODYGOODTIME=4 /D SE_EYE=5 /D SE_CSS=6 /D SE_ORANGEBOXVALVE=7 /D SE_LEFT4DEAD=8 /D SE_LEFT4DEAD2=9 /D SE_ALIENSWARM=10 /D SE_PORTAL2=11 /D SE_CSGO=12
+         asm.c
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I..\sdk /I..\..\..\public /I..\..\..\public\extensions /I..\..\..\public\sourcepawn /I"G:\Coding\C++\exts\hl2sdk-css\common" /I"G:\Coding\C++\exts\hl2sdk-css\public" /I"G:\Coding\C++\exts\hl2sdk-css\public\engine" /I"G:\Coding\C++\exts\hl2sdk-css\public\game\server" /I"G:\Coding\C++\exts\hl2sdk-css\public\mathlib" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier0" /I"G:\Coding\C++\exts\hl2sdk-css\public\tier1" /I"G:\Coding\C++\exts\hl2sdk-css\game\shared" /I"G:\Coding\C++\exts\hl2sdk-css\public\toolframework" /I"G:\Coding\C++\exts\mmsource-central\core" /I"G:\Coding\C++\exts\mmsource-central\core\sourcehook" /Zi /nologo /W3 /WX- /MP /Ox /Ot /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D SDK_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D SOURCEMOD_BUILD /D SOURCE_ENGINE=6 /D _WINDLL /D _MBCS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR- /Fo"Release - CSS\\" /Fd"Release - CSS\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\CDetour\detours.cpp ..\clientnatives.cpp ..\extension.cpp ..\gamerulesnatives.cpp ..\hooks.cpp ..\inputnatives.cpp ..\output.cpp ..\outputnatives.cpp ..\teamnatives.cpp ..\tempents.cpp ..\tenatives.cpp ..\trnatives.cpp ..\vcallbuilder.cpp ..\vcaller.cpp ..\vdecoder.cpp ..\vglobals.cpp ..\vhelpers.cpp ..\vnatives.cpp ..\voice.cpp ..\vsound.cpp ..\vstringtable.cpp ..\sdk\smsdk_ext.cpp /D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_BLOODYGOODTIME=4 /D SE_EYE=5 /D SE_CSS=6 /D SE_ORANGEBOXVALVE=7 /D SE_LEFT4DEAD=8 /D SE_LEFT4DEAD2=9 /D SE_ALIENSWARM=10 /D SE_PORTAL2=11 /D SE_CSGO=12
+         detours.cpp
+         clientnatives.cpp
+         extension.cpp
+         gamerulesnatives.cpp
+         hooks.cpp
+         inputnatives.cpp
+         output.cpp
+         outputnatives.cpp
+         teamnatives.cpp
+         tempents.cpp
+         tenatives.cpp
+         trnatives.cpp
+         vcallbuilder.cpp
+         vcaller.cpp
+         vdecoder.cpp
+         vglobals.cpp
+         vhelpers.cpp
+         vnatives.cpp
+         voice.cpp
+         vsound.cpp
+         vstringtable.cpp
+         smsdk_ext.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D "BINARY_NAME=\"\\\"sdktools.ext.2.css.dll\\\"\"" /l"0x0409" /I..\..\..\public /nologo /fo"Release - CSS\version.res" ..\version.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.dll" /INCREMENTAL:NO /NOLOGO "G:\Coding\C++\exts\hl2sdk-css\lib\public\tier0.lib" "G:\Coding\C++\exts\hl2sdk-css\lib\public\tier1.lib" "G:\Coding\C++\exts\hl2sdk-css\lib\public\vstdlib.lib" "G:\Coding\C++\exts\hl2sdk-css\lib\public\mathlib.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:LIBC /NODEFAULTLIB:LIBCD /NODEFAULTLIB:LIBCMTD /MANIFEST /ManifestFile:"Release - CSS\sdktools.ext.2.css.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.lib" /MACHINE:X86 /DLL "Release - CSS\version.res"
+         "Release - CSS\asm.obj"
+         "Release - CSS\detours.obj"
+         "Release - CSS\clientnatives.obj"
+         "Release - CSS\extension.obj"
+         "Release - CSS\gamerulesnatives.obj"
+         "Release - CSS\hooks.obj"
+         "Release - CSS\inputnatives.obj"
+         "Release - CSS\output.obj"
+         "Release - CSS\outputnatives.obj"
+         "Release - CSS\teamnatives.obj"
+         "Release - CSS\tempents.obj"
+         "Release - CSS\tenatives.obj"
+         "Release - CSS\trnatives.obj"
+         "Release - CSS\vcallbuilder.obj"
+         "Release - CSS\vcaller.obj"
+         "Release - CSS\vdecoder.obj"
+         "Release - CSS\vglobals.obj"
+         "Release - CSS\vhelpers.obj"
+         "Release - CSS\vnatives.obj"
+         "Release - CSS\voice.obj"
+         "Release - CSS\vsound.obj"
+         "Release - CSS\vstringtable.obj"
+         "Release - CSS\smsdk_ext.obj"
+            Creating library E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.lib and object E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.exp
+         Generating code
+         Finished generating code
+         sdktools.vcxproj -> E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.dll;#2" /manifest "Release - CSS\sdktools.ext.2.css.dll.intermediate.manifest"
+       PostBuildEvent:
+         IF NOT "%SMOUTDIR%"=="" copy "E:\simillimum-central\msvc10\Release - CSS\sdktools.ext.2.css.dll" "%SMOUTDIR%\extensions"
+         :VCEnd
+       FinalizeBuildStatus:
+         Deleting file "Release - CSS\sdktools.unsuccessfulbuild".
+         Touching "Release - CSS\sdktools.lastbuildstate".
+     1>Done Building Project "E:\simillimum-central\extensions\sdktools\msvc10\sdktools.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:12.55

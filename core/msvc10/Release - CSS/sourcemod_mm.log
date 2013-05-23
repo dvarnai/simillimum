@@ -1,0 +1,22 @@
+﻿Build started 2013.05.23. 4:31:56.
+     1>Project "E:\simillimum-central\core\msvc10\sourcemod_mm.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release - CSS\simillimum_mm.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       ResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         sourcemod_mm.vcxproj -> E:\simillimum-central\msvc10\Release - CSS\simillimum.2.css.dll
+       PostBuildEvent:
+         IF NOT "%SMOUTDIR%"=="" copy /Y "E:\simillimum-central\msvc10\Release - CSS\simillimum.2.css.dll" "%SMOUTDIR%\bin"
+         :VCEnd
+       FinalizeBuildStatus:
+         Deleting file "Release - CSS\simillimum_mm.unsuccessfulbuild".
+         Touching "Release - CSS\simillimum_mm.lastbuildstate".
+     1>Done Building Project "E:\simillimum-central\core\msvc10\sourcemod_mm.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.09

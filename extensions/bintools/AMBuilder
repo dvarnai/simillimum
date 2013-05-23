@@ -1,0 +1,25 @@
+# vim: set ts=2 sw=2 tw=99 noet ft=python: 
+import os
+
+compiler = SM.DefaultExtCompiler('extensions/bintools')
+compiler['CDEFINES'].append('HOOKING_ENABLED')
+compiler['CXXINCLUDES'].append(os.path.join(SM.mmsPath, 'core', 'sourcehook'))
+compiler['CXXINCLUDES'].append(os.path.join(AMBuild.sourceFolder, 'public', 'jit'))
+compiler['CXXINCLUDES'].append(os.path.join(AMBuild.sourceFolder, 'public', 'jit', 'x86'))
+
+extension = AMBuild.AddJob('bintools.ext')
+binary = Cpp.LibraryBuilder('bintools.ext', AMBuild, extension, compiler)
+binary.AddSourceFiles('extensions/bintools', [
+	'extension.cpp',
+	'CallMaker.cpp',
+	'CallWrapper.cpp',
+	'HookWrapper.cpp',
+	'jit_call.cpp',
+	'jit_hook.cpp',
+	'sdk/smsdk_ext.cpp'
+	])
+SM.AutoVersion('extensions/bintools', binary)
+SM.ExtractDebugInfo(extension, binary)
+binary.SendToJob()
+
+
