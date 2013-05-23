@@ -77,7 +77,7 @@ native bool:CloseHandle(Handle:hndl);
 native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
 
 /**
- * Do not use this function.  Returns if a Handle and its contents 
+ * Returns if a Handle and its contents 
  * are readable, whereas INVALID_HANDLE only checks for the absence 
  * of a Handle.
  *
@@ -92,5 +92,4 @@ native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
  * @param hndl		Handle to test for validity.
  * @return			True if handle is valid, false otherwise.
  */
-#pragma deprecated Do not use this function.
 native bool:IsValidHandle(Handle:hndl);
