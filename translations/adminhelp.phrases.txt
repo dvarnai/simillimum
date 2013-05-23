@@ -2,7 +2,7 @@
 {
 	"SM help commands"
 	{
-		"en"			"SourceMod Help: Command Information"
+		"en"			"Simillimum Help: Command Information"
 	}
 
 	"No description available"
