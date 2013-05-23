@@ -570,7 +570,7 @@ skip_search:
 			/* If there are no control options,
 			 * Instead just pad with invisible slots.
 			 */
-			if (!displayPrev && !displayPrev)
+			if (!displayPrev && !displayNext)
 			{
 				padItem.style = ITEMDRAW_NOTEXT;
 			}
