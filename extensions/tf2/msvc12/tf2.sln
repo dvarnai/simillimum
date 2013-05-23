@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tf2", "tf2.vcxproj", "{B3E8AF22-5436-49A4-9A3F-631519874372}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug - Orange Box Valve|Win32 = Debug - Orange Box Valve|Win32
+		Release - Orange Box Valve|Win32 = Release - Orange Box Valve|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3E8AF22-5436-49A4-9A3F-631519874372}.Debug - Orange Box Valve|Win32.ActiveCfg = Debug - Orange Box Valve|Win32
+		{B3E8AF22-5436-49A4-9A3F-631519874372}.Debug - Orange Box Valve|Win32.Build.0 = Debug - Orange Box Valve|Win32
+		{B3E8AF22-5436-49A4-9A3F-631519874372}.Release - Orange Box Valve|Win32.ActiveCfg = Release - Orange Box Valve|Win32
+		{B3E8AF22-5436-49A4-9A3F-631519874372}.Release - Orange Box Valve|Win32.Build.0 = Release - Orange Box Valve|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
