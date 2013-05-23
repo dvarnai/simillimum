@@ -19,8 +19,9 @@ Changelog:<br/>
 <b>2013.05.24:</b><br/>
 -Updated cURL libraries<br/>
 -Minor cleanup<br/>
--Swapd the MySQL connector to the connector of MariaDB<br/>
--Removed deprecated status of IsValidHandle<br/>
+-Swapped the MySQL connector to the connector of MariaDB<br/>
+-Added native HandleError:GetHandleStatus(Handle:hndl)<br/>
+-Updated SDKHooks gamedata for CStrike to utilise Dynamic Offsets<br/>
 <br/>
 <b>TODO:</b><br/>
 <br/>

@@ -45,6 +45,27 @@ enum Handle
 
 
 /**
+ * Returns the HandleError of a Error
+ */
+enum HandleError
+{
+	HandleError_None = 0,       /**< No error */
+	HandleError_Changed,        /**< The handle has been freed and reassigned */
+	HandleError_Type,           /**< The handle has a different type registered */
+	HandleError_Freed,          /**< The handle has been freed */
+	HandleError_Index,          /**< generic internal indexing error */
+	HandleError_Access,         /**< No access permitted to free this handle */
+	HandleError_Limit,          /**< The limited number of handles has been reached */
+	HandleError_Identity,       /**< The identity token was not usable */
+	HandleError_Owner,          /**< Owners do not match for this operation */
+	HandleError_Version,        /**< Unrecognized security structure version */
+	HandleError_Parameter,      /**< An invalid parameter was passed */
+	HandleError_NoInherit,      /**< This type cannot be inherited */
+};
+
+
+
+/**
  * Closes a Handle.  If the handle has multiple copies open, 
  * it is not destroyed unless all copies are closed.
  * 
@@ -77,7 +98,7 @@ native bool:CloseHandle(Handle:hndl);
 native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
 
 /**
- * Returns if a Handle and its contents 
+ * Do not use this function. Returns if a Handle and its contents 
  * are readable, whereas INVALID_HANDLE only checks for the absence 
  * of a Handle.
  *
@@ -92,4 +113,14 @@ native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
  * @param hndl		Handle to test for validity.
  * @return			True if handle is valid, false otherwise.
  */
+#pragma deprecated Do not use this function.
 native bool:IsValidHandle(Handle:hndl);
+
+
+/**
+ * Returns the current status of a handle.
+ *
+ * @param hndl		Handle to get status for.
+ * @return			HandleError item.
+ */
+native HandleError:GetHandleStatus(Handle:hndl);
