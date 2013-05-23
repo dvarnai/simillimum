@@ -50,6 +50,15 @@ static cell_t sm_IsValidHandle(IPluginContext *pContext, const cell_t *params)
 	return 1;
 }
 
+static cell_t sm_GetHandleStatus(IPluginContext *pContext, const cell_t *params)
+{
+	Handle_t hndl = static_cast<Handle_t>(params[1]);
+
+	HandleError err = handlesys->ReadHandle(hndl, 0, NULL, NULL);
+
+	return err;
+}
+
 static cell_t sm_CloseHandle(IPluginContext *pContext, const cell_t *params)
 {
 	Handle_t hndl = static_cast<Handle_t>(params[1]);
@@ -112,6 +121,7 @@ static cell_t sm_GetMyHandle(IPluginContext *pContext, const cell_t *params)
 REGISTER_NATIVES(handles)
 {
 	{"IsValidHandle",			sm_IsValidHandle},
+	{"GetHandleStatus",			sm_GetHandleStatus},
 	{"CloseHandle",				sm_CloseHandle},
 	{"CloneHandle",				sm_CloneHandle},
 	{"GetMyHandle",				sm_GetMyHandle},
