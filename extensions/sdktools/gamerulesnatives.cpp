@@ -180,7 +180,8 @@ static cell_t GameRules_GetProp(IPluginContext *pContext, const cell_t *params)
 		bit_count = sizeof(int) * 8;
 	}
 #endif
-	if (bit_count < 1)
+
+	if (bit_count < 1)
 	{
 		bit_count = params[2] * 8;
 	}
