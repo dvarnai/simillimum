@@ -22,6 +22,7 @@ Changelog:<br/>
 -Swapped the MySQL connector to the connector of MariaDB<br/>
 -Added native HandleError:GetHandleStatus(Handle:hndl)<br/>
 -Updated SDKHooks gamedata for CStrike to utilise Dynamic Offsets<br/>
+-Add support for CSS to the ExtinguishEntity function<br/>
 <br/>
 <b>TODO:</b><br/>
 <br/>
@@ -33,6 +34,5 @@ Changelog:<br/>
 -Convert more gamedata to use dynamic offsets<br/>
 -Expose Trie iteration to plugins<br/>
 -Major improvements to the default plugins<br/>
--Add support for CSS to the ExtinguishEntity function<br/>
 -Add a universal way to change the players' name<br/>
 -Implement color code formatting to PrintToChat and PrintToChatAll<br/>
