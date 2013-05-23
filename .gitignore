@@ -1,0 +1,32 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.dll
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Visual Studio
+*.sdf
+*.suo
+*.user
+*.ipch
+*.exp
+*.lib
+*.tlog
+*.pdb
+*.manifest
+*.obj
+*.log
+*.lastb
+
+
+# Builds
+Release*/
