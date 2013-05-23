@@ -15,10 +15,10 @@ Changelog:<br/>
 -Added option to core.cfg to enable/disable listing of extensions and plugins<br/>
 -Updated SQLite libraries to the latest version so we can benefit from its smaller memory footprint<br/>
  and better performance thanks to memory mapped I/O<br/>
--Swap the MySQL connector to the connector of MariaDB<br/>
 <br/>
 <b>2013.05.24:</b><br/>
 -Updated cURL libraries<br/>
+-Swap the MySQL connector to the connector of MariaDB<br/>
 -Minor cleanup<br/>
 <br/>
 <b>TODO:</b><br/>
