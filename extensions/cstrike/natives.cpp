@@ -356,8 +356,7 @@ static cell_t CS_GetWeaponPrice(IPluginContext *pContext, const cell_t *params)
 		}
 	}
 
-	CBaseEntity *pEntity;
-	if (!(pEntity = GetCBaseEntity(params[1], true)))
+	if (!GetCBaseEntity(params[1], true))
 	{
 		return pContext->ThrowNativeError("Client index %d is not valid", params[1]);
 	}
