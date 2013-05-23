@@ -260,6 +260,61 @@ static cell_t IgniteEntity(IPluginContext *pContext, const cell_t *params)
 
 static cell_t ExtinguishEntity(IPluginContext *pContext, const cell_t *params)
 {
+#if SOURCE_ENGINE == SE_CSS
+	if(params[1] <= gpGlobals->maxClients)
+	{
+		IGamePlayer *player = playerhelpers->GetGamePlayer(params[1]);
+		if (player == NULL)
+		{
+			return pContext->ThrowNativeError("Invalid client index %d", params[1]);
+		}
+		if (!player->IsInGame())
+		{
+			return pContext->ThrowNativeError("Client %d is not in game", params[1]);
+		}
+
+		edict_t *pEdict = PEntityOfEntIndex(gamehelpers->ReferenceToIndex(params[2]));
+		if (!pEdict || pEdict->IsFree())
+		{
+			return pContext->ThrowNativeError("Entity %d is not valid", params[2]);
+		}
+		CBaseEntity *pEntity = g_pGameHelpers->ReferenceToEntity(params[1]);
+		datamap_t * m_Datamap = g_pGameHelpers->GetDataMap(pEntity);
+		if(!m_Datamap)
+		{
+			return pContext->ThrowNativeError("Cannot find datamap for entity %d", params[1]);
+		}
+
+		typedescription_t *m_hEffectEntity = g_pGameHelpers->FindInDataMap(m_Datamap, "m_hEffectEntity");
+		if(!m_hEffectEntity)
+		{
+			return pContext->ThrowNativeError("Cannot find m_hEffectEntity offset for entity %d", params[1]);
+		}
+
+		CBaseHandle &hndl = *(CBaseHandle *)((uint8_t *)pEntity + GetTypeDescOffs(m_hEffectEntity));
+		CBaseEntity *pHandleEntity = g_pGameHelpers->ReferenceToEntity(hndl.GetEntryIndex());
+
+		if (!pHandleEntity || hndl != reinterpret_cast<IHandleEntity *>(pHandleEntity)->GetRefEHandle())
+			return 1;
+
+		m_Datamap = g_pGameHelpers->GetDataMap(pHandleEntity);
+
+		if(!m_Datamap)
+		{
+			return pContext->ThrowNativeError("Cannot find datamap for entity %d", g_pGameHelpers->EntityToBCompatRef(pHandleEntity));
+		}
+
+		typedescription_t *m_flLifetime = g_pGameHelpers->FindInDataMap(m_Datamap, "m_flLifetime");
+		if(!m_flLifetime)
+		{
+			return pContext->ThrowNativeError("Cannot find m_flLifetime offset for entity %d", g_pGameHelpers->EntityToBCompatRef(pHandleEntity));
+		}
+
+		*(float*)((uint8_t *)pHandleEntity + GetTypeDescOffs(m_flLifetime)) = 0.0f;
+	}
+	else
+	{
+#endif
 	static ValveCall *pCall = NULL;
 	if (!pCall)
 	{
@@ -274,6 +329,9 @@ static cell_t ExtinguishEntity(IPluginContext *pContext, const cell_t *params)
 	START_CALL();
 	DECODE_VALVE_PARAM(1, thisinfo, 0);
 	FINISH_CALL_SIMPLE(NULL);
+#if SOURCE_ENGINE == SE_CSS
+	}
+#endif
 
 	return 1;
 }

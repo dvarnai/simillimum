@@ -1845,7 +1845,7 @@ void CPluginManager::OnSimillimumAllInitialized()
 	g_PluginType = handlesys->CreateType("Plugin", this, 0, NULL, &sec, m_MyIdent, NULL);
 	g_PluginIdent = g_ShareSys.CreateIdentType("PLUGIN");
 
-	rootmenu->AddRootConsoleCommand("sm", "Manage Plugins", this);
+	rootmenu->AddRootConsoleCommand("plugins", "Manage Plugins", this);
 
 	g_ShareSys.AddInterface(NULL, GetOldAPI());
 	
@@ -1855,7 +1855,7 @@ void CPluginManager::OnSimillimumAllInitialized()
 
 void CPluginManager::OnSimillimumShutdown()
 {
-	rootmenu->RemoveRootConsoleCommand("sm", this);
+	rootmenu->RemoveRootConsoleCommand("plugins", this);
 
 	UnloadAll();
 
