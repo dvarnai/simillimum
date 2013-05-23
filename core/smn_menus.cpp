@@ -1440,10 +1440,9 @@ static cell_t GetMenuSelectionPosition(IPluginContext *pContext, const cell_t *p
 static cell_t IsClientInVotePool(IPluginContext *pContext, const cell_t *params)
 {
 	int client;
-	IGamePlayer *pPlayer;
 
 	client = params[1];
-	if ((pPlayer = g_Players.GetPlayerByIndex(client)) == NULL)
+	if (g_Players.GetPlayerByIndex(client) == NULL)
 	{
 		return pContext->ThrowNativeError("Invalid client index %d", client);
 	}
@@ -1459,10 +1458,9 @@ static cell_t IsClientInVotePool(IPluginContext *pContext, const cell_t *params)
 static cell_t RedrawClientVoteMenu(IPluginContext *pContext, const cell_t *params)
 {
 	int client;
-	IGamePlayer *pPlayer;
 
 	client = params[1];
-	if ((pPlayer = g_Players.GetPlayerByIndex(client)) == NULL)
+	if (g_Players.GetPlayerByIndex(client) == NULL)
 	{
 		return pContext->ThrowNativeError("Invalid client index %d", client);
 	}
