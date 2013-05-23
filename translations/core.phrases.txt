@@ -80,7 +80,7 @@
 	
 	"Name Reserved"
 	{
-		"en"			"Your name is reserved by SourceMod; set your password to use it."
+		"en"			"Your name is reserved by Simillimum; set your password to use it."
 	}
 	
 	/* This is a special "pass-thru" translation */
