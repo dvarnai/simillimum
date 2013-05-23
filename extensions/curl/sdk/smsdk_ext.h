@@ -42,7 +42,7 @@
 #include <IHandleSys.h>
 #include <sp_vm_api.h>
 #include <sm_platform.h>
-#include <ISourceMod.h>
+#include <ISimillimum.h>
 #if defined SMEXT_ENABLE_FORWARDSYS
 #include <IForwardSys.h>
 #endif //SMEXT_ENABLE_FORWARDSYS
@@ -97,7 +97,7 @@
 #include <eiface.h>
 #endif
 
-using namespace SourceMod;
+using namespace Simillimum;
 using namespace SourcePawn;
 
 class SDKExtension : 
@@ -235,8 +235,8 @@ extern IExtension *myself;
 
 extern IShareSys *g_pShareSys;
 extern IShareSys *sharesys;				/* Note: Newer name */
-extern ISourceMod *g_pSM;
-extern ISourceMod *smutils;				/* Note: Newer name */
+extern ISimillimum *g_pSM;
+extern ISimillimum *smutils;				/* Note: Newer name */
 
 /* Optional interfaces are below */
 #if defined SMEXT_ENABLE_FORWARDSYS

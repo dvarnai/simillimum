@@ -35,7 +35,7 @@
 #include <IWebternet.h>
 #include <curl/curl.h>
 
-using namespace SourceMod;
+using namespace Simillimum;
 
 class WebForm : public IWebForm
 {

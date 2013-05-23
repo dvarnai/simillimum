@@ -9,7 +9,7 @@
 //
 #include "winres.h"
 
-#include <sourcemod_version.h>
+#include <simillimum_version.h>
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -27,6 +27,10 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 // Version
 //
+
+#ifndef SM_GENERATED_BUILD
+#define BINARY_NAME "webternet.ext.dll\0"
+#endif
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION  SM_VERSION_FILE

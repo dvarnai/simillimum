@@ -6,12 +6,26 @@ maintain ABI compatibility with SourceMod.
 
 Changelog:
 
-2013.05.23:
--Forked SourceMod
--Changed all SourceMod references to Simillimum while keeping ABI compatibility
--New signature scanning algorithm using a version of the Boyer-Moore-Horspool algorithm
--Introduced a new gamedata type for POSIX platforms to prevent offset breaks in case of updates
--Converted the sdktools/game.cstrike.txt gamedata to use Dynamic Offsets
--Added option to core.cfg to enable/disable listing of extensions and plugins
--Updated SQLite libraries to the latest version so we can benefit from its smaller memory footprint
- and better performance thanks to memory mapped i/o
+2013.05.23:<br/>
+-Forked SourceMod<br/>
+-Changed all SourceMod references to Simillimum while keeping ABI compatibility<br/>
+-New signature scanning algorithm using a version of the Boyer-Moore-Horspool algorithm<br/>
+-Introduced a new gamedata type for POSIX platforms to prevent offset breaks in case of updates<br/>
+-Converted the sdktools/game.cstrike.txt gamedata to use Dynamic Offsets<br/>
+-Added option to core.cfg to enable/disable listing of extensions and plugins<br/>
+-Updated SQLite libraries to the latest version so we can benefit from its smaller memory footprint<br/>
+ and better performance thanks to memory mapped I/O<br/>
+<br/>
+2013.05.24:<br/>
+.Updated cURL libraries<br/>
+<br/>
+ TODO:<br/>
+<br/>
+-Major cleanup<br/>
+-Expose cURL functions to plugins<br/>
+-Implement a Socket extension without Boost dependencies<br/>
+-Use the Boyer-Moore-Horspool algorithm for strstr/stristr<br/>
+-Swap the MySQL connector to the connector of MariaDB<br/>
+-Convert more gamedata to use dynamic offsets<br/>
+-Expose Trie iteration to plugins<br/>
+-Major improvements to the default plugins<br/>

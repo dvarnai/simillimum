@@ -42,7 +42,7 @@
 #define SMINTERFACE_WEBTERNET_NAME		"IWebternet"
 #define SMINTERFACE_WEBTERNET_VERSION	3
 
-namespace SourceMod
+namespace Simillimum
 {
 	/**
 	 * @brief Status to return via the OnDownloadWrite function of ITransferHandler.

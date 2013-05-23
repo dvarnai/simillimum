@@ -362,9 +362,6 @@
     <ClInclude Include="..\..\public\IShareSys.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\public\ISourceMod.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\public\ITextParsers.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
@@ -421,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="..\..\public\simillimum_version.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\public\ISimillimum.h">
+      <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,9 @@
-EXTRA_DIST = batch_compile.com build_vms.com config-vms.h defines.com	\
- hpssl_alpha.opt hpssl_ia64.opt hpssl_vax.opt readme curlmsg.msg	\
- curlmsg_vms.h axp/README ia64/README vax/README curlmsg.h curlmsg.sdl
+EXTRA_DIST = \
+ build_vms.com \
+ config_h.com \
+ curlmsg.h \
+ curlmsg.msg \
+ curlmsg.sdl \
+ curlmsg_vms.h \
+ generate_config_vms_h_curl.com \
+ readme

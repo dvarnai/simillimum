@@ -29,7 +29,7 @@
  * Version: $Id$
  */
 
-#include <sourcemod_version.h>
+#include <simillimum_version.h>
 #include "extension.h"
 #include <stdarg.h>
 #include <sm_platform.h>

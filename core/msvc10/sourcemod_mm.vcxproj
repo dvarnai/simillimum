@@ -2283,6 +2283,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\public\ISimillimum.h" />
     <ClInclude Include="..\..\public\simillimum_version.h" />
     <ClInclude Include="..\..\public\sm_platform.h" />
     <ClInclude Include="..\AdminCache.h" />
@@ -2347,7 +2348,6 @@
     <ClInclude Include="..\..\public\IPluginSys.h" />
     <ClInclude Include="..\..\public\IRootConsoleMenu.h" />
     <ClInclude Include="..\..\public\IShareSys.h" />
-    <ClInclude Include="..\..\public\ISourceMod.h" />
     <ClInclude Include="..\..\public\ITextParsers.h" />
     <ClInclude Include="..\..\public\ITimerSystem.h" />
     <ClInclude Include="..\..\public\ITranslator.h" />
