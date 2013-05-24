@@ -45,7 +45,7 @@ enum Handle
 
 
 /**
- * Returns the HandleError of a Error
+ * Enum with possible Handle Errors
  */
 enum HandleError
 {
@@ -97,6 +97,16 @@ native bool:CloseHandle(Handle:hndl);
  */
 native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
 
+
+/**
+ * Returns the current status of a handle.
+ *
+ * @param hndl		Handle to get status for.
+ * @return			HandleError item.
+ */
+native HandleError:GetHandleStatus(Handle:hndl);
+
+
 /**
  * Do not use this function. Returns if a Handle and its contents 
  * are readable, whereas INVALID_HANDLE only checks for the absence 
@@ -114,13 +124,14 @@ native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
  * @return			True if handle is valid, false otherwise.
  */
 #pragma deprecated Do not use this function.
-native bool:IsValidHandle(Handle:hndl);
+stock bool:IsValidHandle(Handle:hndl)
+{
+	if (hndl == INVALID_HANDLE)
+	{
+		return false;
+	}
 
+	new HandleError:status = GetHandleStatus(hndl);
 
-/**
- * Returns the current status of a handle.
- *
- * @param hndl		Handle to get status for.
- * @return			HandleError item.
- */
-native HandleError:GetHandleStatus(Handle:hndl);
+	return (status == HandleError_None || status == HandleError_Access);
+}

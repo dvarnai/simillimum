@@ -35,20 +35,6 @@
 
 using namespace Simillimum;
 
-static cell_t sm_IsValidHandle(IPluginContext *pContext, const cell_t *params)
-{
-	Handle_t hndl = static_cast<Handle_t>(params[1]);
-
-	HandleError err = handlesys->ReadHandle(hndl, 0, NULL, NULL);
-
-	if (err != HandleError_Access
-		&& err != HandleError_None)
-	{
-		return 0;
-	}
-
-	return 1;
-}
 
 static cell_t sm_GetHandleStatus(IPluginContext *pContext, const cell_t *params)
 {
@@ -120,7 +106,6 @@ static cell_t sm_GetMyHandle(IPluginContext *pContext, const cell_t *params)
 
 REGISTER_NATIVES(handles)
 {
-	{"IsValidHandle",			sm_IsValidHandle},
 	{"GetHandleStatus",			sm_GetHandleStatus},
 	{"CloseHandle",				sm_CloseHandle},
 	{"CloneHandle",				sm_CloneHandle},
