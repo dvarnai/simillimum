@@ -938,3 +938,13 @@ native bool:AddCommandListener(CommandListener:callback, const String:command[]=
  */
 native RemoveCommandListener(CommandListener:callback, const String:command[]="");
 
+/**
+ * Returns if a supplied command exists.
+ *
+ * @param command       Command to find.
+ * @return              True if command exists, false otherwise.
+ */
+stock bool:CommandExists(const String:command[])
+{
+	return (GetCommandFlags(command) != INVALID_FCVAR_FLAGS);
+}
