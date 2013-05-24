@@ -1257,7 +1257,7 @@ bool CHalfLife2::IsMapValid(const char *map)
 		static char szFuzzyName[PLATFORM_MAX_PATH];
 		if (ResolveFuzzyMapName(map, szFuzzyName, sizeof(szFuzzyName)))
 		{
-			ret = engine->IsMapValid(szFuzzyName);
+			ret = (engine->IsMapValid(szFuzzyName) != 0);
 		}
 	}
 #endif
