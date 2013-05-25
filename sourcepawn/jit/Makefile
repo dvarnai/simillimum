@@ -2,38 +2,20 @@
 # Makefile written by David "BAILOPAN" Anderson
 
 SMSDK = ../..
-MMSOURCE17 = ../../../mmsource-1.7
+MMSOURCE17 = ../../../mmsource-central
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-PROJECT = sourcepawn.jit.x86
+PROJECT = simillimum.jit.x86
 
-OBJECTS = dll_exports.cpp 	\
-	x86/jit_x86.cpp			\
-	x86/opcode_helpers.cpp	\
-	sp_vm_basecontext.cpp	\
-	sp_vm_engine.cpp	\
-	sp_vm_function.cpp	\
-	engine2.cpp			\
-	BaseRuntime.cpp		\
-	jit_function.cpp	\
-	md5/md5.cpp			\
-	zlib/adler32.c		\
-	zlib/compress.c		\
-	zlib/crc32.c		\
-	zlib/deflate.c		\
-	zlib/gzio.c			\
-	zlib/infback.c		\
-	zlib/inffast.c		\
-	zlib/inflate.c		\
-	zlib/inftrees.c		\
-	zlib/trees.c		\
-	zlib/uncompr.c		\
-	zlib/zutil.c		\
+OBJECTS = BaseRuntime.cpp engine2.cpp dll_exports.cpp jit_function.cpp sp_vm_basecontext.cpp sp_vm_engine.cpp \
+          sp_vm_function.cpp x86/jit_x86.cpp x86/opcode_helpers.cpp zlib/adler32.c zlib/compress.c zlib/crc32.c \
+          zlib/deflate.c zlib/gzio.c zlib/infback.c zlib/inffast.c zlib/inflate.c zlib/inftrees.c zlib/trees.c \
+          zlib/uncompr.c zlib/zutil.c md5/md5.cpp ../../knight/shared/KeCodeAllocator.cpp
 
-OBJECTS += ../../knight/shared/KeCodeAllocator.cpp
+
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -101,6 +83,7 @@ all:
 	mkdir -p $(BIN_DIR)/x86
 	mkdir -p $(BIN_DIR)/zlib
 	mkdir -p $(BIN_DIR)/knight
+	mkdir -p $(BIN_DIR)/md5
 	$(MAKE) -f Makefile jit
 
 jit: $(OBJ_LINUX)

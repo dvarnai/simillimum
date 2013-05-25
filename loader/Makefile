@@ -7,7 +7,7 @@ MMSOURCE17 = ../../mmsource-central
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-PROJECT = sourcemod_mm
+PROJECT = simillimum_mm
 
 OBJECTS = loader.cpp
 

@@ -2,46 +2,21 @@
 # Makefile written by David "BAILOPAN" Anderson
 
 SMSDK = ../..
-MMSOURCE17 = ../../../mmsource-1.7
+MMSOURCE17 = ../../../mmsource-central
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-BINARY = sourcemod.logic.so
+BINARY = simillimum.logic.so
 
-OBJECTS = \
-	common_logic.cpp	\
-	smn_adt_array.cpp	\
-	smn_sorting.cpp		\
-	smn_maplists.cpp	\
-	smn_adt_stack.cpp	\
-	thread/ThreadWorker.cpp \
-	thread/BaseWorker.cpp 	\
-	thread/PosixThreads.cpp \
-	ThreadSupport.cpp	\
-	smn_float.cpp		\
-	TextParsers.cpp		\
-	smn_textparse.cpp	\
-	smn_adt_trie.cpp	\
-	Profiler.cpp		\
-	smn_functions.cpp   \
-	sm_crc32.cpp		\
-	smn_timers.cpp		\
-	MemoryUtils.cpp		\
-	smn_admin.cpp		\
-	smn_banning.cpp		\
-	stringutil.cpp		\
-	Translator.cpp		\
-	PhraseCollection.cpp \
-	smn_lang.cpp		\
-	smn_string.cpp		\
-	smn_handles.cpp		\
-	smn_datapacks.cpp	\
-	smn_gameconfigs.cpp	\
-	GameConfigs.cpp		\
-	smn_players.cpp 	\
-	smn_profiler.cpp
+OBJECTS = common_logic.cpp smn_adt_array.cpp smn_sorting.cpp smn_maplists.cpp smn_adt_stack.cpp thread/ThreadWorker.cpp thread/BaseWorker.cpp \
+          ThreadSupport.cpp smn_float.cpp TextParsers.cpp smn_textparse.cpp smn_adt_trie.cpp Profiler.cpp smn_functions.cpp smn_timers.cpp \
+          smn_players.cpp MemoryUtils.cpp smn_admin.cpp smn_banning.cpp smn_filesystem.cpp stringutil.cpp Translator.cpp PhraseCollection.cpp \
+          smn_lang.cpp smn_string.cpp smn_handles.cpp smn_datapacks.cpp smn_gameconfigs.cpp smn_fakenatives.cpp GameConfigs.cpp sm_crc32.cpp \
+          smn_profiler.cpp ShareSys.cpp PluginSys.cpp HandleSys.cpp NativeOwner.cpp NativeInvoker.cpp ExtensionSys.cpp DebugReporter.cpp
+
+
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -59,7 +34,7 @@ INCLUDE += -I. -I$(MMSOURCE17)/core/sourcehook -I$(SMSDK)/public -I$(SMSDK)/publ
 
 CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Werror \
-	-Wno-uninitialized -mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -DSM_DEFAULT_THREADER -m32 \
+	-Wno-uninitialized -Wno-unused -mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -DSM_DEFAULT_THREADER -m32 \
 	-DSM_LOGIC
 CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
 

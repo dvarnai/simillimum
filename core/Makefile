@@ -15,28 +15,16 @@ MMSOURCE = ../../mmsource-central
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-OBJECTS = AdminCache.cpp CDataPack.cpp ConCmdManager.cpp ConVarManager.cpp CoreConfig.cpp \
-	Database.cpp DebugReporter.cpp EventManager.cpp HalfLife2.cpp Logger.cpp \
-	PlayerManager.cpp TimerSys.cpp UserMessages.cpp \
-	sm_autonatives.cpp sm_srvcmds.cpp sm_stringutil.cpp sm_trie.cpp \
-	sourcemm_api.cpp sourcemod.cpp MenuStyle_Base.cpp MenuStyle_Valve.cpp MenuManager.cpp \
-	MenuStyle_Radio.cpp ChatTriggers.cpp ADTFactory.cpp MenuVoting.cpp \
-	frame_hooks.cpp concmd_cleaner.cpp NextMap.cpp \
-	NativeOwner.cpp logic_bridge.cpp ConsoleDetours.cpp
-OBJECTS += smn_bitbuffer.cpp smn_console.cpp smn_core.cpp \
-	smn_database.cpp smn_entities.cpp smn_events.cpp \
-	smn_fakenatives.cpp smn_filesystem.cpp smn_halflife.cpp \
-	smn_keyvalues.cpp smn_player.cpp \
-	smn_usermsgs.cpp smn_menus.cpp smn_vector.cpp \
-	smn_hudtext.cpp smn_nextmap.cpp
-OBJECTS += ExtensionSys.cpp 		\
-		   ForwardSys.cpp 			\
-		   HandleSys.cpp 			\
-		   LibrarySys.cpp 			\
-		   PluginInfoDatabase.cpp 	\
-		   PluginSys.cpp 			\
-		   ShareSys.cpp				\
-		   NativeInvoker.cpp
+
+
+
+OBJECTS = AdminCache.cpp MenuStyle_Valve.cpp logic_bridge.cpp smn_entities.cpp sm_stringutil.cpp ADTFactory.cpp ForwardSys.cpp \
+          MenuVoting.cpp smn_events.cpp smn_menus.cpp sm_trie.cpp CDataPack.cpp frame_hooks.cpp smn_nextmap.cpp sourcemm_api.cpp \
+          ChatTriggers.cpp smn_player.cpp simillimum.cpp concmd_cleaner.cpp HalfLife2.cpp NextMap.cpp ConCmdManager.cpp ConVarManager.cpp \
+          LibrarySys.cpp PlayerManager.cpp TimerSys.cpp CoreConfig.cpp Logger.cpp smn_halflife.cpp smn_console.cpp UserMessages.cpp Database.cpp \
+          MenuManager.cpp smn_core.cpp smn_hudtext.cpp smn_usermsgs.cpp MenuStyle_Base.cpp smn_database.cpp smn_keyvalues.cpp smn_vector.cpp \
+          EventManager.cpp MenuStyle_Radio.cpp sm_autonatives.cpp sm_srvcmds.cpp ConsoleDetours.cpp
+
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -60,7 +48,7 @@ ifeq "$(ENGINE)" "original"
 	CFLAGS += -DSOURCE_ENGINE=1
 	METAMOD = $(MMSOURCE)/core-legacy
 	INCLUDE += -I$(HL2SDK)/public/dlls
-	BINARY = sourcemod.1.ep1.so
+	BINARY = simillimum.1.ep1.so
 endif
 ifeq "$(ENGINE)" "orangebox"
 	HL2SDK = $(HL2SDK_OB)
@@ -68,7 +56,7 @@ ifeq "$(ENGINE)" "orangebox"
 	CFLAGS += -DSOURCE_ENGINE=3
 	METAMOD = $(MMSOURCE)/core
 	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = sourcemod.2.ep2.so
+	BINARY = simillimum.2.ep2.so
 endif
 ifeq "$(ENGINE)" "css"
 	HL2SDK = $(HL2SDK_CSS)
@@ -76,7 +64,7 @@ ifeq "$(ENGINE)" "css"
 	CFLAGS += -DSOURCE_ENGINE=6
 	METAMOD = $(MMSOURCE)/core
 	INCLUDE += -I$(HL2SDK)/public/game/server 
-	BINARY = sourcemod.2.css.so
+	BINARY = simillimum.2.css.so
 endif
 ifeq "$(ENGINE)" "orangeboxvalve"
 	HL2SDK = $(HL2SDK_OB_VALVE)
@@ -84,7 +72,7 @@ ifeq "$(ENGINE)" "orangeboxvalve"
 	CFLAGS += -DSOURCE_ENGINE=7
 	METAMOD = $(MMSOURCE)/core
 	INCLUDE += -I$(HL2SDK)/public/game/server 
-	BINARY = sourcemod.2.ep2v.so
+	BINARY = simillimum.2.ep2v.so
 endif
 ifeq "$(ENGINE)" "left4dead"
 	HL2SDK = $(HL2SDK_L4D)
@@ -92,7 +80,7 @@ ifeq "$(ENGINE)" "left4dead"
 	CFLAGS += -DSOURCE_ENGINE=8
 	METAMOD = $(MMSOURCE)/core
 	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = sourcemod.2.l4d.so
+	BINARY = simillimum.2.l4d.so
 endif
 ifeq "$(ENGINE)" "left4dead2"
 	HL2SDK = $(HL2SDK_L4D2)
@@ -100,7 +88,7 @@ ifeq "$(ENGINE)" "left4dead2"
 	CFLAGS += -DSOURCE_ENGINE=9
 	METAMOD = $(MMSOURCE)/core
 	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = sourcemod.2.l4d2.so
+	BINARY = simillimum.2.l4d2.so
 endif
 ifeq "$(ENGINE)" "csgo"
 	HL2SDK = $(HL2SDK_CSGO)
@@ -108,7 +96,7 @@ ifeq "$(ENGINE)" "csgo"
 	CFLAGS += -DSOURCE_ENGINE=12
 	METAMOD = $(MMSOURCE)/core
 	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = sourcemod.2.csgo.so
+	BINARY = simillimum.2.csgo.so
 endif
 
 HL2PUB = $(HL2SDK)/public
