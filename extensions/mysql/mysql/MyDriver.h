@@ -32,8 +32,10 @@
 #ifndef _INCLUDE_SM_MYSQL_DRIVER_H_
 #define _INCLUDE_SM_MYSQL_DRIVER_H_
 
-#include <IDBDriver.h>
+#include <sh_string.h>
+#include <sh_list.h>
 #include <sm_platform.h>
+
 #if defined PLATFORM_WINDOWS
 #define _WINSOCKAPI_
 #include <winsock.h>
@@ -41,12 +43,11 @@
 
 #include <mysql.h>
 #if !defined(PLATFORM_WINDOWS)
-# include <my_global.h>
-# include <my_sys.h>
+#include <my_global.h>
 #endif
 
-#include <sh_string.h>
-#include <sh_list.h>
+#include <IDBDriver.h>
+
 
 using namespace Simillimum;
 using namespace SourceHook;

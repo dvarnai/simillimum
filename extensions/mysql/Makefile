@@ -14,7 +14,7 @@ HL2SDK_L4D = ../../../hl2sdk-l4d
 HL2SDK_L4D2 = ../../../hl2sdk-l4d2
 HL2SDK_CSGO = ../../../hl2sdk-csgo
 MMSOURCE19 = ../../../mmsource-central
-MARIADB = ../../mariadb
+MARIADB = ../../../mariadb
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
@@ -25,10 +25,10 @@ PROJECT = dbi.mysql
 #Uncomment for Metamod: Source enabled extension
 #USEMETA = true
 
-OBJECTS = sdk/smsdk_ext.cpp extension.cpp \
-	mysql/MyBasicResults.cpp mysql/MyDatabase.cpp \
-	mysql/MyBoundResults.cpp mysql/MyDriver.cpp \
-	mysql/MyStatement.cpp
+OBJECTS = sdk/smsdk_ext.cpp \
+	mysql/MyBasicResults.cpp mysql/MyBoundResults.cpp \
+	mysql/MyDatabase.cpp mysql/MyDriver.cpp \
+	mysql/MyStatement.cpp extension.cpp
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -130,7 +130,7 @@ ifeq "$(USEMETA)" "true"
 		-DSE_PORTAL2=11 -DSE_CSGO=12
 endif
 
-LINK += $(MARIADB)/libmariadbclient.a -lz -lpthread -m32 -lm -ldl
+LINK += $(MARIADB)/libmariadbclient.a -lpthread -m32 -lm -ldl
 
 CFLAGS += -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -DCOMPILER_GCC -Wall -Werror \

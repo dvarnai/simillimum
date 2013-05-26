@@ -13,6 +13,7 @@
 #define HAVE_FCNTL_H 1
 #define HAVE_FENV_H 1
 #define HAVE_FLOAT_H 1
+#define HAVE_BOOL 1
 /* #undef HAVE_FPU_CONTROL_H */
 #define HAVE_GRP_H 1
 /* #undef HAVE_IEEEFP_H */
