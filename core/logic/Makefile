@@ -1,16 +1,17 @@
-# (C)2004-2008 SourceMod Development Team
+# (C)2004-2010 SourceMod Development Team
 # Makefile written by David "BAILOPAN" Anderson
 
 SMSDK = ../..
-MMSOURCE17 = ../../../mmsource-central
+MMSOURCE19 = ../../../mmsource-central
+
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-BINARY = simillimum.logic.so
+PROJECT = simillimum.logic
 
-OBJECTS = common_logic.cpp smn_adt_array.cpp smn_sorting.cpp smn_maplists.cpp smn_adt_stack.cpp thread/ThreadWorker.cpp thread/BaseWorker.cpp \
+OBJECTS = common_logic.cpp smn_adt_array.cpp smn_sorting.cpp smn_maplists.cpp smn_adt_stack.cpp thread/PosixThreads.cpp thread/ThreadWorker.cpp thread/BaseWorker.cpp \
           ThreadSupport.cpp smn_float.cpp TextParsers.cpp smn_textparse.cpp smn_adt_trie.cpp Profiler.cpp smn_functions.cpp smn_timers.cpp \
           smn_players.cpp MemoryUtils.cpp smn_admin.cpp smn_banning.cpp smn_filesystem.cpp stringutil.cpp Translator.cpp PhraseCollection.cpp \
           smn_lang.cpp smn_string.cpp smn_handles.cpp smn_datapacks.cpp smn_gameconfigs.cpp smn_fakenatives.cpp GameConfigs.cpp sm_crc32.cpp \
@@ -28,19 +29,24 @@ C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
 CPP = gcc
 
-LINK += -lpthread -static-libgcc
-	
-INCLUDE += -I. -I$(MMSOURCE17)/core/sourcehook -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn
 
-CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
+LINK += -lpthread -m32 -ldl -lm -shared
+	
+INCLUDE += -I. -I$(MMSOURCE19)/core/sourcehook -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn
+
+CFLAGS += -D_LINUX -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Werror \
 	-Wno-uninitialized -Wno-unused -mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -DSM_DEFAULT_THREADER -m32 \
-	-DSM_LOGIC
+	-DSM_LOGIC -Wno-non-virtual-dtor -Wno-narrowing
+	
 CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
+
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
+
+BINARY = $(PROJECT).so
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
@@ -50,14 +56,43 @@ else
 	CFLAGS += $(C_OPT_FLAGS)
 endif
 
-GCC_VERSION := $(shell $(CPP) -dumpversion >&1 | cut -b1)
-ifeq "$(GCC_VERSION)" "4"
+
+IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
+
+ifeq "$(IS_CLANG)" "1"
+	CPP_MAJOR := $(shell $(CPP) --version | grep clang | sed "s/.*version \([0-9]\)*\.[0-9]*.*/\1/")
+	CPP_MINOR := $(shell $(CPP) --version | grep clang | sed "s/.*version [0-9]*\.\([0-9]\)*.*/\1/")
+else
+	CPP_MAJOR := $(shell $(CPP) -dumpversion >&1 | cut -b1)
+	CPP_MINOR := $(shell $(CPP) -dumpversion >&1 | cut -b3)
+endif
+
+# If not clang
+ifeq "$(IS_CLANG)" "0"
+	CFLAGS += -mfpmath=sse
+	LINK += -static-libgcc
+endif
+
+# Clang || GCC >= 4
+ifeq "$(shell expr $(IS_CLANG) \| $(CPP_MAJOR) \>= 4)" "1"
 	CFLAGS += $(C_GCC4_FLAGS)
 	CPPFLAGS += $(CPP_GCC4_FLAGS)
 endif
 
-OBJ_LINUX := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
-OBJ_LINUX := $(OBJ_LINUX:%.c=$(BIN_DIR)/%.o)
+# Clang >= 3 || GCC >= 4.7
+ifeq "$(shell expr $(IS_CLANG) \& $(CPP_MAJOR) \>= 3 \| $(CPP_MAJOR) \>= 4 \& $(CPP_MINOR) \>= 7)" "1"
+	CFLAGS += -Wno-delete-non-virtual-dtor
+endif
+
+
+
+OBJ_BIN := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
+
+# This will break if we include other Makefiles, but is fine for now. It allows
+#  us to make a copy of this file that uses altered paths (ie. Makefile.mine)
+#  or other changes without mucking up the original.
+MAKEFILE_NAME := $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+
 
 $(BIN_DIR)/%.o: %.cpp
 	$(CPP) $(INCLUDE) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
@@ -67,13 +102,13 @@ $(BIN_DIR)/%.o: %.c
 
 all: 
 	mkdir -p $(BIN_DIR)/thread
-	$(MAKE) -f Makefile sourcemod
+	$(MAKE) -f $(MAKEFILE_NAME) sourcemod
 
-sourcemod: $(OBJ_LINUX)
-	$(CPP) $(INCLUDE) $(OBJ_LINUX) $(LINK) -m32 -shared -ldl -lm -o $(BIN_DIR)/$(BINARY)
+sourcemod: $(OBJ_BIN)
+	$(CPP) $(INCLUDE) $(OBJ_BIN) $(LINK) -o $(BIN_DIR)/$(BINARY)
 
 debug:
-	$(MAKE) -f Makefile all DEBUG=true
+	$(MAKE) -f $(MAKEFILE_NAME) all DEBUG=true
 
 default: all
 

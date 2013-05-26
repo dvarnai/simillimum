@@ -1,15 +1,17 @@
-# (C)2004-2008 SourceMod Development Team
+# (C)2004-2010 SourceMod Development Team
 # Makefile written by David "BAILOPAN" Anderson
 
-MMSOURCE17 = ../../mmsource-central
+MMSOURCE19 = ../../mmsource-central
+
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-PROJECT = simillimum_mm
+PROJECT = simillimum_mm_i486
 
 OBJECTS = loader.cpp
+
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -21,18 +23,23 @@ C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
 CPP = gcc
 
-LINK = -m32 -ldl -lm
 
-INCLUDE = -I$(MMSOURCE17)/core -I$(MMSOURCE17)/core/sourcehook
+LINK = -m32 -ldl -lm -shared
+
+INCLUDE = -I$(MMSOURCE19)/core -I$(MMSOURCE19)/core/sourcehook
 
 CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Wno-uninitialized \
 	-mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -m32
+	
 CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
+
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
+
+BINARY = $(PROJECT).so
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
@@ -42,35 +49,55 @@ else
 	CFLAGS += $(C_OPT_FLAGS)
 endif
 
-OS := $(shell uname -s)
-ifeq "$(OS)" "Darwin"
-	LINK += -dynamiclib
-	BINARY = $(PROJECT).dylib
+
+IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
+
+ifeq "$(IS_CLANG)" "1"
+	CPP_MAJOR := $(shell $(CPP) --version | grep clang | sed "s/.*version \([0-9]\)*\.[0-9]*.*/\1/")
+	CPP_MINOR := $(shell $(CPP) --version | grep clang | sed "s/.*version [0-9]*\.\([0-9]\)*.*/\1/")
 else
-	LINK += -static-libgcc -shared
-	BINARY = $(PROJECT)_i486.so
+	CPP_MAJOR := $(shell $(CPP) -dumpversion >&1 | cut -b1)
+	CPP_MINOR := $(shell $(CPP) -dumpversion >&1 | cut -b3)
 endif
 
-GCC_VERSION := $(shell $(CPP) -dumpversion >&1 | cut -b1)
-ifeq "$(GCC_VERSION)" "4"
+# If not clang
+ifeq "$(IS_CLANG)" "0"
+	CFLAGS += -mfpmath=sse
+	LINK += -static-libgcc
+endif
+
+# Clang || GCC >= 4
+ifeq "$(shell expr $(IS_CLANG) \| $(CPP_MAJOR) \>= 4)" "1"
 	CFLAGS += $(C_GCC4_FLAGS)
 	CPPFLAGS += $(CPP_GCC4_FLAGS)
 endif
 
-OBJ_LINUX := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
+# Clang >= 3 || GCC >= 4.7
+ifeq "$(shell expr $(IS_CLANG) \& $(CPP_MAJOR) \>= 3 \| $(CPP_MAJOR) \>= 4 \& $(CPP_MINOR) \>= 7)" "1"
+	CFLAGS += -Wno-delete-non-virtual-dtor
+endif
+
+
+OBJ_BIN := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
+
+# This will break if we include other Makefiles, but is fine for now. It allows
+#  us to make a copy of this file that uses altered paths (ie. Makefile.mine)
+#  or other changes without mucking up the original.
+MAKEFILE_NAME := $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+
 
 $(BIN_DIR)/%.o: %.cpp
 	$(CPP) $(INCLUDE) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 all:
 	mkdir -p $(BIN_DIR)
-	$(MAKE) -f Makefile loader
+	$(MAKE) -f $(MAKEFILE_NAME) loader
 
-loader: $(OBJ_LINUX)
-	$(CPP) $(INCLUDE) $(OBJ_LINUX) $(LINK) -o $(BIN_DIR)/$(BINARY)
+loader: $(OBJ_BIN)
+	$(CPP) $(INCLUDE) $(OBJ_BIN) $(LINK) -o $(BIN_DIR)/$(BINARY)
 
 debug:
-	$(MAKE) -f Makefile all DEBUG=true
+	$(MAKE) -f $(MAKEFILE_NAME) all DEBUG=true
 
 default: all
 

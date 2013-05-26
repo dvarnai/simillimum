@@ -1,8 +1,9 @@
-# (C)2004-2008 SourceMod Development Team
+# (C)2004-20010 SourceMod Development Team
 # Makefile written by David "BAILOPAN" Anderson
 
+
 SMSDK = ../..
-MMSOURCE17 = ../../../mmsource-central
+MMSOURCE19 = ../../../mmsource-central
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
@@ -27,19 +28,24 @@ C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
 CPP = gcc
 
-LINK = -m32 -ldl -lm
+
+LINK = -m32 -ldl -lm -shared
 
 INCLUDE = -I. -I.. -I$(SMSDK)/public -I$(SMSDK)/public/jit -I$(SMSDK)/public/jit/x86 \
-	-I$(SMSDK)/public/sourcepawn -I$(MMSOURCE17)/core/sourcehook -I$(SMSDK)/knight/shared -Ix86
+	-I$(SMSDK)/public/sourcepawn -I$(MMSOURCE19)/core/sourcehook -I$(SMSDK)/knight/shared -Ix86
 
 CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -DHAVE_STDINT_H \
-	-m32 -Wno-uninitialized -Werror
-CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
+	-m32 -Wno-uninitialized -Werror -msse -Wno-unused-but-set-variable
+	
+CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti -Wno-delete-non-virtual-dtor
+
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
+
+BINARY = $(PROJECT).so
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
@@ -49,24 +55,40 @@ else
 	CFLAGS += $(C_OPT_FLAGS)
 endif
 
-OS := $(shell uname -s)
-ifeq "$(OS)" "Darwin"
-	LINK += -dynamiclib
-	BINARY = $(PROJECT).dylib
+
+IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
+
+ifeq "$(IS_CLANG)" "1"
+	CPP_MAJOR := $(shell $(CPP) --version | grep clang | sed "s/.*version \([0-9]\)*\.[0-9]*.*/\1/")
+	CPP_MINOR := $(shell $(CPP) --version | grep clang | sed "s/.*version [0-9]*\.\([0-9]\)*.*/\1/")
 else
-	LINK += -static-libgcc -shared
-	BINARY = $(PROJECT).so
+	CPP_MAJOR := $(shell $(CPP) -dumpversion >&1 | cut -b1)
+	CPP_MINOR := $(shell $(CPP) -dumpversion >&1 | cut -b3)
 endif
 
-GCC_VERSION := $(shell $(CPP) -dumpversion >&1 | cut -b1)
-ifeq "$(GCC_VERSION)" "4"
+# If not clang
+ifeq "$(IS_CLANG)" "0"
+	CFLAGS += -mfpmath=sse
+	LINK += -static-libgcc
+endif
+
+# Clang || GCC >= 4
+ifeq "$(shell expr $(IS_CLANG) \| $(CPP_MAJOR) \>= 4)" "1"
 	CFLAGS += $(C_GCC4_FLAGS)
 	CPPFLAGS += $(CPP_GCC4_FLAGS)
 endif
 
-OBJ_LINUX := $(OBJECTS:../../knight/shared/%.cpp=$(BIN_DIR)/knight/%.o)
-OBJ_LINUX := $(OBJ_LINUX:%.cpp=$(BIN_DIR)/%.o)
-OBJ_LINUX := $(OBJ_LINUX:%.c=$(BIN_DIR)/%.o)
+
+OBJ_BIN := $(OBJECTS:../../knight/shared/%.cpp=$(BIN_DIR)/knight/%.o)
+OBJ_BIN := $(OBJ_BIN:%.cpp=$(BIN_DIR)/%.o)
+OBJ_BIN := $(OBJ_BIN:%.c=$(BIN_DIR)/%.o)
+
+# This will break if we include other Makefiles, but is fine for now. It allows
+#  us to make a copy of this file that uses altered paths (ie. Makefile.mine)
+#  or other changes without mucking up the original.
+MAKEFILE_NAME := $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+
+
 
 default: all
 
@@ -84,13 +106,13 @@ all:
 	mkdir -p $(BIN_DIR)/zlib
 	mkdir -p $(BIN_DIR)/knight
 	mkdir -p $(BIN_DIR)/md5
-	$(MAKE) -f Makefile jit
+	$(MAKE) -f $(MAKEFILE_NAME) jit
 
-jit: $(OBJ_LINUX)
-	$(CPP) $(INCLUDE) $(OBJ_LINUX) $(LINK) -o $(BIN_DIR)/$(BINARY)
+jit: $(OBJ_BIN)
+	$(CPP) $(INCLUDE) $(OBJ_BIN) $(LINK) -o $(BIN_DIR)/$(BINARY)
 
 debug:
-	$(MAKE) -f Makefile all DEBUG=true
+	$(MAKE) -f $(MAKEFILE_NAME) all DEBUG=true
 
 clean:
 	rm -rf $(BIN_DIR)/x86/*.o
