@@ -23,6 +23,12 @@ Changelog:<br/>
 -Added native HandleError:GetHandleStatus(Handle:hndl)<br/>
 -Updated SDKHooks gamedata for CStrike to utilise Dynamic Offsets<br/>
 -Add support for CSS to the ExtinguishEntity function<br/>
+<b>2013.05.25:</b><br/>
+-Updated makefiles and msvc solutions
+-Refactored and merged a few patches by Afronanny:
+ -Using @aim while specatating someone will select the spectated player now
+ -Added AwardClientAchievement native
+ -Fixed a crash with Precache natives if they are supplied a bogus string
 <br/>
 <b>TODO:</b><br/>
 <br/>
@@ -36,3 +42,4 @@ Changelog:<br/>
 -Major improvements to the default plugins<br/>
 -Add a universal way to change the players' name<br/>
 -Implement color code formatting to PrintToChat and PrintToChatAll<br/>
+-Finish updating makefiles so we can remove ambuild completely<br/>

@@ -61,10 +61,15 @@ void CDataPack::CheckSize(size_t typesize)
 	}
 
 	size_t pos = m_curptr - m_pBase;
+	char * m_pBaseTmp;
 	do
 	{
 		m_capacity *= 2;
-		m_pBase = (char *)realloc(m_pBase, m_capacity);
+		m_pBaseTmp = (char *)realloc(m_pBase, m_capacity);
+		if(m_pBaseTmp)
+			m_pBase = m_pBaseTmp;
+		else
+			break;
 		m_curptr = m_pBase + pos;
 	} while (m_curptr - m_pBase + typesize > m_capacity);
 }

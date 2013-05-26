@@ -34,6 +34,7 @@
 #include "sourcemm_api.h"
 #include "PlayerManager.h"
 #include "HalfLife2.h"
+#include "sm_stringutil.h"
 
 static cell_t SetRandomSeed(IPluginContext *pContext, const cell_t *params)
 {
@@ -200,6 +201,12 @@ static cell_t PrecacheModel(IPluginContext *pContext, const cell_t *params)
 	char *model;
 	pContext->LocalToString(params[1], &model);
 
+	size_t chars = strlen(model);
+	model = UTIL_TrimWhitespace(model, chars);
+
+	if(model[0] == 0)
+		return 0;
+
 	return engine->PrecacheModel(model, params[2] ? true : false);
 }
 
@@ -207,6 +214,12 @@ static cell_t PrecacheSentenceFile(IPluginContext *pContext, const cell_t *param
 {
 	char *sentencefile;
 	pContext->LocalToString(params[1], &sentencefile);
+
+	size_t chars = strlen(sentencefile);
+	sentencefile = UTIL_TrimWhitespace(sentencefile, chars);
+
+	if(sentencefile[0] == 0)
+		return 0;
 
 	return engine->PrecacheSentenceFile(sentencefile, params[2] ? true : false);
 }
@@ -216,6 +229,12 @@ static cell_t PrecacheDecal(IPluginContext *pContext, const cell_t *params)
 	char *decal;
 	pContext->LocalToString(params[1], &decal);
 
+	size_t chars = strlen(decal);
+	decal = UTIL_TrimWhitespace(decal, chars);
+
+	if(decal[0] == 0)
+		return 0;
+
 	return engine->PrecacheDecal(decal, params[2] ? true : false);
 }
 
@@ -223,6 +242,12 @@ static cell_t PrecacheGeneric(IPluginContext *pContext, const cell_t *params)
 {
 	char *generic;
 	pContext->LocalToString(params[1], &generic);
+
+	size_t chars = strlen(generic);
+	generic = UTIL_TrimWhitespace(generic, chars);
+
+	if(generic[0] == 0)
+		return 0;
 
 	return engine->PrecacheGeneric(generic, params[2] ? true : false);
 }
@@ -255,6 +280,12 @@ static cell_t PrecacheSound(IPluginContext *pContext, const cell_t *params)
 {
 	char *sample;
 	pContext->LocalToString(params[1], &sample);
+
+	size_t chars = strlen(sample);
+	sample = UTIL_TrimWhitespace(sample, chars);
+
+	if(sample[0] == 0)
+		return 0;
 
 	return enginesound->PrecacheSound(sample, params[2] ? true : false) ? 1 : 0;
 }

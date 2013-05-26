@@ -208,6 +208,37 @@ int GetClientAimTarget(edict_t *pEdict, bool only_players)
 {
 	CBaseEntity *pEntity = pEdict->GetUnknown() ? pEdict->GetUnknown()->GetBaseEntity() : NULL;
 
+	IGamePlayer* pPlayer = playerhelpers->GetGamePlayer(pEdict);
+	bool m_bFreelook = false;
+	if (pPlayer->GetPlayerInfo()->GetTeamIndex() == 1)
+	{
+		sm_sendprop_info_t info;
+		const char* classname = gamehelpers->GetEntityClassname(pEdict);
+		if (gamehelpers->FindSendPropInfo(classname, "m_iObserverMode", &info))
+		{
+			int offset = info.actual_offset;
+			int observermode = *(int *)((uint8_t *)pEntity + offset);
+			if (observermode == 6) //SPECMODE_FREELOOK = 6
+				m_bFreelook = true;
+		}
+
+		memset(&info, 0, sizeof(sm_sendprop_info_t));
+
+		if (!m_bFreelook)
+			if (gamehelpers->FindSendPropInfo(classname, "m_hObserverTarget", &info))
+			{
+				int offset = info.actual_offset;
+				CBaseHandle &hndl = *(CBaseHandle *)((uint8_t *)pEntity + offset);
+				CBaseEntity *pHEntity = gamehelpers->ReferenceToEntity(hndl.GetEntryIndex());
+				if (!pHEntity || hndl != reinterpret_cast<IHandleEntity *>(pHEntity)->GetRefEHandle())
+					return -1;
+				int iObserverTarget = gamehelpers->EntityToBCompatRef(pHEntity);
+				return iObserverTarget;
+			}
+			else
+				return -1;
+	}
+
 	if (pEntity == NULL)
 	{
 		return -1;
