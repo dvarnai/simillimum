@@ -336,6 +336,7 @@ void RootConsoleMenu::OnRootConsoleCommand(const char *cmdname, const CCommand &
 		ConsolePrint(" Simillimum was developed by the Simillimum team:");
 		ConsolePrint(" Daniel \"Zephyrus\" Varnai");
 		ConsolePrint(" David \"Popoklopsi\" Ordnung");
+		ConsolePrint(" Impact");
 		ConsolePrint(" Brian \"420yoloswagboy69\" \"Afronanny\" Simon");
 		ConsolePrint(" http://www.simillimum.net/");
 	}
