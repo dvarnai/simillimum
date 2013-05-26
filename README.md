@@ -36,6 +36,12 @@ Simillimum will always maintain ABI compatibility with SourceMod.
   * Added AwardClientAchievement native
   * Fixed a crash with Precache natives if they are supplied a bogus string
 
+**2013.05.26**
+  * Added initial LUA support, considered highly experimental, stuff:
+  * * http://i.imgur.com/5Mi7Kdi.png
+  * * http://pastebin.com/aMcTVLQQ
+  * More cleansing
+
 
 ## TODO
 
@@ -50,3 +56,4 @@ Simillimum will always maintain ABI compatibility with SourceMod.
   * Add a universal way to change the players' name
   * Implement color code formatting to PrintToChat and PrintToChatAll
   * Finish updating makefiles so we can remove ambuild completely
+  * Add full LUA support, rewrite all stock plugins in LUA
