@@ -3,13 +3,15 @@
 
 MMSOURCE19 = ../../mmsource-central
 
+
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-PROJECT = simillimum_mm
+PROJECT = simillimum_mm_i486
 
 OBJECTS = loader.cpp
+
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -20,32 +22,24 @@ C_DEBUG_FLAGS = -D_DEBUG -DDEBUG -g -ggdb3
 C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
 CPP = gcc
-CPP_OSX = clang
 
 
-OS := $(shell uname -s)
-
-ifeq "$(OS)" "Darwin"
-	LIB_EXT = .dylib
-else
-	LIB_EXT = _i486.so
-endif
-
-
-LINK = -m32 -ldl -lm
+LINK = -m32 -ldl -lm -shared
 
 INCLUDE = -I$(MMSOURCE19)/core -I$(MMSOURCE19)/core/sourcehook
 
-CFLAGS += -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
+CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Wno-uninitialized \
 	-mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -m32
+	
 CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
+
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
 
-BINARY = $(PROJECT)$(LIB_EXT)
+BINARY = $(PROJECT).so
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
@@ -55,15 +49,6 @@ else
 	CFLAGS += $(C_OPT_FLAGS)
 endif
 
-
-ifeq "$(OS)" "Darwin"
-	CPP = $(CPP_OSX)
-	CFLAGS += -DOSX -D_OSX
-	LINK += -dynamiclib -lstdc++ -mmacosx-version-min=10.5
-else
-	CFLAGS += -D_LINUX
-	LINK += -shared
-endif
 
 IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
 
@@ -78,6 +63,7 @@ endif
 # If not clang
 ifeq "$(IS_CLANG)" "0"
 	CFLAGS += -mfpmath=sse
+	LINK += -static-libgcc
 endif
 
 # Clang || GCC >= 4
@@ -91,10 +77,6 @@ ifeq "$(shell expr $(IS_CLANG) \& $(CPP_MAJOR) \>= 3 \| $(CPP_MAJOR) \>= 4 \& $(
 	CFLAGS += -Wno-delete-non-virtual-dtor
 endif
 
-# OS is Linux and not using clang
-ifeq "$(shell expr $(OS) \= Linux \& $(IS_CLANG) \= 0)" "1"
-	LINK += -static-libgcc
-endif
 
 OBJ_BIN := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
 

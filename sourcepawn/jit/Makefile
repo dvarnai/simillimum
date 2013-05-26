@@ -1,5 +1,6 @@
-# (C)2004-2008 SourceMod Development Team
+# (C)2004-20010 SourceMod Development Team
 # Makefile written by David "BAILOPAN" Anderson
+
 
 SMSDK = ../..
 MMSOURCE19 = ../../../mmsource-central
@@ -26,18 +27,9 @@ C_DEBUG_FLAGS = -D_DEBUG -DDEBUG -g -ggdb3
 C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
 CPP = gcc
-CPP_OSX = clang
-
-OS := $(shell uname -s)
-
-ifeq "$(OS)" "Darwin"
-	LIB_EXT = dylib
-else
-	LIB_EXT = so
-endif
 
 
-LINK = -m32 -ldl -lm
+LINK = -m32 -ldl -lm -shared
 
 INCLUDE = -I. -I.. -I$(SMSDK)/public -I$(SMSDK)/public/jit -I$(SMSDK)/public/jit/x86 \
 	-I$(SMSDK)/public/sourcepawn -I$(MMSOURCE19)/core/sourcehook -I$(SMSDK)/knight/shared -Ix86
@@ -45,13 +37,15 @@ INCLUDE = -I. -I.. -I$(SMSDK)/public -I$(SMSDK)/public/jit -I$(SMSDK)/public/jit
 CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -DHAVE_STDINT_H \
 	-m32 -Wno-uninitialized -Werror -msse -Wno-unused-but-set-variable
+	
 CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti -Wno-delete-non-virtual-dtor
+
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
 
-BINARY = $(PROJECT).$(LIB_EXT)
+BINARY = $(PROJECT).so
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
@@ -61,17 +55,6 @@ else
 	CFLAGS += $(C_OPT_FLAGS)
 endif
 
-
-ifeq "$(OS)" "Darwin"
-	CPP = $(CPP_OSX)
-	LIB_EXT = dylib
-	CFLAGS += -DOSX -D_OSX
-	LINK += -dynamiclib -lstdc++ -mmacosx-version-min=10.5
-else
-	LIB_EXT = so
-	CFLAGS += -D_LINUX
-	LINK += -shared
-endif
 
 IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
 
@@ -86,6 +69,7 @@ endif
 # If not clang
 ifeq "$(IS_CLANG)" "0"
 	CFLAGS += -mfpmath=sse
+	LINK += -static-libgcc
 endif
 
 # Clang || GCC >= 4
@@ -94,11 +78,6 @@ ifeq "$(shell expr $(IS_CLANG) \| $(CPP_MAJOR) \>= 4)" "1"
 	CPPFLAGS += $(CPP_GCC4_FLAGS)
 endif
 
-
-# OS is Linux and not using clang
-ifeq "$(shell expr $(OS) \= Linux \& $(IS_CLANG) \= 0)" "1"
-	LINK += -static-libgcc
-endif
 
 OBJ_BIN := $(OBJECTS:../../knight/shared/%.cpp=$(BIN_DIR)/knight/%.o)
 OBJ_BIN := $(OBJ_BIN:%.cpp=$(BIN_DIR)/%.o)
