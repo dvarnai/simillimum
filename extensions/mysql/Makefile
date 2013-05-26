@@ -113,6 +113,10 @@ else
 	LIB_SUFFIX = .$(LIB_EXT)
 endif
 
+ifneq (,$(filter orangeboxvalve css,$(ENGINE)))
+	LIB_SUFFIX = _srv.so
+endif
+
 INCLUDE += -I. -I.. -Isdk -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn -Imariadb-source/include -I$(MMSOURCE19)/core/sourcehook
 
 ifeq "$(USEMETA)" "true"

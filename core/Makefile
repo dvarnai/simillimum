@@ -1,5 +1,9 @@
-# (C)2004-2008 SourceMod Development Team
+# (C)2004-20010 SourceMod Development Team
 # Makefile written by David "BAILOPAN" Anderson
+
+###########################################
+### EDIT THESE PATHS FOR YOUR OWN SETUP ###
+###########################################
 
 SMSDK = ..
 HL2SDK_ORIG = ../../hl2sdk
@@ -9,13 +13,13 @@ HL2SDK_OB_VALVE = ../../hl2sdk-ob-valve
 HL2SDK_L4D = ../../hl2sdk-l4d
 HL2SDK_L4D2 = ../../hl2sdk-l4d2
 HL2SDK_CSGO = ../../hl2sdk-csgo
-MMSOURCE = ../../mmsource-central
+MMSOURCE19 = ../../mmsource-central
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-
+PROJECT = simillimum
 
 
 OBJECTS = AdminCache.cpp MenuStyle_Valve.cpp logic_bridge.cpp smn_entities.cpp sm_stringutil.cpp ADTFactory.cpp ForwardSys.cpp \
@@ -35,6 +39,7 @@ C_DEBUG_FLAGS = -D_DEBUG -DDEBUG -g -ggdb3
 C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
 CPP = gcc
+CPP_OSX = clang
 
 override ENGSET = false
 
@@ -44,62 +49,42 @@ endif
 
 ifeq "$(ENGINE)" "original"
 	HL2SDK = $(HL2SDK_ORIG)
-	HL2LIB = $(HL2SDK)/linux_sdk
 	CFLAGS += -DSOURCE_ENGINE=1
-	METAMOD = $(MMSOURCE)/core-legacy
-	INCLUDE += -I$(HL2SDK)/public/dlls
-	BINARY = simillimum.1.ep1.so
 endif
 ifeq "$(ENGINE)" "orangebox"
 	HL2SDK = $(HL2SDK_OB)
-	HL2LIB = $(HL2SDK)/lib/linux
 	CFLAGS += -DSOURCE_ENGINE=3
-	METAMOD = $(MMSOURCE)/core
-	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = simillimum.2.ep2.so
 endif
 ifeq "$(ENGINE)" "css"
 	HL2SDK = $(HL2SDK_CSS)
-	HL2LIB = $(HL2SDK)/lib/linux
 	CFLAGS += -DSOURCE_ENGINE=6
-	METAMOD = $(MMSOURCE)/core
-	INCLUDE += -I$(HL2SDK)/public/game/server 
-	BINARY = simillimum.2.css.so
 endif
 ifeq "$(ENGINE)" "orangeboxvalve"
 	HL2SDK = $(HL2SDK_OB_VALVE)
-	HL2LIB = $(HL2SDK)/lib/linux
 	CFLAGS += -DSOURCE_ENGINE=7
-	METAMOD = $(MMSOURCE)/core
-	INCLUDE += -I$(HL2SDK)/public/game/server 
-	BINARY = simillimum.2.ep2v.so
 endif
 ifeq "$(ENGINE)" "left4dead"
 	HL2SDK = $(HL2SDK_L4D)
-	HL2LIB = $(HL2SDK)/lib/linux
 	CFLAGS += -DSOURCE_ENGINE=8
-	METAMOD = $(MMSOURCE)/core
-	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = simillimum.2.l4d.so
 endif
 ifeq "$(ENGINE)" "left4dead2"
 	HL2SDK = $(HL2SDK_L4D2)
-	HL2LIB = $(HL2SDK)/lib/linux
 	CFLAGS += -DSOURCE_ENGINE=9
-	METAMOD = $(MMSOURCE)/core
-	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = simillimum.2.l4d2.so
 endif
 ifeq "$(ENGINE)" "csgo"
 	HL2SDK = $(HL2SDK_CSGO)
-	HL2LIB = $(HL2SDK)/lib/linux
 	CFLAGS += -DSOURCE_ENGINE=12
-	METAMOD = $(MMSOURCE)/core
-	INCLUDE += -I$(HL2SDK)/public/game/server
-	BINARY = simillimum.2.csgo.so
 endif
 
 HL2PUB = $(HL2SDK)/public
+
+ifeq "$(ENGINE)" "original"
+	INCLUDE += -I$(HL2SDK)/public/dlls
+	METAMOD = $(MMSOURCE19)/core-legacy
+else
+	INCLUDE += -I$(HL2SDK)/public/game/server
+	METAMOD = $(MMSOURCE19)/core
+endif
 
 OS := $(shell uname -s)
 
@@ -115,19 +100,16 @@ else
 	endif
 endif
 
-ifneq (,$(filter original orangebox left4dead,$(ENGINE)))
+# if ENGINE is original or OB
+ifneq (,$(filter original orangebox,$(ENGINE)))
 	LIB_SUFFIX = _i486.$(LIB_EXT)
 else
 	LIB_PREFIX = lib
-	ifneq (,$(filter orangeboxvalve css,$(ENGINE)))
-		ifneq "$(OS)" "Darwin"
-			LIB_SUFFIX = _srv.$(LIB_EXT)
-		else
-			LIB_SUFFIX = .$(LIB_EXT)
-		endif
-	else
-		LIB_SUFFIX = .$(LIB_EXT)
-	endif
+	LIB_SUFFIX = .$(LIB_EXT)
+endif
+
+ifneq (,$(filter orangeboxvalve css,$(ENGINE)))
+	LIB_SUFFIX = _srv.so
 endif
 
 CFLAGS += -DSE_EPISODEONE=1 -DSE_DARKMESSIAH=2 -DSE_ORANGEBOX=3 -DSE_BLOODYGOODTIME=4 -DSE_EYE=5 \
@@ -135,7 +117,7 @@ CFLAGS += -DSE_EPISODEONE=1 -DSE_DARKMESSIAH=2 -DSE_ORANGEBOX=3 -DSE_BLOODYGOODT
 	-DSE_PORTAL2=11 -DSE_CSGO=12
 
 LINK += $(HL2LIB)/tier1_i486.a $(HL2LIB)/mathlib_i486.a $(LIB_PREFIX)vstdlib$(LIB_SUFFIX) \
-	$(LIB_PREFIX)tier0$(LIB_SUFFIX) -static-libgcc
+	$(LIB_PREFIX)tier0$(LIB_SUFFIX) -m32 -ldl -lm 
 
 ifeq "$(ENGINE)" "csgo"
 	LINK += $(HL2LIB)/interfaces_i486.a
@@ -148,29 +130,76 @@ INCLUDE += -I. -I.. -I$(HL2PUB) -I$(HL2PUB)/engine -I$(HL2PUB)/mathlib -I$(HL2PU
 CFLAGS += -D_LINUX -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Werror \
 	-Wno-uninitialized -Wno-unused -Wno-switch -mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H \
-	-DSM_DEFAULT_THREADER -m32 -DCOMPILER_GCC
+	-DSM_DEFAULT_THREADER -m32 -DCOMPILER_GCC -Wno-narrowing
 CPPFLAGS += -Wno-non-virtual-dtor -Wno-overloaded-virtual -fno-threadsafe-statics -fno-exceptions -fno-rtti
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
 
+BINARY = $(PROJECT).ext.$(LIB_EXT)
+
 ifeq "$(DEBUG)" "true"
-	BIN_DIR = Debug.$(ENGINE)
+	BIN_DIR = Debug
 	CFLAGS += $(C_DEBUG_FLAGS)
 else
-	BIN_DIR = Release.$(ENGINE)
+	BIN_DIR = Release
 	CFLAGS += $(C_OPT_FLAGS)
 endif
 
-GCC_VERSION := $(shell $(CPP) -dumpversion >&1 | cut -b1)
-ifeq "$(GCC_VERSION)" "4"
+ifeq "$(USEMETA)" "true"
+	BIN_DIR := $(BIN_DIR).$(ENGINE)
+endif
+
+ifeq "$(OS)" "Darwin"
+	CPP = $(CPP_OSX)
+	LIB_EXT = dylib
+	CFLAGS += -DOSX -D_OSX
+	LINK += -dynamiclib -lstdc++ -mmacosx-version-min=10.5
+else
+	LIB_EXT = so
+	CFLAGS += -D_LINUX
+	LINK += -shared
+endif
+
+IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
+
+ifeq "$(IS_CLANG)" "1"
+	CPP_MAJOR := $(shell $(CPP) --version | grep clang | sed "s/.*version \([0-9]\)*\.[0-9]*.*/\1/")
+	CPP_MINOR := $(shell $(CPP) --version | grep clang | sed "s/.*version [0-9]*\.\([0-9]\)*.*/\1/")
+else
+	CPP_MAJOR := $(shell $(CPP) -dumpversion >&1 | cut -b1)
+	CPP_MINOR := $(shell $(CPP) -dumpversion >&1 | cut -b3)
+endif
+
+# If not clang
+ifeq "$(IS_CLANG)" "0"
+	CFLAGS += -mfpmath=sse
+endif
+
+# Clang || GCC >= 4
+ifeq "$(shell expr $(IS_CLANG) \| $(CPP_MAJOR) \>= 4)" "1"
 	CFLAGS += $(C_GCC4_FLAGS)
 	CPPFLAGS += $(CPP_GCC4_FLAGS)
 endif
 
-OBJ_LINUX := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
-OBJ_LINUX := $(OBJ_LINUX:%.c=$(BIN_DIR)/%.o)
+# Clang >= 3 || GCC >= 4.7
+ifeq "$(shell expr $(IS_CLANG) \& $(CPP_MAJOR) \>= 3 \| $(CPP_MAJOR) \>= 4 \& $(CPP_MINOR) \>= 7)" "1"
+	CFLAGS += -Wno-delete-non-virtual-dtor
+endif
+
+# OS is Linux and not using clang
+ifeq "$(shell expr $(OS) \= Linux \& $(IS_CLANG) \= 0)" "1"
+	LINK += -static-libgcc
+endif
+
+OBJ_BIN := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
+
+# This will break if we include other Makefiles, but is fine for now. It allows
+#  us to make a copy of this file that uses altered paths (ie. Makefile.mine)
+#  or other changes without mucking up the original.
+MAKEFILE_NAME := $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+
 
 $(BIN_DIR)/%.o: %.cpp
 	$(CPP) $(INCLUDE) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
@@ -182,7 +211,7 @@ all: check
 	mkdir -p $(BIN_DIR)
 	ln -sf $(HL2LIB)/$(LIB_PREFIX)vstdlib$(LIB_SUFFIX)
 	ln -sf $(HL2LIB)/$(LIB_PREFIX)tier0$(LIB_SUFFIX)
-	$(MAKE) -f Makefile sourcemod
+	$(MAKE) -f $(MAKEFILE_NAME) sourcemod
 
 check:
 	if [ "$(ENGSET)" = "false" ]; then \
@@ -191,11 +220,11 @@ check:
 		exit 1; \
 	fi
 
-sourcemod: check $(OBJ_LINUX)
-	$(CPP) $(INCLUDE) $(OBJ_LINUX) $(LINK) -m32 -shared -ldl -lm -o$(BIN_DIR)/$(BINARY)
+sourcemod: check $(OBJ_BIN)
+	$(CPP) $(INCLUDE) $(OBJ_BIN) $(LINK) -o$(BIN_DIR)/$(BINARY)
 
 debug:
-	$(MAKE) -f Makefile all DEBUG=true
+	$(MAKE) -f $(MAKEFILE_NAME) all DEBUG=true
 
 default: all
 
