@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod Updater Extension
+ * Simillimum Updater Extension
  * Copyright (C) 2004-2009 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -34,7 +34,7 @@
 #include <stdlib.h>
 #include "MemoryDownloader.h"
 
-using namespace SourceMod;
+using namespace Simillimum;
 
 MemoryDownloader::MemoryDownloader() : buffer(NULL), bufsize(0), bufpos(0)
 {

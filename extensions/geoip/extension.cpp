@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod GeoIP Extension
+ * Simillimum GeoIP Extension
  * Copyright (C) 2004-2008 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -29,7 +29,7 @@
  * Version: $Id$
  */
 
-#include <sourcemod_version.h>
+#include <simillimum_version.h>
 #include "extension.h"
 #include "GeoIP.h"
 

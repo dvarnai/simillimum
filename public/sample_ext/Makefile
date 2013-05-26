@@ -13,7 +13,7 @@ HL2SDK_OB_VALVE = ../../../hl2sdk-ob-valve
 HL2SDK_L4D = ../../../hl2sdk-l4d
 HL2SDK_L4D2 = ../../../hl2sdk-l4d2
 HL2SDK_CSGO = ../../../hl2sdk-csgo
-MMSOURCE19 = ../../../mmsource-1.9
+MMSOURCE19 = ../../../mmsource-central
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
@@ -35,7 +35,7 @@ C_DEBUG_FLAGS = -D_DEBUG -DDEBUG -g -ggdb3
 C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
 CPP = gcc
-CPP_OSX = clang
+
 
 ##########################
 ### SDK CONFIGURATIONS ###
@@ -51,30 +51,37 @@ endif
 ifeq "$(ENGINE)" "original"
 	HL2SDK = $(HL2SDK_ORIG)
 	CFLAGS += -DSOURCE_ENGINE=1
+	EXT = 1.ep1
 endif
 ifeq "$(ENGINE)" "orangebox"
 	HL2SDK = $(HL2SDK_OB)
 	CFLAGS += -DSOURCE_ENGINE=3
+	EXT = 2.ep2
 endif
 ifeq "$(ENGINE)" "css"
 	HL2SDK = $(HL2SDK_CSS)
 	CFLAGS += -DSOURCE_ENGINE=6
+	EXT = 2.css
 endif
 ifeq "$(ENGINE)" "orangeboxvalve"
 	HL2SDK = $(HL2SDK_OB_VALVE)
 	CFLAGS += -DSOURCE_ENGINE=7
+	EXT = 2.ep2v
 endif
 ifeq "$(ENGINE)" "left4dead"
 	HL2SDK = $(HL2SDK_L4D)
 	CFLAGS += -DSOURCE_ENGINE=8
+	EXT = 2.l4d
 endif
 ifeq "$(ENGINE)" "left4dead2"
 	HL2SDK = $(HL2SDK_L4D2)
 	CFLAGS += -DSOURCE_ENGINE=9
+	EXT = 2.l4d2
 endif
 ifeq "$(ENGINE)" "csgo"
 	HL2SDK = $(HL2SDK_CSGO)
 	CFLAGS += -DSOURCE_ENGINE=12
+	EXT = 2.csgo
 endif
 
 HL2PUB = $(HL2SDK)/public
@@ -87,27 +94,27 @@ else
 	METAMOD = $(MMSOURCE19)/core
 endif
 
-OS := $(shell uname -s)
 
-ifeq "$(OS)" "Darwin"
-	LIB_EXT = dylib
-	HL2LIB = $(HL2SDK)/lib/mac
+ifeq "$(ENGINE)" "original"
+	HL2LIB = $(HL2SDK)/linux_sdk
 else
-	LIB_EXT = so
-	ifeq "$(ENGINE)" "original"
-		HL2LIB = $(HL2SDK)/linux_sdk
-	else
-		HL2LIB = $(HL2SDK)/lib/linux
-	endif
+	HL2LIB = $(HL2SDK)/lib/linux
 endif
+
 
 # if ENGINE is original or OB
 ifneq (,$(filter original orangebox,$(ENGINE)))
-	LIB_SUFFIX = _i486.$(LIB_EXT)
+	LIB_SUFFIX = _i486.so
 else
 	LIB_PREFIX = lib
-	LIB_SUFFIX = .$(LIB_EXT)
+	LIB_SUFFIX = .so
 endif
+
+
+ifneq (,$(filter orangeboxvalve css,$(ENGINE)))
+	LIB_SUFFIX = _srv.so
+endif
+
 
 INCLUDE += -I. -I.. -Isdk -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn
 
@@ -126,18 +133,23 @@ ifeq "$(USEMETA)" "true"
 		-DSE_PORTAL2=11 -DSE_CSGO=12
 endif
 
-LINK += -m32 -lm -ldl
+LINK += -m32 -lm -ldl -shared
 
-CFLAGS += -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
+CFLAGS += -D_LINUX -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -DCOMPILER_GCC -Wall -Werror \
 	-Wno-overloaded-virtual -Wno-switch -Wno-unused -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -m32
+	
 CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
 
-BINARY = $(PROJECT).ext.$(LIB_EXT)
+ifeq "$(USEMETA)" "true"
+	BINARY = $(PROJECT).ext.$(EXT).so
+else
+	BINARY = $(PROJECT).ext.so
+endif
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
@@ -151,16 +163,6 @@ ifeq "$(USEMETA)" "true"
 	BIN_DIR := $(BIN_DIR).$(ENGINE)
 endif
 
-ifeq "$(OS)" "Darwin"
-	CPP = $(CPP_OSX)
-	LIB_EXT = dylib
-	CFLAGS += -DOSX -D_OSX
-	LINK += -dynamiclib -lstdc++ -mmacosx-version-min=10.5
-else
-	LIB_EXT = so
-	CFLAGS += -D_LINUX
-	LINK += -shared
-endif
 
 IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
 
@@ -175,6 +177,7 @@ endif
 # If not clang
 ifeq "$(IS_CLANG)" "0"
 	CFLAGS += -mfpmath=sse
+	LINK += -static-libgcc
 endif
 
 # Clang || GCC >= 4
@@ -188,10 +191,7 @@ ifeq "$(shell expr $(IS_CLANG) \& $(CPP_MAJOR) \>= 3 \| $(CPP_MAJOR) \>= 4 \& $(
 	CFLAGS += -Wno-delete-non-virtual-dtor
 endif
 
-# OS is Linux and not using clang
-ifeq "$(shell expr $(OS) \= Linux \& $(IS_CLANG) \= 0)" "1"
-	LINK += -static-libgcc
-endif
+
 
 OBJ_BIN := $(OBJECTS:%.cpp=$(BIN_DIR)/%.o)
 

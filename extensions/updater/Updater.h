@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod Updater Extension
+ * Simillimum Updater Extension
  * Copyright (C) 2004-2009 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -47,7 +47,7 @@ struct UpdatePart
 	size_t length;
 };
 
-namespace SourceMod
+namespace Simillimum
 {
 	class UpdateReader : 
 		public ITextListener_SMC

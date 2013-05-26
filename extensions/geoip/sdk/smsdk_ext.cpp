@@ -41,8 +41,8 @@
 IExtension *myself = NULL;				/**< Ourself */
 IShareSys *g_pShareSys = NULL;			/**< Share system */
 IShareSys *sharesys = NULL;				/**< Share system */
-ISourceMod *g_pSM = NULL;				/**< SourceMod helpers */
-ISourceMod *smutils = NULL;				/**< SourceMod helpers */
+ISimillimum *g_pSM = NULL;				/**< SourceMod helpers */
+ISimillimum *smutils = NULL;				/**< SourceMod helpers */
 
 #if defined SMEXT_ENABLE_FORWARDSYS
 IForwardManager *g_pForwards = NULL;	/**< Forward system */
@@ -130,7 +130,7 @@ bool SDKExtension::OnExtensionLoad(IExtension *me, IShareSys *sys, char *error, 
 		return false;
 	}
 #endif
-	SM_GET_IFACE(SOURCEMOD, g_pSM);
+	SM_GET_IFACE(SIMILLIMUM, g_pSM);
 	smutils = g_pSM;
 #if defined SMEXT_ENABLE_HANDLESYS
 	SM_GET_IFACE(HANDLESYSTEM, g_pHandleSys);

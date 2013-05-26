@@ -11,7 +11,6 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
 
 # Visual Studio
 *.sdf
@@ -19,7 +18,6 @@
 *.user
 *.ipch
 *.exp
-*.lib
 *.tlog
 *.pdb
 *.manifest

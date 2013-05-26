@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod Updater Extension
+ * Simillimum Updater Extension
  * Copyright (C) 2004-2009 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -29,7 +29,7 @@
  * Version: $Id$
  */
 
-#include <sourcemod_version.h>
+#include <simillimum_version.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -97,7 +97,7 @@ void SmUpdater::SDK_OnUnload()
 	}
 }
 
-bool SmUpdater::QueryInterfaceDrop(SourceMod::SMInterface *pInterface)
+bool SmUpdater::QueryInterfaceDrop(Simillimum::SMInterface *pInterface)
 {
 	if (pInterface == webternet)
 	{

@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod Base Extension Code
+ * Simillimum Base Extension Code
  * Copyright (C) 2004-2008 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -24,13 +24,13 @@
  * all respects for all other code used.  Additionally, AlliedModders LLC grants
  * this exception to all derivative works.  AlliedModders LLC defines further
  * exceptions, found in LICENSE.txt (as of this writing, version JULY-31-2007),
- * or <http://www.sourcemod.net/license.php>.
+ * or <http://www.simillimum.net/license.php>.
  *
  * Version: $Id$
  */
 
-#ifndef _INCLUDE_SOURCEMOD_EXTENSION_BASESDK_H_
-#define _INCLUDE_SOURCEMOD_EXTENSION_BASESDK_H_
+#ifndef _INCLUDE_SIMILLIMUM_EXTENSION_BASESDK_H_
+#define _INCLUDE_SIMILLIMUM_EXTENSION_BASESDK_H_
 
 /**
  * @file smsdk_ext.h
@@ -42,7 +42,7 @@
 #include <IHandleSys.h>
 #include <sp_vm_api.h>
 #include <sm_platform.h>
-#include <ISourceMod.h>
+#include <ISimillimum.h>
 #if defined SMEXT_ENABLE_FORWARDSYS
 #include <IForwardSys.h>
 #endif //SMEXT_ENABLE_FORWARDSYS
@@ -85,22 +85,13 @@
 #if defined SMEXT_ENABLE_TEXTPARSERS
 #include <ITextParsers.h>
 #endif
-#if defined SMEXT_ENABLE_USERMSGS
-#include <IUserMessages.h>
-#endif
-#if defined SMEXT_ENABLE_TRANSLATOR
-#include <ITranslator.h>
-#endif
-#if defined SMEXT_ENABLE_NINVOKE
-#include <INativeInvoker.h>
-#endif
 
 #if defined SMEXT_CONF_METAMOD
 #include <ISmmPlugin.h>
 #include <eiface.h>
 #endif
 
-using namespace SourceMod;
+using namespace Simillimum;
 using namespace SourcePawn;
 
 class SDKExtension : 
@@ -151,7 +142,7 @@ public:
 
 	/**
 	 * @brief Called when Metamod is detaching, after the extension version is called.
-	 * NOTE: By default this is blocked unless sent from SourceMod.
+	 * NOTE: By default this is blocked unless sent from Simillimum.
 	 *
 	 * @param error			Error buffer.
 	 * @param maxlength		Maximum size of error buffer.
@@ -161,7 +152,7 @@ public:
 
 	/**
 	 * @brief Called when Metamod's pause state is changing.
-	 * NOTE: By default this is blocked unless sent from SourceMod.
+	 * NOTE: By default this is blocked unless sent from Simillimum.
 	 *
 	 * @param paused		Pause state being set.
 	 * @param error			Error buffer.
@@ -238,8 +229,8 @@ extern IExtension *myself;
 
 extern IShareSys *g_pShareSys;
 extern IShareSys *sharesys;				/* Note: Newer name */
-extern ISourceMod *g_pSM;
-extern ISourceMod *smutils;				/* Note: Newer name */
+extern ISimillimum *g_pSM;
+extern ISimillimum *smutils;				/* Note: Newer name */
 
 /* Optional interfaces are below */
 #if defined SMEXT_ENABLE_FORWARDSYS
@@ -278,22 +269,13 @@ extern IThreader *threader;
 extern ILibrarySys *libsys;
 #endif
 #if defined SMEXT_ENABLE_PLUGINSYS
-extern SourceMod::IPluginManager *plsys;
+extern Simillimum::IPluginManager *plsys;
 #endif
 #if defined SMEXT_ENABLE_MENUS
 extern IMenuManager *menus;
 #endif
 #if defined SMEXT_ENABLE_ADMINSYS
 extern IAdminSystem *adminsys;
-#endif
-#if defined SMEXT_ENABLE_USERMSGS
-extern IUserMessages *usermsgs;
-#endif
-#if defined SMEXT_ENABLE_TRANSLATOR
-extern ITranslator *translator;
-#endif
-#if defined SMEXT_ENABLE_NINVOKE
-extern INativeInterface *ninvoke;
 #endif
 
 #if defined SMEXT_CONF_METAMOD
@@ -302,9 +284,9 @@ extern IVEngineServer *engine;
 extern IServerGameDLL *gamedll;
 #endif
 
-/** Creates a SourceMod interface macro pair */
+/** Creates a Simillimum interface macro pair */
 #define SM_MKIFACE(name) SMINTERFACE_##name##_NAME, SMINTERFACE_##name##_VERSION
-/** Automates retrieving SourceMod interfaces */
+/** Automates retrieving Simillimum interfaces */
 #define SM_GET_IFACE(prefix, addr) \
 	if (!g_pShareSys->RequestInterface(SM_MKIFACE(prefix), myself, (SMInterface **)&addr)) \
 	{ \
@@ -318,10 +300,10 @@ extern IServerGameDLL *gamedll;
 		} \
 		return false; \
 	}
-/** Automates retrieving SourceMod interfaces when needed outside of SDK_OnLoad() */
+/** Automates retrieving Simillimum interfaces when needed outside of SDK_OnLoad() */
 #define SM_GET_LATE_IFACE(prefix, addr) \
 	g_pShareSys->RequestInterface(SM_MKIFACE(prefix), myself, (SMInterface **)&addr)
-/** Validates a SourceMod interface pointer */
+/** Validates a Simillimum interface pointer */
 #define SM_CHECK_IFACE(prefix, addr) \
 	if (!addr) \
 	{ \
@@ -336,4 +318,4 @@ extern IServerGameDLL *gamedll;
 		return false; \
 	}
 
-#endif // _INCLUDE_SOURCEMOD_EXTENSION_BASESDK_H_
+#endif // _INCLUDE_SIMILLIMUM_EXTENSION_BASESDK_H_

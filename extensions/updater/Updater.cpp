@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod Updater Extension
+ * Simillimum Updater Extension
  * Copyright (C) 2004-2009 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -29,7 +29,7 @@
  * Version: $Id$
  */
 
-#include <sourcemod_version.h>
+#include <simillimum_version.h>
 #include <stdlib.h>
 #include "extension.h"
 #include "Updater.h"
@@ -41,7 +41,7 @@
 #define USTATE_CHANGE_FILE	3
 #define USTATE_ERRORS		4
 
-using namespace SourceMod;
+using namespace Simillimum;
 
 UpdateReader::UpdateReader() : partFirst(NULL), partLast(NULL)
 {

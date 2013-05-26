@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod Base Extension Code
+ * Simillimum Base Extension Code
  * Copyright (C) 2004-2008 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -24,7 +24,7 @@
  * all respects for all other code used.  Additionally, AlliedModders LLC grants
  * this exception to all derivative works.  AlliedModders LLC defines further
  * exceptions, found in LICENSE.txt (as of this writing, version JULY-31-2007),
- * or <http://www.sourcemod.net/license.php>.
+ * or <http://www.simillimum.net/license.php>.
  *
  * Version: $Id$
  */
@@ -41,8 +41,8 @@
 IExtension *myself = NULL;				/**< Ourself */
 IShareSys *g_pShareSys = NULL;			/**< Share system */
 IShareSys *sharesys = NULL;				/**< Share system */
-ISourceMod *g_pSM = NULL;				/**< SourceMod helpers */
-ISourceMod *smutils = NULL;				/**< SourceMod helpers */
+ISimillimum *g_pSM = NULL;				/**< Simillimum helpers */
+ISimillimum *smutils = NULL;				/**< Simillimum helpers */
 
 #if defined SMEXT_ENABLE_FORWARDSYS
 IForwardManager *g_pForwards = NULL;	/**< Forward system */
@@ -80,7 +80,7 @@ IThreader *threader = NULL;
 ILibrarySys *libsys = NULL;
 #endif
 #if defined SMEXT_ENABLE_PLUGINSYS
-SourceMod::IPluginManager *plsys;
+Simillimum::IPluginManager *plsys;
 #endif
 #if defined SMEXT_ENABLE_MENUS
 IMenuManager *menus = NULL;
@@ -96,9 +96,6 @@ IUserMessages *usermsgs = NULL;
 #endif
 #if defined SMEXT_ENABLE_TRANSLATOR
 ITranslator *translator = NULL;
-#endif
-#if defined SMEXT_ENABLE_NINVOKE
-INativeInterface *ninvoke = NULL;
 #endif
 
 /** Exports the main interface */
@@ -133,7 +130,7 @@ bool SDKExtension::OnExtensionLoad(IExtension *me, IShareSys *sys, char *error, 
 		return false;
 	}
 #endif
-	SM_GET_IFACE(SOURCEMOD, g_pSM);
+	SM_GET_IFACE(SIMILLIMUM, g_pSM);
 	smutils = g_pSM;
 #if defined SMEXT_ENABLE_HANDLESYS
 	SM_GET_IFACE(HANDLESYSTEM, g_pHandleSys);
@@ -339,7 +336,7 @@ bool SDKExtension::Unload(char *error, size_t maxlen)
 	{
 		if (error)
 		{
-			snprintf(error, maxlen, "This extension must be unloaded by SourceMod.");
+			snprintf(error, maxlen, "This extension must be unloaded by Simillimum.");
 		}
 		return false;
 	}
@@ -353,7 +350,7 @@ bool SDKExtension::Pause(char *error, size_t maxlen)
 	{
 		if (error)
 		{
-			snprintf(error, maxlen, "This extension must be paused by SourceMod.");
+			snprintf(error, maxlen, "This extension must be paused by Simillimum.");
 		}
 		return false;
 	}
@@ -369,7 +366,7 @@ bool SDKExtension::Unpause(char *error, size_t maxlen)
 	{
 		if (error)
 		{
-			snprintf(error, maxlen, "This extension must be unpaused by SourceMod.");
+			snprintf(error, maxlen, "This extension must be unpaused by Simillimum.");
 		}
 		return false;
 	}
