@@ -53,7 +53,7 @@ extern IPlayerManager *playerhelpers;
 extern IAdminSystem *adminsys;
 extern IGameHelpers *gamehelpers;
 extern IScriptManager *scripts;
-extern ILuaSys *g_pLuaSys;
+extern ILuaEngine *g_pLuaEngine;
 
 #endif /* _INCLUDE_SIMILLIMUM_COMMON_LOGIC_H_ */
 

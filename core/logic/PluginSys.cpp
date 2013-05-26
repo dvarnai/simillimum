@@ -33,7 +33,7 @@
 #include <stdarg.h>
 #include "PluginSys.h"
 #include "ShareSys.h"
-#include "ILuaSys.h"
+#include "ILuaEngine.h"
 #include <ILibrarySys.h>
 #include <ISimillimum.h>
 #include <IHandleSys.h>
@@ -103,10 +103,19 @@ CPlugin::~CPlugin()
 		g_ShareSys.DestroyIdentity(m_ident);
 	}
 
-	if (m_pRuntime != NULL)
+	if(GetJitType() == JIT_SourcePawn)
 	{
-		delete m_pRuntime;
-		m_pRuntime = NULL;
+		if (m_pRuntime != NULL)
+		{
+			delete m_pRuntime;
+			m_pRuntime = NULL;
+		}
+	}
+	else if(GetJitType() == JIT_Lua)
+	{
+		char m_szLoadLine[1024];
+		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance=nil\n", m_pluginname);
+		g_pLuaEngine->ExecuteString(m_szLoadLine);
 	}
 
 	for (size_t i=0; i<m_configs.size(); i++)
@@ -329,11 +338,11 @@ bool CPlugin::UpdateInfo()
 		}
 	} else if(m_JIT == JIT_Lua)
 	{
-		m_info.author = g_pLuaSys->GetPluginInfo(m_pluginname, "author");
-		m_info.description = g_pLuaSys->GetPluginInfo(m_pluginname, "description");
-		m_info.name = g_pLuaSys->GetPluginInfo(m_pluginname, "name");
-		m_info.url = g_pLuaSys->GetPluginInfo(m_pluginname, "url");
-		m_info.version = g_pLuaSys->GetPluginInfo(m_pluginname, "version");
+		m_info.author = g_pLuaEngine->GetPluginInfo(m_pluginname, "author");
+		m_info.description = g_pLuaEngine->GetPluginInfo(m_pluginname, "description");
+		m_info.name = g_pLuaEngine->GetPluginInfo(m_pluginname, "name");
+		m_info.url = g_pLuaEngine->GetPluginInfo(m_pluginname, "url");
+		m_info.version = g_pLuaEngine->GetPluginInfo(m_pluginname, "version");
 
 		m_info.author = m_info.author ? m_info.author : "";
 		m_info.description = m_info.description ? m_info.description : "";
@@ -357,7 +366,7 @@ void CPlugin::SyncMaxClients(int max_clients)
 		*m_MaxClientsVar->offs = max_clients;
 	}
 	else
-		g_pLuaSys->SetGlobalNum("maxclients", max_clients);
+		g_pLuaEngine->SetGlobalNum("maxclients", max_clients);
 }
 
 void CPlugin::Call_OnPluginStart()
@@ -388,7 +397,7 @@ void CPlugin::Call_OnPluginStart()
 	{
 		char m_szLoadLine[1024];
 		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:plugin_start()\n", m_pluginname);
-		if(!g_pLuaSys->ExecuteString(m_szLoadLine))
+		if(!g_pLuaEngine->ExecuteString(m_szLoadLine))
 			SetErrorState(Plugin_Error, "Error detected in plugin startup (see error logs)");
 	}
 }
@@ -414,7 +423,7 @@ void CPlugin::Call_OnPluginEnd()
 	{
 		char m_szLoadLine[1024];
 		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:plugin_end()\n", m_pluginname);
-		g_pLuaSys->ExecuteString(m_szLoadLine);
+		g_pLuaEngine->ExecuteString(m_szLoadLine);
 	}
 }
 
@@ -452,11 +461,11 @@ void CPlugin::Call_OnAllPluginsLoaded()
 	{
 		char m_szLoadLine[1024];
 		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:all_plugins_loaded()\n", m_pluginname);
-		g_pLuaSys->ExecuteString(m_szLoadLine);
+		g_pLuaEngine->ExecuteString(m_szLoadLine);
 		if (smcore.IsMapRunning())
 		{
 			snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:map_start()\n", m_pluginname);
-			g_pLuaSys->ExecuteString(m_szLoadLine);
+			g_pLuaEngine->ExecuteString(m_szLoadLine);
 		}
 	}
 
@@ -1059,7 +1068,7 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 		char fullpath[PLATFORM_MAX_PATH];
 		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins_lua/%s", pPlugin->m_filename);
 
-		if (!g_pLuaSys->LoadPlugin(fullpath, &err))
+		if (!g_pLuaEngine->LoadPlugin(fullpath, &err))
 		{
 			if (error)
 			{
@@ -1067,7 +1076,7 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 					maxlength, 
 					"Unable to load plugin (error %d: %s)", 
 					err, 
-					g_pLuaSys->GetErrorString());
+					g_pLuaEngine->GetErrorString());
 			}
 			pPlugin->m_status = Plugin_BadLoad;
 		}
@@ -1637,13 +1646,16 @@ bool CPluginManager::UnloadPlugin(IPlugin *plugin)
 		return false;
 	}
 
-	IPluginContext *pContext = plugin->GetBaseContext();
-	if (pContext != NULL && pContext->IsInExec())
+	if(plugin->GetJitType() == JIT_SourcePawn)
 	{
-		char buffer[255];
-		smcore.Format(buffer, sizeof(buffer), "sm plugins unload %s\n", plugin->GetFilename());
-		engine->ServerCommand(buffer);
-		return false;
+		IPluginContext *pContext = plugin->GetBaseContext();
+		if (pContext != NULL && pContext->IsInExec())
+		{
+			char buffer[255];
+			smcore.Format(buffer, sizeof(buffer), "sm plugins unload %s\n", plugin->GetFilename());
+			engine->ServerCommand(buffer);
+			return false;
+		}
 	}
 
 	/* Remove us from the lookup table and linked list */
@@ -2269,8 +2281,14 @@ void CPluginManager::OnRootConsoleCommand(const char *cmdname, const CCommand &c
 				CPlugin **pluginpp = m_LoadLookup.retrieve(pluginfile);
 				if (!pluginpp || !*pluginpp)
 				{
-					rootmenu->ConsolePrint("[SM] Plugin %s is not loaded.", pluginfile);
-					return;
+					ext = libsys->GetFileExtension(arg) ? "" : ".lua";
+					g_pSM->BuildPath(Path_None, pluginfile, sizeof(pluginfile), "%s%s", arg, ext);
+					pluginpp = m_LoadLookup.retrieve(pluginfile);
+					if (!pluginpp || !*pluginpp)
+					{
+						rootmenu->ConsolePrint("[SM] Plugin %s is not loaded.", pluginfile);
+						return;
+					}
 				}
 				pl = *pluginpp;
 			}

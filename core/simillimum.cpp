@@ -43,7 +43,7 @@
 #include "TimerSys.h"
 #include <IGameConfigs.h>
 #include "frame_hooks.h"
-#include "LuaSys.h"
+#include "ILuaEngine.h"
 #include "logic_bridge.h"
 
 SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, false, bool, const char *, const char *, const char *, const char *, bool, bool);
@@ -54,9 +54,11 @@ SH_DECL_HOOK1_void(IVEngineServer, ServerCommand, SH_NOATTRIB, false, const char
 SimillimumBase g_Simillimum;
 
 ILibrary *g_pJIT = NULL;
+ILibrary *g_pLuaJIT = NULL;
 SourceHook::String g_BaseDir;
 ISourcePawnEngine *g_pSourcePawn = NULL;
 ISourcePawnEngine2 *g_pSourcePawn2 = NULL;
+ILuaEngine * g_pLuaEngine = NULL;
 IdentityToken_t *g_pCoreIdent = NULL;
 IForward *g_pOnMapEnd = NULL;
 IGameConfig *g_pGameConf = NULL;
@@ -65,6 +67,7 @@ bool sm_show_debug_spew = false;
 
 typedef ISourcePawnEngine *(*GET_SP_V1)();
 typedef ISourcePawnEngine2 *(*GET_SP_V2)();
+typedef ILuaEngine *(*GET_LUA_STATE)();
 typedef void (*NOTIFYSHUTDOWN)();
 
 #ifdef PLATFORM_WINDOWS
@@ -87,6 +90,8 @@ void ShutdownJIT()
 	}
 
 	g_pJIT->CloseLibrary();
+	if(g_pLuaJIT)
+		g_pLuaJIT->CloseLibrary();
 }
 
 SimillimumBase::SimillimumBase()
@@ -240,6 +245,46 @@ bool SimillimumBase::InitializeSimillimum(char *error, size_t maxlength, bool la
 	}
 
 	g_pSourcePawn2->SetDebugListener(logicore.debugger);
+
+	g_SMAPI->PathFormat(file, sizeof(file), "%s/bin/lua.jit.x86.%s",
+		GetSimillimumPath(),
+		PLATFORM_LIB_EXT
+		);
+
+	g_pLuaJIT = g_LibSys.OpenLibrary(file, myerror, sizeof(myerror));
+	if (!g_pLuaJIT)
+	{
+		if (error && maxlength)
+		{
+			UTIL_Format(error, maxlength, "%s (failed to load bin/lua.jit.x86.%s)", 
+				myerror,
+				PLATFORM_LIB_EXT);
+		}
+		ShutdownJIT();
+		return false;
+	}
+
+	GET_LUA_STATE getstate = (GET_LUA_STATE)g_pLuaJIT->GetSymbolAddress("GetLuaState");
+	if(!getstate)
+	{
+		if (error && maxlength)
+		{
+			snprintf(error, maxlength, "LuaJIT could not be initialized");
+		}
+		ShutdownJIT();
+		return false;
+	}
+
+	g_pLuaEngine = getstate();
+	if(!g_pLuaEngine)
+	{
+		if (error && maxlength)
+		{
+			snprintf(error, maxlength, "LuaJIT failed to initialize");
+		}
+		ShutdownJIT();
+		return false;
+	}
 
 	/* Hook this now so we can detect startup without calling StartSimillimum() */
 	SH_ADD_HOOK(IServerGameDLL, LevelInit, gamedll, SH_MEMBER(this, &SimillimumBase::LevelInit), false);
@@ -402,7 +447,7 @@ void SimillimumBase::DoGlobalPluginLoads()
 		"configs/plugin_settings.cfg");
 	BuildPath(Path_SM, plugins_path,
 		sizeof(plugins_path),
-		"plugins_sp");
+		"plugins");
 
 	/* Load any auto extensions */
 	extsys->TryAutoload();

@@ -46,7 +46,7 @@
 #include "AdminCache.h"
 #include "HalfLife2.h"
 #include "CoreConfig.h"
-#include "LuaSys.h"
+#include "ILuaEngine.h"
 #if SOURCE_ENGINE == SE_DOTA
 #include "convar_sm_dota.h"
 #elif SOURCE_ENGINE >= SE_ALIENSWARM
@@ -319,6 +319,7 @@ void do_global_plugin_loads()
 #endif //METAMOD_PLAPI_VERSION
 
 static ServerGlobals serverGlobals;
+extern ILuaEngine *g_pLuaEngine;
 
 static sm_core_t core_bridge =
 {
@@ -334,7 +335,7 @@ static sm_core_t core_bridge =
 	&g_HL2,
 	&g_pSourcePawn,
 	&g_pSourcePawn2,
-	&g_pLuaSys,
+	&g_pLuaEngine,
 	/* Functions */
 	find_convar,
 	strncopy,

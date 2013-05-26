@@ -17,7 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tf2", "..\extensions\tf2\ms
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cstrike", "..\extensions\cstrike\msvc12\cstrike.vcxproj", "{18B5ED38-DBB7-47B2-8500-5648B8C1263B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jit-x86", "..\sourcepawn\jit\msvc12\jit-x86.vcxproj", "{307D9D61-51CA-4392-B111-4A3B4229100C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sourcepawn-jit-x86", "..\sourcepawn\jit\msvc12\jit-x86.vcxproj", "{307D9D61-51CA-4392-B111-4A3B4229100C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loader", "..\loader\msvc12\loader.vcxproj", "{9D161017-A713-44A4-927F-E99097A3FC8D}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sdkhooks", "..\extensions\sdkhooks\msvc12\sdkhooks.vcxproj", "{F35CF30D-5C8E-4A95-9F8C-E5A80A124432}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "regex", "..\extensions\regex\msvc12\regex.vcxproj", "{3EF159C3-87E4-4BF9-98A3-9C36AA1036C6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua-jit-x86", "..\lua\msvc2012\lua-jit-x86.vcxproj", "{E98D61B3-F547-4C5E-8C6C-46B80F35088C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1034,6 +1036,82 @@ Global
 		{3EF159C3-87E4-4BF9-98A3-9C36AA1036C6}.Release|Win32.ActiveCfg = Release|Win32
 		{3EF159C3-87E4-4BF9-98A3-9C36AA1036C6}.Release|Win32.Build.0 = Release|Win32
 		{3EF159C3-87E4-4BF9-98A3-9C36AA1036C6}.Release|Win32.Deploy.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Alien Swarm|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Alien Swarm|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Bloody Good Time|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Bloody Good Time|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - CS GO|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - CS GO|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - CSS|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - CSS|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Dark Messiah|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Dark Messiah|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Episode 1|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Episode 1|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - EYE|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - EYE|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Left 4 Dead 2|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Left 4 Dead 2|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Left 4 Dead|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Left 4 Dead|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Old Metamod|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Old Metamod|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Orange Box Valve|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Orange Box Valve|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Orange Box|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.CrazyDebug - Orange Box|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Alien Swarm|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Alien Swarm|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Bloody Good Time|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Bloody Good Time|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - CS GO|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - CS GO|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - CSS|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - CSS|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Dark Messiah|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Dark Messiah|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Episode 1|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Episode 1|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - EYE|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - EYE|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Left 4 Dead 2|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Left 4 Dead 2|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Left 4 Dead|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Left 4 Dead|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Old Metamod|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Old Metamod|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Orange Box Valve|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Orange Box Valve|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Orange Box|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug - Orange Box|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Debug|Win32.Build.0 = Debug|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Alien Swarm|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Alien Swarm|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Bloody Good Time|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Bloody Good Time|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - CS GO|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - CS GO|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - CSS|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - CSS|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Dark Messiah|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Dark Messiah|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Episode 1|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Episode 1|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - EYE|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - EYE|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Left 4 Dead 2|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Left 4 Dead 2|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Left 4 Dead|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Left 4 Dead|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Old Metamod|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Old Metamod|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Orange Box Valve|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Orange Box Valve|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Orange Box|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release - Orange Box|Win32.Build.0 = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release|Win32.ActiveCfg = Release|Win32
+		{E98D61B3-F547-4C5E-8C6C-46B80F35088C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

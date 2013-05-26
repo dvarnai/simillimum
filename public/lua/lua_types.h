@@ -29,27 +29,18 @@
  * Version: $Id$
  */
 
-#ifndef _INCLUDE_SIMILLIMUM_LUASYSTEM_H_
-#define _INCLUDE_SIMILLIMUM_LUASYSTEM_H_
+#ifndef _INCLUDE_SIMILLIMUM_LUATYPES_H_
+#define _INCLUDE_SIMILLIMUM_LUATYPES_H_
 
-#include <ILuaSys.h>
-#include "sm_platform.h"
+#ifndef LUA_VERSION
+typedef void* *lua_State;
 
-using namespace Simillimum;
+typedef int (*lua_CFunction) (lua_State *L);
 
-class LuaSystem : public ILuaSys
-{
-public:
-	LuaSystem();
-	virtual void RegisterLibrary(const char * name, const luaL_Reg * functions);
-	virtual bool LoadPlugin(const char * fullpath, int *err);
-	virtual const char * GetErrorString();
-	virtual const char *GetGlobalString(const char  * name);
-	virtual const char * GetPluginInfo(const  char * plugin, const char  * name);
-	virtual void SetGlobalNum(const char * name, int value);
-	virtual bool ExecuteString(const char * string);
-};
+typedef struct luaL_Reg {
+  const char *name;
+  lua_CFunction func;
+} luaL_Reg;
 
-extern LuaSystem g_pLuaSys;
-
-#endif //_INCLUDE_SIMILLIMUM_LUASYSTEM_H_
+#endif
+#endif _INCLUDE_SIMILLIMUM_LUATYPES_H_

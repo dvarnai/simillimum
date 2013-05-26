@@ -29,28 +29,28 @@
  * Version: $Id$
  */
 
-#include <LuaSys.h>
-#include "sm_platform.h"
-#include "sm_stringutil.h"
-
-#include "Logger.h"
-
-LuaSystem g_pLuaSys;
+#include <LuaEngine.h>
+#include <sm_platform.h>
 
 using namespace Simillimum;
 
-LuaSystem::LuaSystem()
+extern "C" __declspec(dllexport) ILuaEngine * GetLuaState()
+{
+	return new LuaEngine();
+}
+
+LuaEngine::LuaEngine()
 {
 	L = lua_open();
     luaL_openlibs(L);
 }
 
-void LuaSystem::RegisterLibrary(const char * name, const luaL_Reg * functions)
+void LuaEngine::RegisterLibrary(const char * name, const luaL_Reg * functions)
 {
 	luaL_register(L, name, functions);
 }
 
-bool LuaSystem::LoadPlugin(const char * fullpath, int *err)
+bool LuaEngine::LoadPlugin(const char * fullpath, int *err)
 {
 	if ((*err=luaL_loadfile(L, fullpath)) || lua_pcall(L, 0, 0, 0))
         return false;
@@ -73,50 +73,50 @@ bool LuaSystem::LoadPlugin(const char * fullpath, int *err)
 		}
 
 	char m_szLoadLine[1024];
-	UTIL_Format(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance=%s.info()\n", m_szFilename, m_szFilename);
-	luaL_dostring(L, m_szLoadLine);
+	snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance=%s.info()\n", m_szFilename, m_szFilename);
+	m_iLastError = luaL_dostring(L, m_szLoadLine);
 
     return true;
 }
 
-const char * LuaSystem::GetErrorString()
+const char * LuaEngine::GetErrorString()
 {
 	return lua_tostring(L, -1);
 }
 
-const char * LuaSystem::GetGlobalString(const char  * name)
+const char * LuaEngine::GetGlobalString(const char  * name)
 {
 	lua_getglobal(L, name);
 	return lua_tostring(L, -1);
 }
 
-const char * LuaSystem::GetPluginInfo(const  char * plugin, const char  * name)
+const char * LuaEngine::GetPluginInfo(const  char * plugin, const char  * name)
 {
 	char m_szCode[1024];
-	UTIL_Format(m_szCode, sizeof(m_szCode), "return %s_instance.%s", plugin, name);
-	int error = luaL_dostring(L, m_szCode);
-	if (error)
-	{
-		g_Logger.LogError("LUA ERROR: %s\n", lua_tostring(L, -1));
-		lua_pop(L, 1);
-	}
+	snprintf(m_szCode, sizeof(m_szCode), "return %s_instance.%s", plugin, name);
+	m_iLastError = luaL_dostring(L, m_szCode);
 	return lua_tostring(L, -1);
 }
 
-void LuaSystem::SetGlobalNum(const char * name, int value)
+void LuaEngine::SetGlobalNum(const char * name, int value)
 {
 	lua_pushnumber(L, value);
 	lua_setglobal(L, name);
 }
 
-bool LuaSystem::ExecuteString(const char * string)
+bool LuaEngine::ExecuteString(const char * string)
 {
-	int error = luaL_dostring(L, string);
-	if (error)
-	{
-		g_Logger.LogError("LUA ERROR: %s\n", lua_tostring(L, -1));
-		lua_pop(L, 1);
-	}
+	m_iLastError = luaL_dostring(L, string);
+	return !m_iLastError;
+}
 
-	return !error;
+int LuaEngine::GetLastError()
+{
+	return m_iLastError;
+}
+
+void LuaEngine::GetLastErrorText(char * error, int maxlen)
+{
+	strncpy(error, lua_tostring(L, -1), maxlen-1);
+	lua_pop(L, 1);
 }

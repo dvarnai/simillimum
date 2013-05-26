@@ -2319,7 +2319,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\public\ILuaEngine.h" />
     <ClInclude Include="..\..\public\ISimillimum.h" />
+    <ClInclude Include="..\..\public\lua\lua_types.h" />
     <ClInclude Include="..\..\public\simillimum_version.h" />
     <ClInclude Include="..\..\public\sm_platform.h" />
     <ClInclude Include="..\AdminCache.h" />
