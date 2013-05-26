@@ -24,11 +24,11 @@ Changelog:<br/>
 -Updated SDKHooks gamedata for CStrike to utilise Dynamic Offsets<br/>
 -Add support for CSS to the ExtinguishEntity function<br/>
 <b>2013.05.25:</b><br/>
--Updated makefiles and msvc solutions
--Refactored and merged a few patches by Afronanny:
- -Using @aim while specatating someone will select the spectated player now
- -Added AwardClientAchievement native
- -Fixed a crash with Precache natives if they are supplied a bogus string
+-Updated makefiles and msvc solutions<br/>
+-Refactored and merged a few patches by <b>Afronanny</b>:<br/>
+ -Using @aim while specatating someone will select the spectated player now<br/>
+ -Added AwardClientAchievement native<br/>
+ -Fixed a crash with Precache natives if they are supplied a bogus string<br/>
 <br/>
 <b>TODO:</b><br/>
 <br/>
