@@ -26,9 +26,9 @@ CPP_OSX = clang
 OS := $(shell uname -s)
 
 ifeq "$(OS)" "Darwin"
-	LIB_EXT = dylib
+	LIB_EXT = .dylib
 else
-	LIB_EXT = so
+	LIB_EXT = _i486.so
 endif
 
 
@@ -36,7 +36,7 @@ LINK = -m32 -ldl -lm
 
 INCLUDE = -I$(MMSOURCE19)/core -I$(MMSOURCE19)/core/sourcehook
 
-CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
+CFLAGS += -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Wno-uninitialized \
 	-mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -m32
 CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
@@ -45,7 +45,7 @@ CPPFLAGS += -Wno-non-virtual-dtor -fno-exceptions -fno-rtti
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
 
-BINARY = $(PROJECT).$(LIB_EXT)
+BINARY = $(PROJECT)$(LIB_EXT)
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
@@ -58,11 +58,9 @@ endif
 
 ifeq "$(OS)" "Darwin"
 	CPP = $(CPP_OSX)
-	LIB_EXT = dylib
 	CFLAGS += -DOSX -D_OSX
 	LINK += -dynamiclib -lstdc++ -mmacosx-version-min=10.5
 else
-	LIB_EXT = so
 	CFLAGS += -D_LINUX
 	LINK += -shared
 endif

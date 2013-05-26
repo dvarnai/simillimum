@@ -50,32 +50,39 @@ endif
 ifeq "$(ENGINE)" "original"
 	HL2SDK = $(HL2SDK_ORIG)
 	CFLAGS += -DSOURCE_ENGINE=1
+	EXT = 1.ep1
 endif
 ifeq "$(ENGINE)" "orangebox"
 	HL2SDK = $(HL2SDK_OB)
 	CFLAGS += -DSOURCE_ENGINE=3
+	EXT = 2.ep2
 endif
 ifeq "$(ENGINE)" "css"
 	HL2SDK = $(HL2SDK_CSS)
 	CFLAGS += -DSOURCE_ENGINE=6
+	EXT = 2.css
 endif
 ifeq "$(ENGINE)" "orangeboxvalve"
 	HL2SDK = $(HL2SDK_OB_VALVE)
 	CFLAGS += -DSOURCE_ENGINE=7
+	EXT = 2.ep2v
 endif
 ifeq "$(ENGINE)" "left4dead"
 	HL2SDK = $(HL2SDK_L4D)
 	CFLAGS += -DSOURCE_ENGINE=8
+	EXT = 2.l4d
 endif
 ifeq "$(ENGINE)" "left4dead2"
 	HL2SDK = $(HL2SDK_L4D2)
 	CFLAGS += -DSOURCE_ENGINE=9
+	EXT = 2.l4d2
 endif
 ifeq "$(ENGINE)" "csgo"
 	HL2SDK = $(HL2SDK_CSGO)
 	CFLAGS += -DSOURCE_ENGINE=12
 	OBJECTS += $(HL2SDK)/public/engine/protobuf/netmessages.pb.cc $(HL2SDK)/public/game/shared/csgo/protobuf/cstrike15_usermessages.pb.cc
 	INCLUDE += -I$(HL2SDK)/common/protobuf-2.3.0/src -I$(HL2SDK)/public/engine/protobuf -I$(HL2SDK)/public/game/shared/csgo/protobuf
+	EXT = 2.csgo
 endif
 
 HL2PUB = $(HL2SDK)/public
@@ -142,7 +149,7 @@ CPPFLAGS += -Wno-non-virtual-dtor -Wno-overloaded-virtual -fno-threadsafe-static
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
 ################################################
 
-BINARY = $(PROJECT).ext.$(LIB_EXT)
+BINARY = $(PROJECT).$(EXT).$(LIB_EXT)
 
 ifeq "$(DEBUG)" "true"
 	BIN_DIR = Debug
