@@ -38,8 +38,8 @@ Simillimum will always maintain ABI compatibility with SourceMod.
 
 **2013.05.26**
   * Added initial LUA support, considered highly experimental, stuff:
-  * * http://i.imgur.com/5Mi7Kdi.png
-  * * http://pastebin.com/aMcTVLQQ
+    * http://i.imgur.com/5Mi7Kdi.png
+    * http://pastebin.com/aMcTVLQQ
   * More cleansing
 
 
@@ -56,4 +56,7 @@ Simillimum will always maintain ABI compatibility with SourceMod.
   * Add a universal way to change the players' name
   * Implement color code formatting to PrintToChat and PrintToChatAll
   * Finish updating makefiles so we can remove ambuild completely
-  * Add full LUA support, rewrite all stock plugins in LUA
+  * Add full LUA support:
+    * Add plugin hash support for plugin blacklist
+    * Begin exposing natives to LUA
+    * Rewrite all stock plugins in LUA
