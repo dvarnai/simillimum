@@ -61,9 +61,6 @@ else
 	CFLAGS += $(C_OPT_FLAGS)
 endif
 
-ifeq "$(USEMETA)" "true"
-	BIN_DIR := $(BIN_DIR).$(ENGINE)
-endif
 
 ifeq "$(OS)" "Darwin"
 	CPP = $(CPP_OSX)
