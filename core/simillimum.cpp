@@ -43,6 +43,7 @@
 #include "TimerSys.h"
 #include <IGameConfigs.h>
 #include "frame_hooks.h"
+#include "LuaSys.h"
 #include "logic_bridge.h"
 
 SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, false, bool, const char *, const char *, const char *, const char *, bool, bool);
@@ -401,7 +402,7 @@ void SimillimumBase::DoGlobalPluginLoads()
 		"configs/plugin_settings.cfg");
 	BuildPath(Path_SM, plugins_path,
 		sizeof(plugins_path),
-		"plugins");
+		"plugins_sp");
 
 	/* Load any auto extensions */
 	extsys->TryAutoload();

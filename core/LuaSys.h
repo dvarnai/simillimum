@@ -2,7 +2,7 @@
  * vim: set ts=4 :
  * =============================================================================
  * Simillimum
- * Copyright (C) 2004-2009 AlliedModders LLC.  All rights reserved.
+ * Copyright (C) 2004-2008 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -29,31 +29,27 @@
  * Version: $Id$
  */
 
-#ifndef _INCLUDE_SIMILLIMUM_COMMON_LOGIC_H_
-#define _INCLUDE_SIMILLIMUM_COMMON_LOGIC_H_
+#ifndef _INCLUDE_SIMILLIMUM_LUASYSTEM_H_
+#define _INCLUDE_SIMILLIMUM_LUASYSTEM_H_
 
-#include <IHandleSys.h>
+#include <ILuaSys.h>
+#include "sm_platform.h"
 
-#include "../sm_globals.h"
-#include "intercom.h"
+using namespace Simillimum;
 
-extern sm_core_t smcore;
-extern IHandleSys *handlesys;
-extern ISimillimum *g_pSM;
-extern ILibrarySys *libsys;
-extern ITextParsers *textparser;
-extern IVEngineServer *engine;
-extern IShareSys *sharesys;
-extern IRootConsole *rootmenu;
-extern IPluginManager *pluginsys;
-extern IForwardManager *forwardsys;
-extern ITimerSystem *timersys;
-extern ServerGlobals serverGlobals;
-extern IPlayerManager *playerhelpers;
-extern IAdminSystem *adminsys;
-extern IGameHelpers *gamehelpers;
-extern IScriptManager *scripts;
-extern ILuaSys *g_pLuaSys;
+class LuaSystem : public ILuaSys
+{
+public:
+	LuaSystem();
+	virtual void RegisterLibrary(const char * name, const luaL_Reg * functions);
+	virtual bool LoadPlugin(const char * fullpath, int *err);
+	virtual const char * GetErrorString();
+	virtual const char *GetGlobalString(const char  * name);
+	virtual const char * GetPluginInfo(const  char * plugin, const char  * name);
+	virtual void SetGlobalNum(const char * name, int value);
+	virtual bool ExecuteString(const char * string);
+};
 
-#endif /* _INCLUDE_SIMILLIMUM_COMMON_LOGIC_H_ */
+extern LuaSystem g_pLuaSys;
 
+#endif //_INCLUDE_SIMILLIMUM_LUASYSTEM_H_

@@ -46,6 +46,7 @@
 #include "AdminCache.h"
 #include "HalfLife2.h"
 #include "CoreConfig.h"
+#include "LuaSys.h"
 #if SOURCE_ENGINE == SE_DOTA
 #include "convar_sm_dota.h"
 #elif SOURCE_ENGINE >= SE_ALIENSWARM
@@ -333,6 +334,7 @@ static sm_core_t core_bridge =
 	&g_HL2,
 	&g_pSourcePawn,
 	&g_pSourcePawn2,
+	&g_pLuaSys,
 	/* Functions */
 	find_convar,
 	strncopy,

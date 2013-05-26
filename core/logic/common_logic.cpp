@@ -70,6 +70,7 @@ ISourcePawnEngine *g_pSourcePawn;
 ISourcePawnEngine2 *g_pSourcePawn2;
 CNativeOwner g_CoreNatives;
 IScriptManager *scripts = &g_PluginSys;
+ILuaSys * g_pLuaSys;
 
 static void AddCorePhraseFile(const char *filename)
 {
@@ -147,6 +148,7 @@ static void logic_init(const sm_core_t* core, sm_logic_t* _logic)
 	gamehelpers = core->gamehelpers;
 	g_pSourcePawn = *core->spe1;
 	g_pSourcePawn2 = *core->spe2;
+	g_pLuaSys = core->lua;
 
 	g_ShareSys.Initialize();
 	g_pCoreIdent = g_ShareSys.CreateCoreIdentity();

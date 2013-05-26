@@ -1385,7 +1385,7 @@
     <ClCompile>
       <AdditionalOptions>/D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_BLOODYGOODTIME=4 /D SE_EYE=5 /D SE_CSS=6 /D SE_ORANGEBOXVALVE=7 /D SE_LEFT4DEAD=8 /D SE_LEFT4DEAD2=9 /D SE_ALIENSWARM=10 /D SE_PORTAL2=11 /D SE_CSGO=12</AdditionalOptions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>..\;..\systems;..\..\public;..\..\public\sourcepawn;$(HL2SDKCSS)\public;$(HL2SDKCSS)\public\engine;$(HL2SDKCSS)\public\game\server;$(HL2SDKCSS)\public\mathlib;$(HL2SDKCSS)\public\tier0;$(HL2SDKCSS)\public\tier1;$(HL2SDKCSS)\public\vstdlib;$(MMSOURCE19)\core;$(MMSOURCE19)\core\sourcehook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;..\systems;..\..\public;..\..\lua\luajit\;..\..\public\sourcepawn;$(HL2SDKCSS)\public;$(HL2SDKCSS)\public\engine;$(HL2SDKCSS)\public\game\server;$(HL2SDKCSS)\public\mathlib;$(HL2SDKCSS)\public\tier0;$(HL2SDKCSS)\public\tier1;$(HL2SDKCSS)\public\vstdlib;$(MMSOURCE19)\core;$(MMSOURCE19)\core\sourcehook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SOURCEMOD_MM_EXPORTS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;SOURCEMOD_BUILD;SM_DEFAULT_THREADER;SOURCE_ENGINE=6;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -1403,7 +1403,7 @@
       <AdditionalIncludeDirectories>..\..\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>$(HL2SDKCSS)\lib\public\tier0.lib;$(HL2SDKCSS)\lib\public\tier1.lib;$(HL2SDKCSS)\lib\public\vstdlib.lib;$(HL2SDKCSS)\lib\public\mathlib.lib;Wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(HL2SDKCSS)\lib\public\tier0.lib;$(HL2SDKCSS)\lib\public\tier1.lib;$(HL2SDKCSS)\lib\public\vstdlib.lib;$(HL2SDKCSS)\lib\public\mathlib.lib;..\..\lua\luajit\lua51.lib;Wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <IgnoreSpecificDefaultLibraries>LIBC;LIBCD;LIBCMTD;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -2105,6 +2105,7 @@
     <ClCompile Include="..\LibrarySys.cpp" />
     <ClCompile Include="..\Logger.cpp" />
     <ClCompile Include="..\logic_bridge.cpp" />
+    <ClCompile Include="..\LuaSys.cpp" />
     <ClCompile Include="..\MenuManager.cpp" />
     <ClCompile Include="..\MenuStyle_Base.cpp" />
     <ClCompile Include="..\MenuStyle_Radio.cpp" />
@@ -2283,6 +2284,77 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\lua\luajit\lauxlib.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_alloc.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_arch.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_asm.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_asm_arm.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_asm_mips.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_asm_ppc.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_asm_x86.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_bc.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_bcdef.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_bcdump.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_carith.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ccall.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ccallback.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_cconv.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_cdata.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_char.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_clib.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_cparse.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_crecord.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ctype.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_debug.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_def.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_dispatch.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_emit_arm.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_emit_mips.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_emit_ppc.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_emit_x86.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_err.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_errmsg.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ff.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ffdef.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ffrecord.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_folddef.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_frame.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_func.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_gc.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_gdbjit.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ir.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_ircall.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_iropt.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_jit.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_lex.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_lib.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_libdef.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_mcode.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_meta.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_obj.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_parse.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_recdef.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_record.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_snap.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_state.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_str.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_strscan.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_tab.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_target.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_target_arm.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_target_mips.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_target_ppc.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_target_x86.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_trace.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_traceerr.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_udata.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_vm.h" />
+    <ClInclude Include="..\..\lua\luajit\lj_vmevent.h" />
+    <ClInclude Include="..\..\lua\luajit\lua.h" />
+    <ClInclude Include="..\..\lua\luajit\luaconf.h" />
+    <ClInclude Include="..\..\lua\luajit\luajit.h" />
+    <ClInclude Include="..\..\lua\luajit\lualib.h" />
+    <ClInclude Include="..\..\public\ILuaSys.h" />
     <ClInclude Include="..\..\public\ISimillimum.h" />
     <ClInclude Include="..\..\public\simillimum_version.h" />
     <ClInclude Include="..\..\public\sm_platform.h" />
@@ -2309,6 +2381,7 @@
     <ClInclude Include="..\LibrarySys.h" />
     <ClInclude Include="..\Logger.h" />
     <ClInclude Include="..\logic_bridge.h" />
+    <ClInclude Include="..\LuaSys.h" />
     <ClInclude Include="..\MenuManager.h" />
     <ClInclude Include="..\MenuStyle_Base.h" />
     <ClInclude Include="..\MenuStyle_Radio.h" />

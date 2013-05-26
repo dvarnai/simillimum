@@ -63,6 +63,12 @@ namespace Simillimum
 		const char *url;			/**< Plugin URL */
 	} sm_plugininfo_t;
 
+	enum JitType
+	{
+		JIT_SourcePawn,
+		JIT_Lua,
+	};
+
 
 	/**
 	 * @brief Describes the usability status of a plugin.
@@ -153,6 +159,11 @@ namespace Simillimum
 		 * @brief Returns the plugin status.
 		 */
 		virtual PluginStatus GetStatus() =0;
+
+		/**
+		 * @brief Returns the plugin JIT type.
+		 */
+		virtual JitType GetJitType() =0;
 		
 		/**
 		 * @brief Sets whether the plugin is paused or not.
