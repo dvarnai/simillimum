@@ -9,7 +9,7 @@ MMSOURCE19 = ../../../mmsource-central
 ### EDIT BELOW FOR OTHER PROJECTS ###
 #####################################
 
-PROJECT = simillimum.jit.x86
+PROJECT = sourcepawn.jit.x86
 
 OBJECTS = BaseRuntime.cpp engine2.cpp dll_exports.cpp jit_function.cpp sp_vm_basecontext.cpp sp_vm_engine.cpp \
           sp_vm_function.cpp x86/jit_x86.cpp x86/opcode_helpers.cpp zlib/adler32.c zlib/compress.c zlib/crc32.c \
