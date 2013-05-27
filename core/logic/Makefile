@@ -32,7 +32,7 @@ CPP = gcc
 
 LINK += -lpthread -m32 -ldl -lm -shared
 	
-INCLUDE += -I. -I$(MMSOURCE19)/core/sourcehook -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn
+INCLUDE += -I. -I$(MMSOURCE19)/core/sourcehook -I$(SMSDK)/public -I$(SMSDK)/public/sourcepawn -I$(SMSDK)/public/lua
 
 CFLAGS += -D_LINUX -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Werror \

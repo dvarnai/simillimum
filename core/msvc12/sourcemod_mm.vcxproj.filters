@@ -25,15 +25,6 @@
       <UniqueIdentifier>{2A750240-7C10-455f-A900-B9A9D362356C}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="HL2SDK\Protobuf">
-      <UniqueIdentifier>{28cf0347-3553-4d24-b9ad-476ba5197680}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HL2SDK\Protobuf\CSGO">
-      <UniqueIdentifier>{0e62c72e-57b1-40d2-9a94-059f535ce719}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LUA">
-      <UniqueIdentifier>{c39465ae-3593-4993-8c18-b31d76d12c3e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\AdminCache.cpp">
@@ -61,9 +52,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\CoreConfig.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\CrazyDebugger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Database.cpp">
@@ -126,6 +114,9 @@
     <ClCompile Include="..\sourcemm_api.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\sourcemod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\TimerSys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -174,23 +165,8 @@
     <ClCompile Include="..\smn_vector.cpp">
       <Filter>Natives</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessage_helpers.cpp">
-      <Filter>HL2SDK\Protobuf\CSGO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessages.pb.cc">
-      <Filter>HL2SDK\Protobuf\CSGO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\hl2sdks\hl2sdk-csgo\public\engine\protobuf\netmessages.pb.cc">
-      <Filter>HL2SDK\Protobuf</Filter>
-    </ClCompile>
     <ClCompile Include="..\smn_protobuf.cpp">
       <Filter>Natives</Filter>
-    </ClCompile>
-    <ClCompile Include="..\simillimum.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\LuaSys.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -311,6 +287,9 @@
     <ClInclude Include="..\sourcemm_api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\sourcemod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\TimerSys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -368,6 +347,9 @@
     <ClInclude Include="..\..\public\IShareSys.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\public\ISourceMod.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\public\ITextParsers.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
@@ -401,6 +383,9 @@
     <ClInclude Include="..\..\public\sm_platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\public\sourcemod_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\convar_sm_l4d.h">
       <Filter>HL2SDK</Filter>
     </ClInclude>
@@ -410,259 +395,10 @@
     <ClInclude Include="..\convar_sm_swarm.h">
       <Filter>HL2SDK</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessage_helpers.h">
-      <Filter>HL2SDK\Protobuf\CSGO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessages.pb.h">
-      <Filter>HL2SDK\Protobuf\CSGO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\hl2sdks\hl2sdk-csgo\public\engine\protobuf\netmessages.pb.h">
-      <Filter>HL2SDK\Protobuf</Filter>
-    </ClInclude>
-    <ClInclude Include="..\simillimum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\simillimum_version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\ISimillimum.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="..\..\public\lua\lua_types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\ILuaEngine.h">
-=======
-    <ClInclude Include="..\..\lua\luajit\lauxlib.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_alloc.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_arch.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_asm.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_asm_arm.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_asm_mips.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_asm_ppc.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_asm_x86.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_bc.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_bcdef.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_bcdump.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_carith.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ccall.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ccallback.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_cconv.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_cdata.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_char.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_clib.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_cparse.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_crecord.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ctype.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_debug.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_def.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_dispatch.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_emit_arm.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_emit_mips.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_emit_ppc.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_emit_x86.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_err.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_errmsg.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ff.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ffdef.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ffrecord.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_folddef.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_frame.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_func.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_gc.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_gdbjit.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ir.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_ircall.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_iropt.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_jit.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_lex.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_lib.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_libdef.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_mcode.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_meta.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_obj.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_parse.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_recdef.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_record.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_snap.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_state.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_str.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_strscan.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_tab.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_target.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_target_arm.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_target_mips.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_target_ppc.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_target_x86.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_trace.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_traceerr.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_udata.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_vm.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lj_vmevent.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lua.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\luaconf.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\luajit.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lua\luajit\lualib.h">
-      <Filter>LUA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\LuaSys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\ILuaSys.h">
->>>>>>> 6536f2e7a58515cf61911fbe7d25b028fe3eca1e
-      <Filter>Interfaces</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\version.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\..\..\hl2sdks\hl2sdk-csgo\lib\win32\release\vs2010\libprotobuf.lib">
-      <Filter>HL2SDK\Protobuf</Filter>
-    </Library>
-    <Library Include="..\..\..\hl2sdks\hl2sdk-csgo\lib\win32\debug\vs2010\libprotobuf.lib">
-      <Filter>HL2SDK\Protobuf</Filter>
-    </Library>
   </ItemGroup>
 </Project>
