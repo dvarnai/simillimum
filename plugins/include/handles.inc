@@ -99,15 +99,6 @@ native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
 
 
 /**
- * Returns the current status of a handle.
- *
- * @param hndl		Handle to get status for.
- * @return			HandleError item.
- */
-native HandleError:GetHandleStatus(Handle:hndl);
-
-
-/**
  * Do not use this function. Returns if a Handle and its contents 
  * are readable, whereas INVALID_HANDLE only checks for the absence 
  * of a Handle.
