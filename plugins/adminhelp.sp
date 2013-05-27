@@ -42,7 +42,7 @@ public Plugin:myinfo =
 	name = "Admin Help",
 	author = "AlliedModders LLC",
 	description = "Display command information",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

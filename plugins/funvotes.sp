@@ -44,7 +44,7 @@ public Plugin:myinfo =
 	name = "Fun Votes",
 	author = "AlliedModders LLC",
 	description = "Fun Vote Commands",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

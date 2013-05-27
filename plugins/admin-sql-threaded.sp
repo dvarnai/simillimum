@@ -41,7 +41,7 @@ public Plugin:myinfo =
 	name = "SQL Admins (Threaded)",
 	author = "AlliedModders LLC",
 	description = "Reads admins from SQL dynamically",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

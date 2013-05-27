@@ -41,7 +41,7 @@ public Plugin:myinfo =
 	name = "Nextmap",
 	author = "AlliedModders LLC",
 	description = "Provides nextmap and sm_nextmap",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

@@ -46,7 +46,7 @@ public Plugin:myinfo =
 	name = "SQL Admin Manager",
 	author = "AlliedModders LLC",
 	description = "Manages SQL admins",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

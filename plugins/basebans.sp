@@ -42,7 +42,7 @@ public Plugin:myinfo =
 	name = "Basic Ban Commands",
 	author = "AlliedModders LLC",
 	description = "Basic Banning Commands",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

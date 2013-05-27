@@ -40,7 +40,7 @@ public Plugin:myinfo =
 	name = "Reserved Slots",
 	author = "AlliedModders LLC",
 	description = "Provides basic reserved slots",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

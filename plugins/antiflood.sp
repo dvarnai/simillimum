@@ -40,7 +40,7 @@ public Plugin:myinfo =
 	name = "Anti-Flood",
 	author = "AlliedModders LLC",
 	description = "Protects against chat flooding",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

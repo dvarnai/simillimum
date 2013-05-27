@@ -42,7 +42,7 @@ public Plugin:myinfo =
 	name = "Basic Votes",
 	author = "AlliedModders LLC",
 	description = "Basic Vote Commands",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

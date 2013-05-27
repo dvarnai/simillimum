@@ -41,7 +41,7 @@ public Plugin:myinfo =
 	name = "Admin Menu",
 	author = "AlliedModders LLC",
 	description = "Administration Menu",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

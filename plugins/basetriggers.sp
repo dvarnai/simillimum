@@ -44,7 +44,7 @@ public Plugin:myinfo =
 	name = "Basic Info Triggers",
 	author = "AlliedModders LLC",
 	description = "Adds ff, timeleft, thetime, and others.",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

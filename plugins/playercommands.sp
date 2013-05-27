@@ -43,7 +43,7 @@ public Plugin:myinfo =
 	name = "Player Commands",
 	author = "AlliedModders LLC",
 	description = "Misc. Player Commands",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

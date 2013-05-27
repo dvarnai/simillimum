@@ -42,7 +42,7 @@ public Plugin:myinfo =
 	name = "Client Preferences",
 	author = "AlliedModders LLC",
 	description = "Client peferences and settings menu",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

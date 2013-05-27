@@ -41,7 +41,7 @@ public Plugin:myinfo =
 	name = "SQL Admins (Prefetch)",
 	author = "AlliedModders LLC",
 	description = "Reads all admins from SQL",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

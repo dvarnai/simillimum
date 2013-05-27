@@ -52,7 +52,7 @@ public Plugin:myinfo =
 	name = "MapChooser",
 	author = "AlliedModders LLC",
 	description = "Automated Map Voting",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

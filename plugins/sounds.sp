@@ -40,7 +40,7 @@ public Plugin:myinfo =
 	name = "Sound Commands",
 	author = "AlliedModders LLC",
 	description = "Sound Commands",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

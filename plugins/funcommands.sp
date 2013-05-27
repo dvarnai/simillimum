@@ -43,7 +43,7 @@ public Plugin:myinfo =
 	name = "Fun Commands",
 	author = "AlliedModders LLC",
 	description = "Fun Commands",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

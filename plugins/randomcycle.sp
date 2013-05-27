@@ -39,7 +39,7 @@ public Plugin:myinfo =
 	name = "RandomCycle",
 	author = "AlliedModders LLC",
 	description = "Randomly chooses the next map.",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

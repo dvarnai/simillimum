@@ -41,7 +41,7 @@ public Plugin:myinfo =
 	name = "Map Nominations",
 	author = "AlliedModders LLC",
 	description = "Provides Map Nominations",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 

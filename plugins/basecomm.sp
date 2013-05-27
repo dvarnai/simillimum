@@ -43,7 +43,7 @@ public Plugin:myinfo =
 	name = "Basic Comm Control",
 	author = "AlliedModders LLC",
 	description = "Provides methods of controlling communication.",
-	version = SOURCEMOD_VERSION,
+	version = SIMILLIMUM_VERSION,
 	url = "http://www.sourcemod.net/"
 };
 
