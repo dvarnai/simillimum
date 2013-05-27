@@ -36,14 +36,18 @@
 using namespace Simillimum;
 
 
-#if defined _LINUX
-	#define DLLSPEC
-#else
-	#define DLLSPEC __declspec(dllexport)
-#endif
+#if defined WIN32
+	#define EXPORTFUNC	extern "C" __declspec(dllexport)
+#elif defined __GNUC__
+	#if __GNUC__ >= 3
+		#define EXPORTFUNC extern "C" __attribute__((visibility("default")))
+	#else
+		#define EXPORTFUNC extern "C"
+	#endif //__GNUC__ >= 3
+#endif //defined __GNUC__
 
 
-extern "C" DLLSPEC ILuaEngine * GetLuaState()
+EXPORTFUNC ILuaEngine * GetLuaState()
 {
 	return new LuaEngine();
 }
