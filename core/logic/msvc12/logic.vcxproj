@@ -46,7 +46,7 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">simillimum.logic</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">sourcemod.logic</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">simillimum.logic</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -156,7 +156,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\public\sm_platform.h" />
     <ClInclude Include="..\..\..\public\sm_trie_tpl.h" />
-    <ClInclude Include="..\..\..\public\sourcemod_version.h" />
+    <ClInclude Include="..\..\..\public\simillimum_version.h" />
     <ClInclude Include="..\AutoHandleRooter.h" />
     <ClInclude Include="..\CellArray.h" />
     <ClInclude Include="..\common_logic.h" />

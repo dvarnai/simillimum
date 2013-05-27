@@ -100,7 +100,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E39527CD-7CAB-4420-97CC-DA1B93B260BC}</ProjectGuid>
-    <RootNamespace>sourcemod_mm</RootNamespace>
+    <RootNamespace>simillimum_mm</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>simillimum_mm</ProjectName>
   </PropertyGroup>
@@ -453,34 +453,34 @@
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release - EYE|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release - EYE|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release - EYE|Win32'" />
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">sourcemod.2.swarm</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Alien Swarm|Win32'">sourcemod.2.swarm</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">sourcemod.2.bgt</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Bloody Good Time|Win32'">sourcemod.2.bgt</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - CS GO|Win32'">sourcemod.2.csgo</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - CS GO|Win32'">sourcemod.2.csgo</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Episode 1|Win32'">sourcemod.2.ep1</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Episode 1|Win32'">sourcemod.2.ep1</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - EYE|Win32'">sourcemod.2.eye</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - EYE|Win32'">sourcemod.2.eye</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Left 4 Dead|Win32'">sourcemod.2.l4d</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Left 4 Dead|Win32'">sourcemod.2.l4d</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Left 4 Dead 2|Win32'">sourcemod.2.l4d2</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Left 4 Dead 2|Win32'">sourcemod.2.l4d2</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Old Metamod|Win32'">sourcemod.1.ep1</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">sourcemod.1.ep1</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">sourcemod.2.ep2</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box|Win32'">sourcemod.2.ep2</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box Valve|Win32'">sourcemod.2.ep2v</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - CSS|Win32'">sourcemod.2.css</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">sourcemod.2.ep2v</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">simillimum.2.swarm</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Alien Swarm|Win32'">simillimum.2.swarm</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">simillimum.2.bgt</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Bloody Good Time|Win32'">simillimum.2.bgt</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - CS GO|Win32'">simillimum.2.csgo</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - CS GO|Win32'">simillimum.2.csgo</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Episode 1|Win32'">simillimum.2.ep1</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Episode 1|Win32'">simillimum.2.ep1</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - EYE|Win32'">simillimum.2.eye</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - EYE|Win32'">simillimum.2.eye</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Left 4 Dead|Win32'">simillimum.2.l4d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Left 4 Dead|Win32'">simillimum.2.l4d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Left 4 Dead 2|Win32'">simillimum.2.l4d2</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Left 4 Dead 2|Win32'">simillimum.2.l4d2</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Old Metamod|Win32'">simillimum.1.ep1</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">simillimum.1.ep1</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">simillimum.2.ep2</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box|Win32'">simillimum.2.ep2</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box Valve|Win32'">simillimum.2.ep2v</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug - CSS|Win32'">simillimum.2.css</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">simillimum.2.ep2v</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release - CSS|Win32'">simillimum.2.css</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - Dark Messiah|Win32'">
-    <TargetName>sourcemod.2.darkm</TargetName>
+    <TargetName>simillimum.2.darkm</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug - Dark Messiah|Win32'">
-    <TargetName>sourcemod.2.darkm</TargetName>
+    <TargetName>simillimum.2.darkm</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug - Old Metamod|Win32'">
     <ClCompile>
@@ -1343,7 +1343,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\hl2sdks\hl2sdk-csgo\public\engine\protobuf\netmessages.pb.cc">
+    <ClCompile Include="$(HL2SDKCSGO)\public\engine\protobuf\netmessages.pb.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">true</ExcludedFromBuild>
@@ -1367,7 +1367,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessages.pb.cc">
+    <ClCompile Include="$(HL2SDKCSGO)\public\game\shared\csgo\protobuf\cstrike15_usermessages.pb.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">true</ExcludedFromBuild>
@@ -1391,7 +1391,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessage_helpers.cpp">
+    <ClCompile Include="$(HL2SDKCSGO)\public\game\shared\csgo\protobuf\cstrike15_usermessage_helpers.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">true</ExcludedFromBuild>
@@ -1490,7 +1490,7 @@
     <ClCompile Include="..\smn_vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\hl2sdks\hl2sdk-csgo\public\engine\protobuf\netmessages.pb.h">
+    <ClInclude Include="$(HL2SDKCSGO)\public\engine\protobuf\netmessages.pb.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">true</ExcludedFromBuild>
@@ -1514,7 +1514,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessages.pb.h">
+    <ClInclude Include="$(HL2SDKCSGO)\public\game\shared\csgo\protobuf\cstrike15_usermessages.pb.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">true</ExcludedFromBuild>
@@ -1538,7 +1538,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\..\hl2sdks\hl2sdk-csgo\public\game\shared\csgo\protobuf\cstrike15_usermessage_helpers.h">
+    <ClInclude Include="$(HL2SDKCSGO)\public\game\shared\csgo\protobuf\cstrike15_usermessage_helpers.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">true</ExcludedFromBuild>
@@ -1644,7 +1644,7 @@
     <ResourceCompile Include="..\version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\hl2sdks\hl2sdk-csgo\lib\win32\debug\vs2010\libprotobuf.lib">
+    <Library Include="$(HL2SDKCSGO)\lib\win32\debug\vs2012\libprotobuf.lib">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Bloody Good Time|Win32'">true</ExcludedFromBuild>
@@ -1669,7 +1669,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Old Metamod|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Orange Box Valve|Win32'">true</ExcludedFromBuild>
     </Library>
-    <Library Include="..\..\..\hl2sdks\hl2sdk-csgo\lib\win32\release\vs2010\libprotobuf.lib">
+    <Library Include="$(HL2SDKCSGO)\lib\win32\release\vs2012\libprotobuf.lib">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - CS GO|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>

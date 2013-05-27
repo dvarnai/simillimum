@@ -206,7 +206,7 @@
     <ClInclude Include="..\..\..\public\sm_trie_tpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\public\sourcemod_version.h">
+    <ClInclude Include="..\..\..\public\simillimum_version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\public\sm_platform.h">
