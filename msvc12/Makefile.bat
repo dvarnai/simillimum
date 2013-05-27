@@ -3,17 +3,19 @@
 rm -r -f "../Release"
 
 mkdir "../Release/addons/simillimum/bin"
-mkdir "../Release/addons/simillimum/data/sqlite"
+mkdir "../Release/addons/simillimum/data"
 mkdir "../Release/addons/simillimum/extensions"
 mkdir "../Release/addons/simillimum/logs"
+mkdir "../Release/addons/simillimum/plugins/disabled"
 mkdir "../Release/addons/metamod"
+mkdir "../Release/cfg/sourcemod"
 
 cp -r -f "../translations" "../Release/addons/simillimum/translations"
 cp -r -f "../configs" "../Release/addons/simillimum/configs"
 cp -r -f "../gamedata" "../Release/addons/simillimum/gamedata"
 cp -r -f "../plugins" "../Release/addons/simillimum/scripting"
 cp -r -f "../plugins_lua" "../Release/addons/simillimum/plugins_lua"
-cp -r -f "../configs/cfg" "../Release"
+cp -r -f "../configs/cfg"/* "../Release/cfg/sourcemod"
 cp -f "../simillimum.vdf" "../Release/addons/metamod/simillimum.vdf"
 
 rm -r -f "../Release/addons/simillimum/configs/cfg"

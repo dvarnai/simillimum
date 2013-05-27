@@ -80,7 +80,7 @@ enum Identity
 public PlVers:__version = 
 {
 	version = SOURCEMOD_PLUGINAPI_VERSION,
-	filevers = SOURCEMOD_VERSION,
+	filevers = SIMILLIMUM_VERSION,
 	date = __DATE__,
 	time = __TIME__
 };
