@@ -1,5 +1,5 @@
 SUBDIRS_SIM = core
-SUBDIRS_CORE = core/logic loader sourcepawn/jit
+SUBDIRS_CORE = core/logic loader sourcepawn/jit lua
 SUBDIRS_EXTENSIONS = extensions/bintools extensions/clientprefs extensions/curl extensions/geoip extensions/mysql extensions/regex extensions/sqlite extensions/tf2 extensions/topmenus extensions/updater
 SUBDIRS_EXTENSIONS_META = extensions/sdkhooks extensions/sdktools
 SUBDIRS_EXTENSIONS_CSTRIKE = extensions/cstrike
