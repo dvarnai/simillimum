@@ -35,15 +35,8 @@
 #endif
 #define _version_included
 
-#tryinclude <version_auto>
+#define SOURCEMOD_V_MAJOR		$PMAJOR$				/**< SourceMod Major version */
+#define SOURCEMOD_V_MINOR		$PMINOR$				/**< SourceMod Minor version */
+#define SOURCEMOD_V_RELEASE		$PREVISION$				/**< SourceMod Release version */
 
-#if !defined _auto_version_included
-#define SOURCEMOD_V_TAG		"manual"
-#define SOURCEMOD_V_REV		0
-#define SOURCEMOD_V_CSET		"0"
-#define SOURCEMOD_V_MAJOR		1				/**< Simillimum Major version */
-#define SOURCEMOD_V_MINOR		0				/**< Simillimum Minor version */
-#define SOURCEMOD_V_RELEASE		0				/**< Simillimum Release version */
-
-#define SOURCEMOD_VERSION	"1.0.0-manual"	/**< Simillimum version string (major.minor.release-tag) */
-#endif
+#define SOURCEMOD_VERSION	"$PMAJOR$.$PMINOR$.$PREVISION$$BUILD_STRING$"	/**< SourceMod version string (major.minor.release.build) */

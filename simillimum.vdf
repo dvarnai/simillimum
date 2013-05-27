@@ -1,0 +1,5 @@
+"Metamod Plugin"
+{
+	"alias"		"simillimum"
+	"file"		"addons/simillimum/bin/simillimum_mm"
+}
