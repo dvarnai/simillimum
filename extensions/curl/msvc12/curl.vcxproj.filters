@@ -18,7 +18,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\CRegEx.cpp">
+    <ClCompile Include="..\curlapi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\extension.cpp">
@@ -29,13 +29,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\CRegEx.h">
+    <ClInclude Include="..\curlapi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\extension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\pcre.h">
+    <ClInclude Include="..\..\..\public\extensions\IWebternet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\sdk\smsdk_config.h">

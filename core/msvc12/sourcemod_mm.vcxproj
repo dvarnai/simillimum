@@ -1641,9 +1641,6 @@
     <ClInclude Include="..\convar_sm.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\version.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <Library Include="$(HL2SDKCSGO)\lib\win32\debug\vs2012\libprotobuf.lib">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Orange Box|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Alien Swarm|Win32'">true</ExcludedFromBuild>

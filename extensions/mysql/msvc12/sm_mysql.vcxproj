@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B3E797CF-4E77-4C9D-B8A8-7589B6902206}</ProjectGuid>
+    <ProjectGuid>{CEFC0BBE-D7B1-4838-B068-BB90FDC07F7A}</ProjectGuid>
     <RootNamespace>sm_mysql</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -75,7 +75,7 @@
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>wsock32.lib;$(MARIADB)\mariadbclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wsock32.lib;..\mariadb-source\libmysql\mariadbclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)dbi.mysql.ext.dll</OutputFile>
       <IgnoreSpecificDefaultLibraries>LIBC;LIBCD;LIBCMTD;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -104,7 +104,7 @@
       </AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>wsock32.lib;$(MARIADB)\mariadbclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wsock32.lib;..\mariadb-source\libmysql\mariadbclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)dbi.mysql.ext.dll</OutputFile>
       <IgnoreSpecificDefaultLibraries>LIBC;LIBCD;LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -135,9 +135,6 @@
     <ClInclude Include="..\mysql\MyDatabase.h" />
     <ClInclude Include="..\mysql\MyDriver.h" />
     <ClInclude Include="..\mysql\MyStatement.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

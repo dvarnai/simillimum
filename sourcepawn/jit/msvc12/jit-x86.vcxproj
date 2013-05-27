@@ -161,9 +161,6 @@
     <ClInclude Include="..\..\..\public\sourcepawn\sp_vm_base.h" />
     <ClInclude Include="..\..\..\public\sourcepawn\sp_vm_types.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\version.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
