@@ -134,6 +134,7 @@ ifeq "$(USEMETA)" "true"
 		-DSE_PORTAL2=11 -DSE_CSGO=12
 endif
 
+LINK += curl-src/lib/libcurl.a curl-src/lib/libssl.a curl-src/lib/libcrypto.a
 LINK += -m32 -lm -ldl -shared -lrt
 
 CFLAGS += -DCURL_STATICLIB -D_LINUX -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \

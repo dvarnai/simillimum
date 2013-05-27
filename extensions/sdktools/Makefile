@@ -123,7 +123,7 @@ endif
 INCLUDE += -I. -I.. -Isdk -I$(SMSDK)/public -I$(SMSDK)/public/extensions -I$(SMSDK)/public/sourcepawn -I$(SMSDK)/public/jit -I$(SMSDK)/public/jit/x86 -I$(HL2SDK)/common
 
 ifeq "$(USEMETA)" "true"
-	LINK_HL2 = $(HL2LIB)/tier1_i486.a $(LIB_PREFIX)vstdlib$(LIB_SUFFIX) $(LIB_PREFIX)tier0$(LIB_SUFFIX)
+	LINK_HL2 = $(HL2LIB)/tier1_i486.a $(HL2LIB)/mathlib_i486.a $(LIB_PREFIX)vstdlib$(LIB_SUFFIX) $(LIB_PREFIX)tier0$(LIB_SUFFIX)
 	ifeq "$(ENGINE)" "csgo"
 		LINK_HL2 += $(HL2LIB)/interfaces_i486.a
 	endif
