@@ -67,7 +67,7 @@ IPluginRuntime * LuaEngine::LoadPlugin(const char * fullpath, int *err)
 {
 	if ((*err=luaL_loadfile(L, fullpath)) || lua_pcall(L, 0, 0, 0))
 	{
-        return false;
+        return NULL;
 	}
 	
 	char m_szFilename[PLATFORM_MAX_PATH];
