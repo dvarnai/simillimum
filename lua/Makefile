@@ -19,7 +19,8 @@ OBJECTS = luajit/lib_aux.c luajit/lib_base.c luajit/lib_bit.c luajit/lib_debug.c
           luajit/lj_gdbjit.c luajit/lj_ir.c luajit/lj_lex.c luajit/lj_lib.c luajit/lj_load.c luajit/lj_mcode.c luajit/lj_meta.c luajit/lj_obj.c \
           luajit/lj_opt_dce.c luajit/lj_opt_fold.c luajit/lj_opt_loop.c luajit/lj_opt_mem.c luajit/lj_opt_narrow.c luajit/lj_opt_sink.c \
           luajit/lj_opt_split.c luajit/lj_parse.c luajit/lj_record.c luajit/lj_snap.c luajit/lj_state.c luajit/lj_str.c luajit/lj_strscan.c \
-          luajit/lj_tab.c luajit/lj_trace.c luajit/lj_udata.c luajit/lj_vmevent.c luajit/lj_vmmath.c luajit/luajit.c LuaEngine.cpp
+          luajit/lj_tab.c luajit/lj_trace.c luajit/lj_udata.c luajit/lj_vmevent.c luajit/lj_vmmath.c luajit/luajit.c \
+		  LuaEngine.cpp PluginFunction.cpp PluginRuntime.cpp
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -34,7 +35,7 @@ CPP = gcc
 
 LINK = luajit/libluajit.a -m32 -ldl -lm -shared
 
-INCLUDE = -I. -I.. -I$(SMSDK)/public -I$(SMSDK)/public/lua \
+INCLUDE = -I. -I.. -I$(SMSDK)/public -I$(SMSDK)/core -I$(SMSDK)/public/lua \
 	-I$(SMSDK)/public/sourcepawn -I$(MMSOURCE19)/core/sourcehook -Iluajit -Idynasm
 
 CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
