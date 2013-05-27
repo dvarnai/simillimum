@@ -62,8 +62,8 @@ endif
 IS_CLANG := $(shell $(CPP) --version | head -1 | grep clang > /dev/null && echo "1" || echo "0")
 
 ifeq "$(IS_CLANG)" "1"
-	CPP_MAJOR := $(shell $(CPP) --version | grep clang | sed "s/.*version /([0-9]/)*/.[0-9]*.*//1/")
-	CPP_MINOR := $(shell $(CPP) --version | grep clang | sed "s/.*version [0-9]*/./([0-9]/)*.*//1/")
+	CPP_MAJOR := $(shell $(CPP) --version | grep clang | sed "s/.*version \([0-9]\)*\.[0-9]*.*/\1/")
+	CPP_MINOR := $(shell $(CPP) --version | grep clang | sed "s/.*version [0-9]*\.\([0-9]\)*.*/\1/")
 else
 	CPP_MAJOR := $(shell $(CPP) -dumpversion >&1 | cut -b1)
 	CPP_MINOR := $(shell $(CPP) -dumpversion >&1 | cut -b3)
@@ -76,7 +76,7 @@ ifeq "$(IS_CLANG)" "0"
 endif
 
 # Clang || GCC >= 4
-ifeq "$(shell expr $(IS_CLANG) /| $(CPP_MAJOR) />= 4)" "1"
+ifeq "$(shell expr $(IS_CLANG) \| $(CPP_MAJOR) \>= 4)" "1"
 	CFLAGS += $(C_GCC4_FLAGS)
 	CPPFLAGS += $(CPP_GCC4_FLAGS)
 endif
