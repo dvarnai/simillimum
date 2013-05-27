@@ -20,7 +20,7 @@ Simillimum will always maintain ABI compatibility with SourceMod.
  and better performance thanks to memory mapped I/O
 
 
-**13.05.24**
+**2013.05.24**
   * Updated cURL libraries
   * Minor cleanup
   * Swapped the MySQL connector to the connector of MariaDB
