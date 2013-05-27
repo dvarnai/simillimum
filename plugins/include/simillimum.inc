@@ -59,3 +59,71 @@ stock bool:IsSimillimumAvailable()
  * @return			HandleError item.
  */
 native HandleError:GetHandleStatus(Handle:hndl);
+
+
+/**
+ * Returns if a supplied command exists.
+ *
+ * @param command       Command to find.
+ * @return              True if command exists, false otherwise.
+ */
+stock bool:CommandExists(const String:command[])
+{
+	return (GetCommandFlags(command) != INVALID_FCVAR_FLAGS);
+}
+
+
+
+/**
+ * Awards an achievement to a client.
+ *
+ * @param client			Client index.
+ * @param achievementID		Achievement ID
+ * @noreturn
+ * @error					Invalid client index, or client not in-game
+ */
+stock AwardClientAchievement(client, achievementID)
+{
+	static bool:m_bSupported = false;
+	static bool:m_bChecked = false;
+
+	if(!m_bChecked)
+	{
+		m_bChecked = true;
+		
+		if(GetUserMessageId("AchievementEvent") != INVALID_MESSAGE_ID)
+		{
+			m_bSupported = true;
+		}
+	}
+
+	if(!m_bSupported)
+	{
+		ThrowError("Game is not supported.");
+	}
+
+	if (client < 1 || client > MaxClients)
+	{
+		ThrowError("Client Index %d out of bounds", client);
+	}
+	
+	if (!IsClientInGame(client))
+	{
+		ThrowError("Client %d is not in-game");
+	}
+	
+	new Handle:msg = StartMessageOne("AchievementEvent", client, 0);
+	
+	if(GetUserMessageType() == UM_Protobuf)
+	{
+		PbSetInt(msg, "achievement", achievementID);
+		PbSetInt(msg, "count", 0);
+		PbSetInt(msg, "user_id", GetClientUserId(client));
+	}
+	else
+	{
+		BfWriteShort(msg, achievementID);
+	}
+	
+	EndMessage();
+}
