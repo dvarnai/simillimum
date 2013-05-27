@@ -103,14 +103,12 @@ CPlugin::~CPlugin()
 		g_ShareSys.DestroyIdentity(m_ident);
 	}
 
-	if(GetJitType() == JIT_SourcePawn)
+	if (m_pRuntime != NULL)
 	{
-		if (m_pRuntime != NULL)
-		{
-			delete m_pRuntime;
-			m_pRuntime = NULL;
-		}
+		delete m_pRuntime;
+		m_pRuntime = NULL;
 	}
+	
 	else if(GetJitType() == JIT_Lua)
 	{
 		char m_szLoadLine[1024];
@@ -380,25 +378,16 @@ void CPlugin::Call_OnPluginStart()
 
 	SyncMaxClients(playerhelpers->GetMaxClients());
 
-	if(m_JIT == JIT_SourcePawn)
+	cell_t result;
+	IPluginFunction *pFunction = m_pRuntime->GetFunctionByName("OnPluginStart");
+	if (!pFunction)
 	{
-		cell_t result;
-		IPluginFunction *pFunction = m_pRuntime->GetFunctionByName("OnPluginStart");
-		if (!pFunction)
-		{
-			return;
-		}
-		int err;
-		if ((err=pFunction->Execute(&result)) != SP_ERROR_NONE)
-		{
-			SetErrorState(Plugin_Error, "Error detected in plugin startup (see error logs)");
-		}
-	} else if(m_JIT == JIT_Lua)
+		return;
+	}
+	int err;
+	if ((err=pFunction->Execute(&result)) != SP_ERROR_NONE)
 	{
-		char m_szLoadLine[1024];
-		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:plugin_start()\n", m_pluginname);
-		if(!g_pLuaEngine->ExecuteString(m_szLoadLine))
-			SetErrorState(Plugin_Error, "Error detected in plugin startup (see error logs)");
+		SetErrorState(Plugin_Error, "Error detected in plugin startup (see error logs)");
 	}
 }
 
@@ -409,22 +398,14 @@ void CPlugin::Call_OnPluginEnd()
 		return;
 	}
 
-	if(m_JIT == JIT_SourcePawn)
+	cell_t result;
+	IPluginFunction *pFunction = m_pRuntime->GetFunctionByName("OnPluginEnd");
+	if (!pFunction)
 	{
-		cell_t result;
-		IPluginFunction *pFunction = m_pRuntime->GetFunctionByName("OnPluginEnd");
-		if (!pFunction)
-		{
-			return;
-		}
-
-		pFunction->Execute(&result);
-	} else if(m_JIT == JIT_Lua)
-	{
-		char m_szLoadLine[1024];
-		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:plugin_end()\n", m_pluginname);
-		g_pLuaEngine->ExecuteString(m_szLoadLine);
+		return;
 	}
+
+	pFunction->Execute(&result);
 }
 
 void CPlugin::Call_OnAllPluginsLoaded()
@@ -441,38 +422,25 @@ void CPlugin::Call_OnAllPluginsLoaded()
 
 	m_bGotAllLoaded = true;
 
-	if(m_JIT == JIT_SourcePawn)
+	cell_t result;
+	IPluginFunction *pFunction = m_pRuntime->GetFunctionByName("OnAllPluginsLoaded");
+	if (pFunction != NULL)
 	{
-		cell_t result;
-		IPluginFunction *pFunction = m_pRuntime->GetFunctionByName("OnAllPluginsLoaded");
-		if (pFunction != NULL)
-		{
-			pFunction->Execute(&result);
-		}
+		pFunction->Execute(&result);
+	}
 
-		if (smcore.IsMapRunning())
-		{
-			if ((pFunction = m_pRuntime->GetFunctionByName("OnMapStart")) != NULL)
-			{
-				pFunction->Execute(NULL);
-			}
-		}
-	} else if(m_JIT == JIT_Lua)
+	if (smcore.IsMapRunning())
 	{
-		char m_szLoadLine[1024];
-		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:all_plugins_loaded()\n", m_pluginname);
-		g_pLuaEngine->ExecuteString(m_szLoadLine);
-		if (smcore.IsMapRunning())
+		if ((pFunction = m_pRuntime->GetFunctionByName("OnMapStart")) != NULL)
 		{
-			snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance:map_start()\n", m_pluginname);
-			g_pLuaEngine->ExecuteString(m_szLoadLine);
+			pFunction->Execute(NULL);
 		}
 	}
 
-	/*if (smcore.AreConfigsExecuted())
+	if (smcore.AreConfigsExecuted())
 	{
 		smcore.ExecuteConfigs(GetBaseContext());
-	}*/
+	}
 }
 
 APLRes CPlugin::Call_AskPluginLoad(char *error, size_t maxlength)
@@ -1068,7 +1036,8 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 		char fullpath[PLATFORM_MAX_PATH];
 		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins_lua/%s", pPlugin->m_filename);
 
-		if (!g_pLuaEngine->LoadPlugin(fullpath, &err))
+		pPlugin->m_pRuntime = g_pLuaEngine->LoadPlugin(fullpath, &err);
+		if (pPlugin->m_pRuntime == NULL)
 		{
 			if (error)
 			{
@@ -1691,12 +1660,10 @@ bool CPluginManager::UnloadPlugin(IPlugin *plugin)
 
 	for (iter=m_listeners.begin(); iter!=m_listeners.end(); iter++)
 	{
-		/* Notify listeners of destruction */
 		pListener = (*iter);
 		pListener->OnPluginDestroyed(pPlugin);
 	}
 	
-	/* Tell the plugin to delete itself */
 	delete pPlugin;
 
 	return true;

@@ -29,8 +29,8 @@
  * Version: $Id$
  */
 
-#ifndef _INCLUDE_SIMILLIMUM_LuaEngineTEM_INTERFACE_H_
-#define _INCLUDE_SIMILLIMUM_LuaEngineTEM_INTERFACE_H_
+#ifndef _INCLUDE_SIMILLIMUM_LUAENGINE_INTERFACE_H_
+#define _INCLUDE_SIMILLIMUM_LUAENGINE_INTERFACE_H_
 
 /**
  * @file IPluginSys.h
@@ -39,6 +39,8 @@
 
 #include <IShareSys.h>
 #include <lua/lua_types.h>
+
+using namespace SourcePawn;
 
 #define SMINTERFACE_LUAENGINE_NAME		"ILuaEngine"
 #define SMINTERFACE_LUAENGINE_VERSION	1
@@ -65,7 +67,7 @@ namespace Simillimum
 		}
 	public:
 		virtual void RegisterLibrary(const char * name, const luaL_Reg * functions) = 0;
-		virtual bool LoadPlugin(const char * fullpath, int *err) = 0;
+		virtual IPluginRuntime * LoadPlugin(const char * fullpath, int *err) = 0;
 		virtual const char * GetErrorString() = 0;
 		virtual const char *GetGlobalString(const char  * name) = 0;
 		virtual const char * GetPluginInfo(const  char * plugin, const char  * name) = 0;
@@ -76,5 +78,5 @@ namespace Simillimum
 	};
 }
 
-#endif //_INCLUDE_SIMILLIMUM_LuaEngineTEM_INTERFACE_H_
+#endif //_INCLUDE_SIMILLIMUM_LUAENGINE_INTERFACE_H_
 

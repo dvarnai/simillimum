@@ -59,7 +59,7 @@ void LuaEngine::RegisterLibrary(const char * name, const luaL_Reg * functions)
 	luaL_register(L, name, functions);
 }
 
-bool LuaEngine::LoadPlugin(const char * fullpath, int *err)
+IPluginRuntime * LuaEngine::LoadPlugin(const char * fullpath, int *err)
 {
 	if ((*err=luaL_loadfile(L, fullpath)) || lua_pcall(L, 0, 0, 0))
 	{
@@ -86,12 +86,14 @@ bool LuaEngine::LoadPlugin(const char * fullpath, int *err)
 			break;
 		}
 	}
-	
+
+	LuaPluginRuntime * ret = new LuaPluginRuntime(L, m_szFilename);
+
 	char m_szLoadLine[1024];
 	snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance=%s.info()\n", m_szFilename, m_szFilename);
 	m_iLastError = luaL_dostring(L, m_szLoadLine);
 
-    return true;
+    return ret;
 }
 
 const char * LuaEngine::GetErrorString()

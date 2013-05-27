@@ -40,6 +40,7 @@ extern "C"{
 }
 
 #include <ILuaEngine.h>
+#include "PluginRuntime.h"
 
 using namespace Simillimum;
 
@@ -50,7 +51,7 @@ class LuaEngine : public ILuaEngine
 public:
 	LuaEngine();
 	virtual void RegisterLibrary(const char * name, const luaL_Reg * functions);
-	virtual bool LoadPlugin(const char * fullpath, int *err);
+	virtual IPluginRuntime * LoadPlugin(const char * fullpath, int *err);
 	virtual const char * GetErrorString();
 	virtual const char *GetGlobalString(const char  * name);
 	virtual const char * GetPluginInfo(const  char * plugin, const char  * name);
