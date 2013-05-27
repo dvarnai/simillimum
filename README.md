@@ -60,3 +60,5 @@ Simillimum will always maintain ABI compatibility with SourceMod.
     * Add plugin hash support for plugin blacklist
     * Begin exposing natives to LUA
     * Rewrite all stock plugins in LUA
+    * Add an exception handler to log all errors
+    * Modify ExecuteString to use formatting

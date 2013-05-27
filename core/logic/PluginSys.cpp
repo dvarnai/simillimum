@@ -189,7 +189,7 @@ CPlugin *CPlugin::CreatePlugin(const char *file, char *error, size_t maxlength)
 	if(strcmp(ext, "lua")==0)
 		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins_lua/%s", file);
 	else if(strcmp(ext, "smx")==0)
-		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins_sp/%s", file);
+		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins/%s", file);
 	FILE *fp = fopen(fullpath, "rb");
 
 	CPlugin *pPlugin = new CPlugin(file);
@@ -656,7 +656,7 @@ time_t CPlugin::GetFileTimeStamp()
 {
 	char path[PLATFORM_MAX_PATH];
 	if(m_JIT == JIT_SourcePawn)
-		g_pSM->BuildPath(Path_SM, path, sizeof(path), "plugins_sp/%s", m_filename);
+		g_pSM->BuildPath(Path_SM, path, sizeof(path), "plugins/%s", m_filename);
 	else if(m_JIT == JIT_Lua)
 		g_pSM->BuildPath(Path_SM, path, sizeof(path), "plugins_lua/%s", m_filename);
 #ifdef PLATFORM_WINDOWS
@@ -1033,7 +1033,7 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 		if (co != NULL)
 		{
 			char fullpath[PLATFORM_MAX_PATH];
-			g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins_sp/%s", pPlugin->m_filename);
+			g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins/%s", pPlugin->m_filename);
 
 			pPlugin->m_pRuntime = g_pSourcePawn2->LoadPlugin(co, fullpath, &err);
 			if (pPlugin->m_pRuntime == NULL)
@@ -2208,7 +2208,7 @@ void CPluginManager::OnRootConsoleCommand(const char *cmdname, const CCommand &c
 			bool m_bPluginSMX = false;
 			bool m_bPluginLUA = false;
 
-			g_pSM->BuildPath(Path_SM, pluginfile, sizeof(pluginfile), "plugins_sp/%s.smx", filename);
+			g_pSM->BuildPath(Path_SM, pluginfile, sizeof(pluginfile), "plugins/%s.smx", filename);
 			FILE * plfile = fopen(pluginfile, "r");
 			if(plfile)
 			{
