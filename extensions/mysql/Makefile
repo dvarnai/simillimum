@@ -134,7 +134,8 @@ ifeq "$(USEMETA)" "true"
 		-DSE_PORTAL2=11 -DSE_CSGO=12
 endif
 
-LINK += mariadb-source/libmysql/libmariadbclient.a -m32 -lm -ldl -lpthread -shared
+LINK += mariadb-source/libmysql/libmariadbclient.a mariadb-source/libmysql/libssl.a mariadb-source/libmysql/libcrypto.a 
+LINK += -m32 -lm -ldl -lz -lpthread -shared
 
 CFLAGS += -D_LINUX -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -DCOMPILER_GCC -Wall -Werror \
