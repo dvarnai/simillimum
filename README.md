@@ -55,7 +55,7 @@ Simillimum will always maintain ABI compatibility with SourceMod.
   * Review all string handling functions and use a faster algorithm where possible
   * Convert more gamedata to use dynamic offsets
   * Expose Trie iteration to plugins
-  * * Write a trie iterator that doesn't actually suck......
+    * Write a trie iterator that doesn't actually suck......
   * Major improvements to the default plugins
   * Add a universal way to change the players' name
   * Implement color code formatting to PrintToChat and PrintToChatAll
