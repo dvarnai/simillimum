@@ -31,10 +31,19 @@
 
 #include <LuaEngine.h>
 #include <sm_platform.h>
+#include <string.h>
 
 using namespace Simillimum;
 
-extern "C" __declspec(dllexport) ILuaEngine * GetLuaState()
+
+#if defined _LINUX
+	#define DLLSPEC
+#else
+	#define DLLSPEC __declspec(dllexport)
+#endif
+
+
+extern "C" DLLSPEC ILuaEngine * GetLuaState()
 {
 	return new LuaEngine();
 }
@@ -53,25 +62,31 @@ void LuaEngine::RegisterLibrary(const char * name, const luaL_Reg * functions)
 bool LuaEngine::LoadPlugin(const char * fullpath, int *err)
 {
 	if ((*err=luaL_loadfile(L, fullpath)) || lua_pcall(L, 0, 0, 0))
+	{
         return false;
-
+	}
+	
 	char m_szFilename[PLATFORM_MAX_PATH];
 	const char * m_szFile = fullpath;
 	for(int i=strlen(fullpath);i>=0;--i)
+	{
 		if(fullpath[i] == '/' || fullpath[i] == '\\')
 		{
 			m_szFile = fullpath+i+1;
 			break;
 		}
+	}
 
 	strncpy(m_szFilename, m_szFile, sizeof(m_szFilename)-1);
 	for(int i=strlen(m_szFilename);i>=0;--i)
+	{
 		if(m_szFilename[i] == '.')
 		{
 			m_szFilename[i] = 0;
 			break;
 		}
-
+	}
+	
 	char m_szLoadLine[1024];
 	snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance=%s.info()\n", m_szFilename, m_szFilename);
 	m_iLastError = luaL_dostring(L, m_szLoadLine);

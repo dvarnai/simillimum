@@ -43,4 +43,4 @@ typedef struct luaL_Reg {
 } luaL_Reg;
 
 #endif
-#endif _INCLUDE_SIMILLIMUM_LUATYPES_H_
+#endif 
