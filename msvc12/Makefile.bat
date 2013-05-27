@@ -25,7 +25,7 @@ cd "../plugins/"
 
 compile.exe
 rm -f "compile.dat"
-mv -f "compiled" "../Release/addons/simillimum/plugins"
+mv -f "compiled"/* "../Release/addons/simillimum/plugins"
 
 cd "../msvc12"
 
