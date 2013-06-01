@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="zlib">
+      <UniqueIdentifier>{826a4b67-a5f6-47ff-b261-19f8bcd46dc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zlib\Source Files">
+      <UniqueIdentifier>{cc618ad9-2829-46c2-aa87-5b2fd51e4341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zlib\Header Files">
+      <UniqueIdentifier>{209dfb17-4443-4f50-8f82-3cd7ad5132a7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libpawnc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lstring.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\memfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pawncc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sc1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sc2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sc3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sc4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sc5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sc6.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sc7.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scexpand.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sci18n.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sclist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scmemfil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scstate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sctracker.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scvars.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sp_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sp_symhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\adler32.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\compress.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\crc32.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\deflate.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\gzio.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\infback.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\inffast.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\inflate.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\inftrees.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\trees.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\uncompr.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zlib\zutil.c">
+      <Filter>zlib\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\amx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\amxdbg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\memfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\osdefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sctracker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sp_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\public\sourcepawn\sp_file_headers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sp_symhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\svn_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\crc32.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\deflate.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\inffast.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\inffixed.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\inflate.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\inftrees.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\trees.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\zconf.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\zlib.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zlib\zutil.h">
+      <Filter>zlib\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
