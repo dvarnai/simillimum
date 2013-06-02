@@ -15,6 +15,7 @@
 # Visual Studio
 *.sdf
 *.suo
+*.cd
 *.user
 *.ipch
 *.exp

@@ -167,40 +167,9 @@ typedef struct sp_nativeinfo_s
 	SPVM_NATIVE_FUNC func;	/**< Address of native implementation */
 } sp_nativeinfo_t;
 
-/** 
- * @brief Run-time debug file table
- */
-typedef struct sp_debug_file_s
-{
-	uint32_t		addr;	/**< Address into code */
-	const char *	name;	/**< Name of file */
-} sp_debug_file_t;
-
-/**
- * @brief Contains run-time debug line table.
- */
-typedef struct sp_debug_line_s
-{
-	uint32_t		addr;	/**< Address into code */
-	uint32_t		line;	/**< Line number */
-} sp_debug_line_t;
-
 /**
  * @brief These structures are equivalent.
  */
 typedef sp_fdbg_arraydim_t	sp_debug_arraydim_t;
-
-/**
- * @brief The majority of this struct is already located in the parent 
- * block.  Thus, only the relocated portions are required.
- */
-typedef struct sp_debug_symbol_s
-{
-	uint32_t		codestart;	/**< Relocated code address */
-	uint32_t		codeend;	/**< Relocated code end address */
-	const char *	name;		/**< Relocated name */
-	sp_debug_arraydim_t *dims;	/**< Relocated dimension struct, if any */
-	sp_fdbg_symbol_t	*sym;	/**< Pointer to original symbol */
-} sp_debug_symbol_t;
 
 #endif //_INCLUDE_SOURCEPAWN_VM_TYPES_H
