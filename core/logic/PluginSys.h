@@ -127,12 +127,10 @@ class CPlugin :
 	friend class CPluginManager;
 	friend class CFunction;
 public:
-	JitType m_JIT;
 	CPlugin(const char *file);
 	~CPlugin();
 public:
 	PluginType GetType();
-	JitType GetJitType();
 	SourcePawn::IPluginContext *GetBaseContext();
 	sp_context_t *GetContext();
 	void *GetPluginStructure();
@@ -263,7 +261,6 @@ private:
 	bool m_bGotAllLoaded;
 	int m_FileVersion;
 	char m_DateTime[256];
-	char m_pluginname[PLATFORM_MAX_PATH];
 	IPluginRuntime *m_pRuntime;
 	IPluginContext *m_pContext;
 	sp_pubvar_t *m_MaxClientsVar;

@@ -33,7 +33,6 @@
 #include <stdarg.h>
 #include "PluginSys.h"
 #include "ShareSys.h"
-#include "ILuaEngine.h"
 #include <ILibrarySys.h>
 #include <ISimillimum.h>
 #include <IHandleSys.h>
@@ -66,29 +65,6 @@ CPlugin::CPlugin(const char *file)
 	m_bGotAllLoaded = false;
 	m_pPhrases = g_Translator.CreatePhraseCollection();
 	m_MaxClientsVar = NULL;
-
-	const char *ext = libsys->GetFileExtension(file);
-	if(strcmp(ext, "lua")==0)
-		m_JIT = JIT_Lua;
-	else if(strcmp(ext, "smx")==0)
-		m_JIT = JIT_SourcePawn;
-
-	m_pluginname[PLATFORM_MAX_PATH];
-	const char * m_szFile = file;
-	for(int i=strlen(file);i>=0;--i)
-		if(file[i] == '/' || file[i] == '\\')
-		{
-			m_szFile = file+i+1;
-			break;
-		}
-
-	strncpy(m_pluginname, m_szFile, sizeof(m_pluginname)-1);
-	for(int i=strlen(m_pluginname);i>=0;--i)
-		if(m_pluginname[i] == '.')
-		{
-			m_pluginname[i] = 0;
-			break;
-		}
 }
 
 CPlugin::~CPlugin()
@@ -109,12 +85,6 @@ CPlugin::~CPlugin()
 		m_pRuntime = NULL;
 	}
 	
-	else if(GetJitType() == JIT_Lua)
-	{
-		char m_szLoadLine[1024];
-		snprintf(m_szLoadLine, sizeof(m_szLoadLine), "%s_instance=nil\n", m_pluginname);
-		g_pLuaEngine->ExecuteString(m_szLoadLine);
-	}
 
 	for (size_t i=0; i<m_configs.size(); i++)
 	{
@@ -175,19 +145,10 @@ Handle_t CPlugin::GetMyHandle()
 	return m_handle;
 }
 
-JitType CPlugin::GetJitType()
-{
-	return m_JIT;
-}
-
 CPlugin *CPlugin::CreatePlugin(const char *file, char *error, size_t maxlength)
 {
 	char fullpath[PLATFORM_MAX_PATH];
-	const char *ext = libsys->GetFileExtension(file);
-	if(strcmp(ext, "lua")==0)
-		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins_lua/%s", file);
-	else if(strcmp(ext, "smx")==0)
-		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins/%s", file);
+	g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins/%s", file);
 	FILE *fp = fopen(fullpath, "rb");
 
 	CPlugin *pPlugin = new CPlugin(file);
@@ -259,94 +220,78 @@ void CPlugin::SetErrorState(PluginStatus status, const char *error_fmt, ...)
 bool CPlugin::UpdateInfo()
 {
 	/* Now grab the info */
-	if(m_JIT == JIT_SourcePawn)
+	uint32_t idx;
+	IPluginContext *base = GetBaseContext();
+	int err = base->FindPubvarByName("myinfo", &idx);
+
+	memset(&m_info, 0, sizeof(m_info));
+
+	if (err == SP_ERROR_NONE)
 	{
-		uint32_t idx;
-		IPluginContext *base = GetBaseContext();
-		int err = base->FindPubvarByName("myinfo", &idx);
-
-		memset(&m_info, 0, sizeof(m_info));
-
-		if (err == SP_ERROR_NONE)
+		struct sm_plugininfo_c_t
 		{
-			struct sm_plugininfo_c_t
-			{
-				cell_t name;
-				cell_t description;
-				cell_t author;
-				cell_t version;
-				cell_t url;
-			};
-			sm_plugininfo_c_t *cinfo;
-			cell_t local_addr;
+			cell_t name;
+			cell_t description;
+			cell_t author;
+			cell_t version;
+			cell_t url;
+		};
+		sm_plugininfo_c_t *cinfo;
+		cell_t local_addr;
 
-			base->GetPubvarAddrs(idx, &local_addr, (cell_t **)&cinfo);
-			base->LocalToString(cinfo->name, (char **)&m_info.name);
-			base->LocalToString(cinfo->description, (char **)&m_info.description);
-			base->LocalToString(cinfo->author, (char **)&m_info.author);
-			base->LocalToString(cinfo->url, (char **)&m_info.url);
-			base->LocalToString(cinfo->version, (char **)&m_info.version);
-		}
+		base->GetPubvarAddrs(idx, &local_addr, (cell_t **)&cinfo);
+		base->LocalToString(cinfo->name, (char **)&m_info.name);
+		base->LocalToString(cinfo->description, (char **)&m_info.description);
+		base->LocalToString(cinfo->author, (char **)&m_info.author);
+		base->LocalToString(cinfo->url, (char **)&m_info.url);
+		base->LocalToString(cinfo->version, (char **)&m_info.version);
+	}
 
-		m_info.author = m_info.author ? m_info.author : "";
-		m_info.description = m_info.description ? m_info.description : "";
-		m_info.name = m_info.name ? m_info.name : "";
-		m_info.url = m_info.url ? m_info.url : "";
-		m_info.version = m_info.version ? m_info.version : "";
+	m_info.author = m_info.author ? m_info.author : "";
+	m_info.description = m_info.description ? m_info.description : "";
+	m_info.name = m_info.name ? m_info.name : "";
+	m_info.url = m_info.url ? m_info.url : "";
+	m_info.version = m_info.version ? m_info.version : "";
 
-		if ((err = base->FindPubvarByName("__version", &idx)) == SP_ERROR_NONE)
-		{
-			struct __version_info
-			{
-				cell_t version;
-				cell_t filevers;
-				cell_t date;
-				cell_t time;
-			};
-			__version_info *info;
-			cell_t local_addr;
-			const char *pDate, *pTime, *pFileVers;
-
-			pDate = "";
-			pTime = "";
-
-			base->GetPubvarAddrs(idx, &local_addr, (cell_t **)&info);
-			m_FileVersion = info->version;
-			if (m_FileVersion >= 4)
-			{
-				base->LocalToString(info->date, (char **)&pDate);
-				base->LocalToString(info->time, (char **)&pTime);
-				smcore.Format(m_DateTime, sizeof(m_DateTime), "%s %s", pDate, pTime);
-			}
-			if (m_FileVersion > 5)
-			{
-				base->LocalToString(info->filevers, (char **)&pFileVers);
-				SetErrorState(Plugin_Failed, "Newer Simillimum required (%s or higher)", pFileVers);
-				return false;
-			}
-		}
-		else
-		{
-			m_FileVersion = 0;
-		}
-
-		if ((err = base->FindPubvarByName("MaxClients", &idx)) == SP_ERROR_NONE)
-		{
-			base->GetPubvarByIndex(idx, &m_MaxClientsVar);
-		}
-	} else if(m_JIT == JIT_Lua)
+	if ((err = base->FindPubvarByName("__version", &idx)) == SP_ERROR_NONE)
 	{
-		m_info.author = g_pLuaEngine->GetPluginInfo(m_pluginname, "author");
-		m_info.description = g_pLuaEngine->GetPluginInfo(m_pluginname, "description");
-		m_info.name = g_pLuaEngine->GetPluginInfo(m_pluginname, "name");
-		m_info.url = g_pLuaEngine->GetPluginInfo(m_pluginname, "url");
-		m_info.version = g_pLuaEngine->GetPluginInfo(m_pluginname, "version");
+		struct __version_info
+		{
+			cell_t version;
+			cell_t filevers;
+			cell_t date;
+			cell_t time;
+		};
+		__version_info *info;
+		cell_t local_addr;
+		const char *pDate, *pTime, *pFileVers;
 
-		m_info.author = m_info.author ? m_info.author : "";
-		m_info.description = m_info.description ? m_info.description : "";
-		m_info.name = m_info.name ? m_info.name : "";
-		m_info.url = m_info.url ? m_info.url : "";
-		m_info.version = m_info.version ? m_info.version : "";
+		pDate = "";
+		pTime = "";
+
+		base->GetPubvarAddrs(idx, &local_addr, (cell_t **)&info);
+		m_FileVersion = info->version;
+		if (m_FileVersion >= 4)
+		{
+			base->LocalToString(info->date, (char **)&pDate);
+			base->LocalToString(info->time, (char **)&pTime);
+			smcore.Format(m_DateTime, sizeof(m_DateTime), "%s %s", pDate, pTime);
+		}
+		if (m_FileVersion > 5)
+		{
+			base->LocalToString(info->filevers, (char **)&pFileVers);
+			SetErrorState(Plugin_Failed, "Newer Simillimum required (%s or higher)", pFileVers);
+			return false;
+		}
+	}
+	else
+	{
+		m_FileVersion = 0;
+	}
+
+	if ((err = base->FindPubvarByName("MaxClients", &idx)) == SP_ERROR_NONE)
+	{
+		base->GetPubvarByIndex(idx, &m_MaxClientsVar);
 	}
 
 	return true;
@@ -354,17 +299,12 @@ bool CPlugin::UpdateInfo()
 
 void CPlugin::SyncMaxClients(int max_clients)
 {
-	if(m_JIT == JIT_SourcePawn)
+	if (m_MaxClientsVar == NULL)
 	{
-		if (m_MaxClientsVar == NULL)
-		{
-			return;
-		}
-
-		*m_MaxClientsVar->offs = max_clients;
+		return;
 	}
-	else
-		g_pLuaEngine->SetGlobalNum("maxclients", max_clients);
+
+	*m_MaxClientsVar->offs = max_clients;
 }
 
 void CPlugin::Call_OnPluginStart()
@@ -623,10 +563,7 @@ bool CPlugin::IsRunnable()
 time_t CPlugin::GetFileTimeStamp()
 {
 	char path[PLATFORM_MAX_PATH];
-	if(m_JIT == JIT_SourcePawn)
-		g_pSM->BuildPath(Path_SM, path, sizeof(path), "plugins/%s", m_filename);
-	else if(m_JIT == JIT_Lua)
-		g_pSM->BuildPath(Path_SM, path, sizeof(path), "plugins_lua/%s", m_filename);
+	g_pSM->BuildPath(Path_SM, path, sizeof(path), "plugins/%s", m_filename);
 #ifdef PLATFORM_WINDOWS
 	struct _stat s;
 	if (_stat(path, &s) != 0)
@@ -988,55 +925,21 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 
 	pPlugin->m_type = PluginType_MapUpdated;
 
-	if(pPlugin->GetJitType() == JIT_SourcePawn)
+
+	ICompilation *co = NULL;
+
+	if (pPlugin->m_status == Plugin_Uncompiled)
 	{
-		ICompilation *co = NULL;
+		co = g_pSourcePawn2->StartCompilation();
+	}
 
-		if (pPlugin->m_status == Plugin_Uncompiled)
-		{
-			co = g_pSourcePawn2->StartCompilation();
-		}
-
-		/* Do the actual compiling */
-		if (co != NULL)
-		{
-			char fullpath[PLATFORM_MAX_PATH];
-			g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins/%s", pPlugin->m_filename);
-
-			pPlugin->m_pRuntime = g_pSourcePawn2->LoadPlugin(co, fullpath, &err);
-			if (pPlugin->m_pRuntime == NULL)
-			{
-				if (error)
-				{
-					smcore.Format(error, 
-						maxlength, 
-						"Unable to load plugin (error %d: %s)", 
-						err, 
-						g_pSourcePawn2->GetErrorString(err));
-				}
-				pPlugin->m_status = Plugin_BadLoad;
-			}
-			else
-			{
-				if (pPlugin->UpdateInfo())
-				{
-					pPlugin->m_status = Plugin_Created;
-				}
-				else
-				{
-					if (error)
-					{
-						smcore.Format(error, maxlength, "%s", pPlugin->m_errormsg);
-					}
-				}
-			}
-		}
-	} else if(pPlugin->GetJitType() == JIT_Lua)
+	/* Do the actual compiling */
+	if (co != NULL)
 	{
 		char fullpath[PLATFORM_MAX_PATH];
-		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins_lua/%s", pPlugin->m_filename);
+		g_pSM->BuildPath(Path_SM, fullpath, sizeof(fullpath), "plugins/%s", pPlugin->m_filename);
 
-		pPlugin->m_pRuntime = g_pLuaEngine->LoadPlugin(fullpath, &err);
+		pPlugin->m_pRuntime = g_pSourcePawn2->LoadPlugin(co, fullpath, &err);
 		if (pPlugin->m_pRuntime == NULL)
 		{
 			if (error)
@@ -1045,7 +948,7 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 					maxlength, 
 					"Unable to load plugin (error %d: %s)", 
 					err, 
-					g_pLuaEngine->GetErrorString());
+					g_pSourcePawn2->GetErrorString(err));
 			}
 			pPlugin->m_status = Plugin_BadLoad;
 		}
@@ -1053,7 +956,7 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 		{
 			if (pPlugin->UpdateInfo())
 			{
-				pPlugin->m_status = Plugin_Loaded;
+				pPlugin->m_status = Plugin_Created;
 			}
 			else
 			{
@@ -1065,7 +968,8 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 		}
 	}
 	
-	if (pPlugin->GetStatus() == Plugin_Created && pPlugin->GetJitType() == JIT_SourcePawn)
+	
+	if (pPlugin->GetStatus() == Plugin_Created)
 	{
 		unsigned char *pCodeHash = pPlugin->m_pRuntime->GetCodeHash();
 		
@@ -1102,7 +1006,7 @@ LoadRes CPluginManager::_LoadPlugin(CPlugin **_plugin, const char *path, bool de
 
 	LoadRes loadFailure = LoadRes_Failure;
 	/* Get the status */
-	if (pPlugin->GetStatus() == Plugin_Created && pPlugin->GetJitType() == JIT_SourcePawn)
+	if (pPlugin->GetStatus() == Plugin_Created)
 	{
 		/* First native pass - add anything from Core */
 		g_ShareSys.BindNativesToPlugin(pPlugin, true);
@@ -1176,6 +1080,7 @@ IPlugin *CPluginManager::LoadPlugin(const char *path, bool debug, PluginType typ
 
 	AddPlugin(pl);
 
+	/* Run second pass if we need to */
 	if (IsLateLoadTime() && pl->GetStatus() == Plugin_Loaded)
 	{
 		if (!RunSecondPass(pl, error, maxlength))
@@ -1441,44 +1346,42 @@ bool CPluginManager::LoadOrRequireExtensions(CPlugin *pPlugin, unsigned int pass
 
 bool CPluginManager::RunSecondPass(CPlugin *pPlugin, char *error, size_t maxlength)
 {
-	if(pPlugin->m_JIT == JIT_SourcePawn)
+	/* Second pass for extension requirements */
+	if (!LoadOrRequireExtensions(pPlugin, 2, error, maxlength))
 	{
-		/* Second pass for extension requirements */
-		if (!LoadOrRequireExtensions(pPlugin, 2, error, maxlength))
+		return false;
+	}
+
+	if (!FindOrRequirePluginDeps(pPlugin, error, maxlength))
+	{
+		return false;
+	}
+
+	/* Run another binding pass */
+	g_ShareSys.BindNativesToPlugin(pPlugin, false);
+
+	/* Find any unbound natives. Right now, these are not allowed. */
+	IPluginContext *pContext = pPlugin->GetBaseContext();
+	uint32_t num = pContext->GetNativesNum();
+	sp_native_t *native;
+	for (unsigned int i=0; i<num; i++)
+	{
+		if (pContext->GetNativeByIndex(i, &native) != SP_ERROR_NONE)
 		{
-			return false;
+			break;
 		}
-
-		if (!FindOrRequirePluginDeps(pPlugin, error, maxlength))
+		if (native->status == SP_NATIVE_UNBOUND
+			&& native->name[0] != '@'
+			&& !(native->flags & SP_NTVFLAG_OPTIONAL))
 		{
+			if (error)
+			{
+				smcore.Format(error, maxlength, "Native \"%s\" was not found", native->name);
+			}
 			return false;
-		}
-
-		/* Run another binding pass */
-		g_ShareSys.BindNativesToPlugin(pPlugin, false);
-
-		/* Find any unbound natives. Right now, these are not allowed. */
-		IPluginContext *pContext = pPlugin->GetBaseContext();
-		uint32_t num = pContext->GetNativesNum();
-		sp_native_t *native;
-		for (unsigned int i=0; i<num; i++)
-		{
-			if (pContext->GetNativeByIndex(i, &native) != SP_ERROR_NONE)
-			{
-				break;
-			}
-			if (native->status == SP_NATIVE_UNBOUND
-				&& native->name[0] != '@'
-				&& !(native->flags & SP_NTVFLAG_OPTIONAL))
-			{
-				if (error)
-				{
-					smcore.Format(error, maxlength, "Native \"%s\" was not found", native->name);
-				}
-				return false;
-			}
 		}
 	}
+
 
 	/* Finish by telling all listeners */
 	List<IPluginsListener *>::iterator iter;
@@ -1492,47 +1395,44 @@ bool CPluginManager::RunSecondPass(CPlugin *pPlugin, char *error, size_t maxleng
 	/* Tell this plugin to finish initializing itself */
 	pPlugin->Call_OnPluginStart();
 
-	if(pPlugin->m_JIT == JIT_SourcePawn)
+	/* Now, if we have fake natives, go through all plugins that might need rebinding */
+	if (pPlugin->GetStatus() <= Plugin_Paused && pPlugin->m_Natives.size())
 	{
-		/* Now, if we have fake natives, go through all plugins that might need rebinding */
-		if (pPlugin->GetStatus() <= Plugin_Paused && pPlugin->m_Natives.size())
+		List<CPlugin *>::iterator pl_iter;
+		CPlugin *pOther;
+		for (pl_iter = m_plugins.begin();
+			 pl_iter != m_plugins.end();
+			 pl_iter++)
 		{
-			List<CPlugin *>::iterator pl_iter;
-			CPlugin *pOther;
-			for (pl_iter = m_plugins.begin();
-				 pl_iter != m_plugins.end();
-				 pl_iter++)
+			pOther = (*pl_iter);
+			if ((pOther->GetStatus() == Plugin_Error
+				&& (pOther->m_FakeNativesMissing || pOther->m_LibraryMissing))
+				|| pOther->m_FakeNativesMissing)
 			{
-				pOther = (*pl_iter);
-				if ((pOther->GetStatus() == Plugin_Error
-					&& (pOther->m_FakeNativesMissing || pOther->m_LibraryMissing))
-					|| pOther->m_FakeNativesMissing)
+				TryRefreshDependencies(pOther);
+			}
+			else if ((pOther->GetStatus() == Plugin_Running
+					  || pOther->GetStatus() == Plugin_Paused)
+					 && pOther != pPlugin)
+			{
+				List<NativeEntry *>::iterator nv_iter;
+				for (nv_iter = pPlugin->m_Natives.begin();
+					 nv_iter != pPlugin->m_Natives.end();
+					 nv_iter++)
 				{
-					TryRefreshDependencies(pOther);
-				}
-				else if ((pOther->GetStatus() == Plugin_Running
-						  || pOther->GetStatus() == Plugin_Paused)
-						 && pOther != pPlugin)
-				{
-					List<NativeEntry *>::iterator nv_iter;
-					for (nv_iter = pPlugin->m_Natives.begin();
-						 nv_iter != pPlugin->m_Natives.end();
-						 nv_iter++)
-					{
-						g_ShareSys.BindNativeToPlugin(pOther, (*nv_iter));
-					}
+					g_ShareSys.BindNativeToPlugin(pOther, (*nv_iter));
 				}
 			}
 		}
+	}
 
-		/* Go through our libraries and tell other plugins they're added */
-		List<String>::iterator s_iter;
-		for (s_iter = pPlugin->m_Libraries.begin();
-			s_iter != pPlugin->m_Libraries.end();
-			s_iter++)
-		{
-			OnLibraryAction((*s_iter).c_str(), LibraryAction_Added);
-		}
+	/* Go through our libraries and tell other plugins they're added */
+	List<String>::iterator s_iter;
+	for (s_iter = pPlugin->m_Libraries.begin();
+		s_iter != pPlugin->m_Libraries.end();
+		s_iter++)
+	{
+		OnLibraryAction((*s_iter).c_str(), LibraryAction_Added);
 	}
 
 	/* :TODO: optimize? does this even matter? */
@@ -1615,16 +1515,13 @@ bool CPluginManager::UnloadPlugin(IPlugin *plugin)
 		return false;
 	}
 
-	if(plugin->GetJitType() == JIT_SourcePawn)
+	IPluginContext *pContext = plugin->GetBaseContext();
+	if (pContext != NULL && pContext->IsInExec())
 	{
-		IPluginContext *pContext = plugin->GetBaseContext();
-		if (pContext != NULL && pContext->IsInExec())
-		{
-			char buffer[255];
-			smcore.Format(buffer, sizeof(buffer), "sm plugins unload %s\n", plugin->GetFilename());
-			engine->ServerCommand(buffer);
-			return false;
-		}
+		char buffer[255];
+		smcore.Format(buffer, sizeof(buffer), "sm plugins unload %s\n", plugin->GetFilename());
+		engine->ServerCommand(buffer);
+		return false;
 	}
 
 	/* Remove us from the lookup table and linked list */
@@ -2168,33 +2065,7 @@ void CPluginManager::OnRootConsoleCommand(const char *cmdname, const CCommand &c
 			const char *filename = smcore.Arg(command, 3);
 
 			char pluginfile[256];
-			const char *ext = libsys->GetFileExtension(filename);
-			if(ext)
-				*(char*)ext = 0;
-
-			bool m_bPluginSMX = false;
-			bool m_bPluginLUA = false;
-
-			g_pSM->BuildPath(Path_SM, pluginfile, sizeof(pluginfile), "plugins/%s.smx", filename);
-			FILE * plfile = fopen(pluginfile, "r");
-			if(plfile)
-			{
-				m_bPluginSMX = true;
-				fclose(plfile);
-			}
-		
-			g_pSM->BuildPath(Path_SM, pluginfile, sizeof(pluginfile), "plugins_lua/%s.lua", filename);
-			plfile = fopen(pluginfile, "r");
-			if(plfile)
-			{
-				m_bPluginLUA = true;
-				fclose(plfile);
-			}
-
-			if(m_bPluginSMX)
-				ext = ".smx";
-			else if(m_bPluginLUA)
-				ext = ".lua";
+			const char *ext = libsys->GetFileExtension(filename) ? "" : ".smx";
 
 			g_pSM->BuildPath(Path_None, pluginfile, sizeof(pluginfile), "%s%s", filename, ext);
 
@@ -2248,14 +2119,8 @@ void CPluginManager::OnRootConsoleCommand(const char *cmdname, const CCommand &c
 				CPlugin **pluginpp = m_LoadLookup.retrieve(pluginfile);
 				if (!pluginpp || !*pluginpp)
 				{
-					ext = libsys->GetFileExtension(arg) ? "" : ".lua";
-					g_pSM->BuildPath(Path_None, pluginfile, sizeof(pluginfile), "%s%s", arg, ext);
-					pluginpp = m_LoadLookup.retrieve(pluginfile);
-					if (!pluginpp || !*pluginpp)
-					{
-						rootmenu->ConsolePrint("[SM] Plugin %s is not loaded.", pluginfile);
-						return;
-					}
+					rootmenu->ConsolePrint("[SM] Plugin %s is not loaded.", pluginfile);
+					return;
 				}
 				pl = *pluginpp;
 			}
@@ -2415,19 +2280,16 @@ void CPluginManager::OnRootConsoleCommand(const char *cmdname, const CCommand &c
 					rootmenu->ConsolePrint("  Timestamp: %s", pl->m_DateTime);
 				}
 				
-				if(pl->GetJitType() == JIT_SourcePawn)
-				{
-					unsigned char *pCodeHash = pl->m_pRuntime->GetCodeHash();
-					unsigned char *pDataHash = pl->m_pRuntime->GetDataHash();
+				unsigned char *pCodeHash = pl->m_pRuntime->GetCodeHash();
+				unsigned char *pDataHash = pl->m_pRuntime->GetDataHash();
+			
+				char combinedHash[33];
+				for (int i = 0; i < 16; i++)
+					smcore.Format(combinedHash + (i * 2), 3, "%02x", pCodeHash[i] ^ pDataHash[i]);
+			
+				rootmenu->ConsolePrint("  Hash: %s", combinedHash);
+				rootmenu->ConsolePrint("  JIT: SourcePawn");
 				
-					char combinedHash[33];
-					for (int i = 0; i < 16; i++)
-						smcore.Format(combinedHash + (i * 2), 3, "%02x", pCodeHash[i] ^ pDataHash[i]);
-				
-					rootmenu->ConsolePrint("  Hash: %s", combinedHash);
-					rootmenu->ConsolePrint("  JIT: SourcePawn");
-				} else if (pl->GetJitType() == JIT_Lua)
-					rootmenu->ConsolePrint("  JIT: LUA");
 
 			}
 			else

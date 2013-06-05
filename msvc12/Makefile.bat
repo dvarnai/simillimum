@@ -14,7 +14,6 @@ cp -r -f "../translations" "../Release/addons/simillimum/translations"
 cp -r -f "../configs" "../Release/addons/simillimum/configs"
 cp -r -f "../gamedata" "../Release/addons/simillimum/gamedata"
 cp -r -f "../plugins" "../Release/addons/simillimum/scripting"
-cp -r -f "../plugins_lua" "../Release/addons/simillimum/plugins_lua"
 cp -r -f "../configs/cfg"/* "../Release/cfg/sourcemod"
 cp -f "../simillimum.vdf" "../Release/addons/metamod/simillimum.vdf"
 
@@ -33,7 +32,6 @@ cd "../msvc12"
 "%NETFRAME%\MSBuild" ../core/logic/msvc12/logic.vcxproj /p:configuration=Release
 "%NETFRAME%\MSBuild" ../loader/msvc12/loader.vcxproj /p:configuration=Release
 "%NETFRAME%\MSBuild" ../sourcepawn/jit/msvc12/jit-x86.vcxproj /p:configuration=Release
-"%NETFRAME%\MSBuild" ../lua/msvc12/lua-jit-x86.vcxproj /p:configuration=Release
 
 
 "%NETFRAME%\MSBuild"  ../core/msvc12/sourcemod_mm.vcxproj /p:configuration="Release - CSS"
@@ -81,7 +79,6 @@ cd "../msvc12"
 mv -f "../loader/msvc12/Release/"*.dll "../Release/addons/simillimum/bin/"
 mv -f "../core/logic/msvc12/Release/"*.dll "../Release/addons/simillimum/bin/"
 mv -f "../sourcepawn/jit/msvc12/Release/"*.dll "../Release/addons/simillimum/bin/"
-mv -f "../lua/msvc12/Release/"*.dll "../Release/addons/simillimum/bin/"
 mv -f "../core/msvc12/"Release*/*.dll "../Release/addons/simillimum/bin/"
 mv -f "../extensions/"*"/msvc12/"Release*/*.dll "../Release/addons/simillimum/extensions/"
 
@@ -90,6 +87,5 @@ rm -f -r "../core/msvc12/"Release*
 rm -f -r "../loader/msvc12/Release"
 rm -f -r "../core/logic/msvc12/Release"
 rm -f -r "../sourcepawn/jit/msvc12/Release"
-rm -f -r "../lua/msvc12/Release"
 
 pause

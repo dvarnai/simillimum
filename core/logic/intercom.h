@@ -40,7 +40,6 @@
 #include <sp_vm_api.h>
 #include <sh_vector.h>
 #include <IExtensionSys.h>
-#include <ILuaEngine.h>
 
 using namespace Simillimum;
 using namespace SourcePawn;
@@ -219,7 +218,6 @@ struct sm_core_t
 	IGameHelpers    *gamehelpers;
 	ISourcePawnEngine **spe1;
 	ISourcePawnEngine2 **spe2;
-	ILuaEngine **lua;
 	/* Functions */
 	ConVar *		(*FindConVar)(const char*);
 	unsigned int	(*strncopy)(char*, const char*, size_t);

@@ -105,20 +105,17 @@ IChangeableForward *CForwardManager::CreateForwardEx(const char *name, ExecType 
 
 void CForwardManager::OnPluginLoaded(IPlugin *plugin)
 {
-	if(plugin->GetJitType() == JIT_SourcePawn)
-	{
-		/* Attach any globally managed forwards */
-		List<CForward *>::iterator iter;
-		CForward *fwd;
+	/* Attach any globally managed forwards */
+	List<CForward *>::iterator iter;
+	CForward *fwd;
 
-		for (iter=m_managed.begin(); iter!=m_managed.end(); iter++)
+	for (iter=m_managed.begin(); iter!=m_managed.end(); iter++)
+	{
+		fwd = (*iter);
+		IPluginFunction *pFunc = plugin->GetBaseContext()->GetFunctionByName(fwd->GetForwardName());
+		if (pFunc)
 		{
-			fwd = (*iter);
-			IPluginFunction *pFunc = plugin->GetBaseContext()->GetFunctionByName(fwd->GetForwardName());
-			if (pFunc)
-			{
-				fwd->AddFunction(pFunc);
-			}
+			fwd->AddFunction(pFunc);
 		}
 	}
 }
