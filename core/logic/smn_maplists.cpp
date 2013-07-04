@@ -160,6 +160,16 @@ public:
 			sizeof(pDefList->path),
 			"%s",
 			m_pMapCycleFile ? smcore.GetCvarString(m_pMapCycleFile) : "mapcycle.txt");
+
+		if(!smcore.FileExists(pDefList->path))
+		{
+			g_pSM->BuildPath(Path_Game,
+			pDefList->path, 
+			sizeof(pDefList->path),
+			"cfg/%s",
+			m_pMapCycleFile ? smcore.GetCvarString(m_pMapCycleFile) : "mapcycle.txt");
+		}
+
 		pDefList->last_modified_time = 0;
 		pDefList->pArray = NULL;
 		pDefList->serial = 0;
